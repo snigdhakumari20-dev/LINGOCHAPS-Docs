@@ -789,7 +789,8 @@
                                 <h4
                                     style="color: var(--danger); margin-bottom: 0.8rem; font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">
                                     Scenario B: High OST, Insufficient ETA, or Timezone Conflict, Negotiate a realistic
-                                    ETA based on quantity of work before starting execution.</h4>
+                                    ETA based on quantity of work before starting execution. (Consult with senior, don't
+                                    reject without consulting.)</h4>
                                 <div style="margin-top: 1rem;">
                                     <button
                                         style="background: var(--danger); color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2); transition: all 0.2s ease;">
@@ -801,26 +802,37 @@
 
                         <!-- Technical Notes for OST -->
                         <div
-                            style="background: rgba(255, 255, 255, 0.5); border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem; border: 1px dashed var(--primary);">
+                            style="background: rgba(255, 255, 255, 0.5); border-radius: 12px; padding: 2rem; margin-top: 1.5rem; border: 1.5px dashed var(--primary);">
                             <h4
-                                style="color: var(--primary); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem; font-weight: 800;">
+                                style="color: var(--primary); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
                                 <i class="fas fa-lightbulb"></i> Critical OST Execution Tips
                             </h4>
-                            <ul style="list-style: none; font-size: 0.9rem; color: var(--text-dark);">
-                                <li style="margin-bottom: 10px; display: flex; gap: 10px;">
-                                    <i class="fas fa-language" style="color: var(--primary); margin-top: 3px;"></i>
-                                    <span><b>Mandatory English Conversion:</b> In ALL cases, converting OST to English
-                                        text is a hard requirement. <i>(Website tool link will be provided)</i>.</span>
+                            
+                            <!-- Red warning box -->
+                            <div style="border: 1px solid rgba(239, 68, 68, 0.2); border-left: 4px solid var(--danger); background: rgba(239, 68, 68, 0.05); border-radius: 8px; padding: 1.2rem; display: flex; gap: 15px; align-items: flex-start; margin-bottom: 1.5rem;">
+                                <i class="fas fa-exclamation-triangle" style="color: var(--danger); font-size: 1.2rem; margin-top: 2px;"></i>
+                                <div>
+                                    <h5 style="color: var(--danger); margin: 0 0 0.5rem 0; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        Mandatory OST Requirement (Regardless of Language)
+                                    </h5>
+                                    <p style="margin: 0; font-size: 0.9rem; color: #991b1b; line-height: 1.5;">
+                                        You must capture high-quality screenshots and paste all the OST into the document, regardless of the language.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <ul style="list-style: none; font-size: 0.9rem; color: var(--text-dark); padding-left: 0;">
+                                <li style="margin-bottom: 15px; display: flex; gap: 12px; align-items: flex-start;">
+                                    <i class="fas fa-language" style="color: var(--primary); margin-top: 4px; font-size: 1.1rem;"></i>
+                                    <span><b>Mandatory English Conversion:</b> In ALL cases, converting English OST into editable text is a hard requirement. You can use any of these website (<a href="https://translate.google.com/?sl=auto&tl=en&op=images" target="_blank" style="color: var(--primary); text-decoration: none; border-bottom: 1px dashed var(--primary);">Google Translate (Image)</a> or <a href="https://www.imagetotext.info/" target="_blank" style="color: var(--primary); text-decoration: none; border-bottom: 1px dashed var(--primary);">imagetotext.info</a> or <a href="https://imagetotext.io/" target="_blank" style="color: var(--primary); text-decoration: none; border-bottom: 1px dashed var(--primary);">imagetotext.io</a>).</span>
                                 </li>
-                                <li style="margin-bottom: 10px; display: flex; gap: 10px;">
-                                    <i class="fas fa-sync-alt" style="color: var(--primary); margin-top: 3px;"></i>
-                                    <span><b>Language Protocols:</b> If OST is English, convert directly. If OST is in
-                                        another language, the assigned resource will handle translation.</span>
+                                <li style="margin-bottom: 15px; display: flex; gap: 12px; align-items: flex-start;">
+                                    <i class="fas fa-sync-alt" style="color: var(--primary); margin-top: 4px; font-size: 1.1rem;"></i>
+                                    <span><b>Language Protocols:</b> If OST is in English, convert directly. If the OST is in another language, the assigned resource will handle the translation, or your senior will guide you on how to proceed with the other language OST included as screenshots in the document.</span>
                                 </li>
-                                <li style="display: flex; gap: 10px;">
-                                    <i class="fas fa-camera" style="color: var(--primary); margin-top: 3px;"></i>
-                                    <span><b>Screenshot (SS) Requirement:</b> High-quality screenshots of the OST are
-                                        <b>MANDATORY</b> to facilitate the conversion process. No exceptions.</span>
+                                <li style="display: flex; gap: 12px; align-items: flex-start;">
+                                    <i class="fas fa-camera" style="color: var(--primary); margin-top: 4px; font-size: 1.1rem;"></i>
+                                    <span><b>Screenshot (SS) Requirement:</b> High-quality screenshots of the OST are MANDATORY to facilitate the conversion process. If there is any issue with the quality, consult your senior regarding the necessary steps to avoid any missing or overlooked OST. No exceptions.</span>
                                 </li>
                             </ul>
                         </div>
@@ -1315,8 +1327,11 @@
                                         either by their actual names, identifiable appearances (e.g., “Speaker in Red
                                         Shirt” or “Speaker in Grey Trouser”), their position, or by distinguishing voice
                                         characteristics wherever the speaker names are unknown.</p>
-                                    <p style="margin-bottom: 10px;">4. <b>Abbreviations:</b> Add the full forms and meanings of all abbreviations in the Notes column wherever applicable.</p>
-                                    <p style="margin-bottom: 10px;">5. <b>Quality Check:</b> Ensure there are no grammatical, contextual errors. The file must be thoroughly reviewed internally before submission.</p>
+                                    <p style="margin-bottom: 10px;">4. <b>Abbreviations:</b> Add the full forms and
+                                        meanings of all abbreviations in the Notes column wherever applicable.</p>
+                                    <p style="margin-bottom: 10px;">5. <b>Quality Check:</b> Ensure there are no
+                                        grammatical, contextual errors. The file must be thoroughly reviewed internally
+                                        before submission.</p>
                                     <p style="margin-bottom: 10px; color: var(--danger); font-weight: 700;">6. <b>Manual
                                             Translation
                                             Only:</b> Absolutely no Machine Translation (MT) is allowed. All
