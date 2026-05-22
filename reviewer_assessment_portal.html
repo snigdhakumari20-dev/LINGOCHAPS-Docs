@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lingo Chaps — Reviewer Certification Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --secondary-light: #34d399;
+            --danger: #ef4444;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --bg: #ffffff;
+            --sidebar-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --section-bg: #f8fafc;
+            --whatsapp-bg: #e5ddd5;
+            --whatsapp-bubble-in: #ffffff;
+            --whatsapp-bubble-out: #dcf8c6;
+            --whatsapp-header: #075e54;
+        }
+
+        body.dark-mode {
+            --bg: #0f172a;
+            --text-dark: #f1f5f9;
+            --text-light: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --card-bg: #1e293b;
+            --sidebar-bg: #111827;
+            --section-bg: #1e293b;
+            --whatsapp-bg: #0b141a;
+            --whatsapp-bubble-in: #202c33;
+            --whatsapp-bubble-out: #005c4b;
+            --whatsapp-header: #202c33;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+        }
+
+        header {
+            height: 64px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 1000;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 1.25rem;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+        }
+
+        .btn-secondary {
+            background: var(--border);
+            color: var(--text-dark);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--text-dark);
+            box-shadow: none;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--bg);
+            color: var(--text-dark);
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease-out;
+        }
+
+        /* Option items (Quizzes) */
+        .option-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-item {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            background: var(--card-bg);
+        }
+
+        .option-item:hover {
+            background: rgba(79, 70, 229, 0.05);
+            border-color: var(--primary);
+        }
+
+        .option-item.selected {
+            background: rgba(79, 70, 229, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .option-item.correct {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--secondary);
+            color: #166534;
+        }
+
+        .option-item.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--danger);
+            color: #991b1b;
+        }
+
+        /* WhatsApp Simulator Styles */
+        .whatsapp-container {
+            background: var(--whatsapp-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .whatsapp-header {
+            background: var(--whatsapp-header);
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .whatsapp-user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .whatsapp-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .whatsapp-status {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .whatsapp-timer {
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            color: #ffeb3b;
+        }
+
+        .whatsapp-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .whatsapp-message {
+            max-width: 75%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            position: relative;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        }
+
+        .whatsapp-message.received {
+            background: var(--whatsapp-bubble-in);
+            align-self: flex-start;
+            border-top-left-radius: 0;
+            color: var(--text-dark);
+        }
+
+        .whatsapp-message.sent {
+            background: var(--whatsapp-bubble-out);
+            align-self: flex-end;
+            border-top-right-radius: 0;
+            color: #000000;
+        }
+
+        .whatsapp-message-time {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        /* Spreadsheet check simulator */
+        .sheet-container {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: auto;
+            margin-bottom: 2rem;
+        }
+
+        .sheet-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .sheet-th {
+            background: var(--sidebar-bg);
+            border-bottom: 2px solid var(--border);
+            padding: 10px;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .sheet-tr {
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .sheet-tr:hover {
+            background: rgba(79, 70, 229, 0.02);
+        }
+
+        .sheet-tr.selected {
+            background: rgba(79, 70, 229, 0.08);
+        }
+
+        .sheet-tr.flagged {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .sheet-td {
+            padding: 10px;
+        }
+
+        /* Document check simulator */
+        .doc-container {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fff;
+            color: #1e293b;
+            padding: 2rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 2rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .doc-header-block {
+            border-bottom: 2px solid #000;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .doc-row {
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .doc-row:hover {
+            background: #f1f5f9;
+        }
+
+        .doc-row.selected {
+            background: #e2e8f0;
+        }
+
+        .doc-row.flagged {
+            background: #fee2e2;
+            border-left: 4px solid var(--danger);
+        }
+
+        /* Feedback box */
+        .feedback-box {
+            background: var(--sidebar-bg);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        /* Score Badge */
+        .score-display {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 8px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+        }
+
+        .score-value {
+            font-size: 2.25rem;
+            color: var(--primary);
+        }
+
+        .score-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        /* Certificate Styles */
+        .certificate-container {
+            border: 10px double var(--primary);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--card-bg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-container::before {
+            content: 'LINGO CHAPS';
+            position: absolute;
+            font-size: 5rem;
+            opacity: 0.02;
+            font-weight: 900;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            pointer-events: none;
+            width: 100%;
+        }
+
+        .cert-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .cert-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border);
+            display: inline-block;
+            padding: 5px 30px;
+            margin: 1.5rem 0;
+            color: var(--text-dark);
+        }
+
+        .cert-meta {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .cert-sign {
+            font-family: cursive;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 10px;
+        }
+
+        .cert-stamp {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+            margin: 0 auto 1.5rem;
+            transform: rotate(-10deg);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="youtube_project_guide.html" class="logo">
+            <i class="fas fa-gavel"></i>
+            <span>Lingo Chaps Reviewer Hub</span>
+        </a>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <main>
+        <!-- Welcome Screen -->
+        <div id="screen-welcome" class="card">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <i class="fas fa-graduation-cap" style="font-size: 3.5rem; color: var(--primary);"></i>
+            </div>
+            <h1 style="text-align: center;">Reviewer Certification Portal</h1>
+            <p style="text-align: center; font-size: 1.1rem;">
+                Validate your understanding of the **Lingo Chaps** project protocols. 
+                This assessment simulates real-world intake, allocation, and QC review scenarios.
+            </p>
+            
+            <div style="background: var(--sidebar-bg); padding: 1.5rem; border-radius: 16px; margin: 2rem 0; border: 1px solid var(--border);">
+                <h3 style="margin-bottom: 0.75rem; font-weight: 800;"><i class="fas fa-info-circle"></i> Assessment Guidelines:</h3>
+                <ul style="list-style-type: none; font-size: 0.95rem; display: flex; flex-direction: column; gap: 10px;">
+                    <li><i class="fas fa-clock" style="color: var(--primary);"></i> <b>Time limits:</b> Intake phase tests the WhatsApp 5-Minute response speed.</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> <b>Passing Grade:</b> Must correctly audit all workflow violations to receive certificate.</li>
+                    <li><i class="fas fa-database" style="color: var(--primary);"></i> <b>Result Logged:</b> Your score is automatically recorded in the manager database sheet.</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <label for="userName">Enter Your Full Name:</label>
+                <input type="text" id="userName" placeholder="e.g., Jane Doe" required autocomplete="off">
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn" onclick="startAssessment()">
+                    Start Assessment <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div id="assessment-progress" style="display: none;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-light);">
+                <span id="progress-phase-name">Phase 1: Intake Test</span>
+                <span id="progress-step-text">Step 1 of 4</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progressBarFill"></div>
+            </div>
+        </div>
+
+        <!-- Phase 1: Intake (WhatsApp) -->
+        <div id="screen-phase1" class="card" style="display: none;">
+            <h2>Phase 1: Intake & Global Communications</h2>
+            <p>
+                A new client dropped a message in your WhatsApp group. 
+                According to the <b>Global Communications Intake Protocol</b>, you must reply immediately. Respond before the timer expires!
+            </p>
+
+            <div class="whatsapp-container">
+                <div class="whatsapp-header">
+                    <div class="whatsapp-user-info">
+                        <div class="whatsapp-avatar">YT</div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 0.9rem;">YouTube Project Group #14</div>
+                            <div class="whatsapp-status">Client is typing...</div>
+                        </div>
+                    </div>
+                    <div class="whatsapp-timer" id="whatsappTimer">Time Left: 05:00</div>
+                </div>
+                <div class="whatsapp-body">
+                    <div class="whatsapp-message received">
+                        Hey Lingo Chaps operations team! We have a new YouTube project ready. 
+                        It's a 2200-word video, language pair English to Arabic. ETA is tomorrow morning. 
+                        Can you confirm?
+                        <div class="whatsapp-message-time">10:15 AM</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Choose the best next action:</label>
+                <div class="option-list">
+                    <div class="option-item" onclick="selectPhase1Option(0)" id="p1-opt-0">
+                        <i class="far fa-circle" id="p1-ico-0"></i>
+                        <span>Wait for the assigned translator to confirm availability before replying to the client.</span>
+                    </div>
+                    <div class="option-item" onclick="selectPhase1Option(1)" id="p1-opt-1">
+                        <i class="far fa-circle" id="p1-ico-1"></i>
+                        <span>Reply immediately: "Received! Let me check the resource availability, OST quantity, and timezone. We will confirm the ETA in 5-10 minutes."</span>
+                    </div>
+                    <div class="option-item" onclick="selectPhase1Option(2)" id="p1-opt-2">
+                        <i class="far fa-circle" id="p1-ico-2"></i>
+                        <span>Confirm immediately: "Yes, we can definitely do it, we'll start work right away!" (Without checking OST details or availability).</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback-box" id="phase1-feedback"></div>
+
+            <div style="text-align: right; margin-top: 1.5rem;">
+                <button class="btn" id="btn-phase1-next" onclick="submitPhase1()" disabled>
+                    Submit Answer <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Phase 2: Allocation Sheet Check -->
+        <div id="screen-phase2" class="card" style="display: none;">
+            <h2>Phase 2: Allocation & Real-Time Tracking</h2>
+            <p>
+                To maintain our <b>Zero-Delay status</b>, the project status must be updated in the allocation sheet immediately. 
+                Identify the row containing a **critical workflow violation** based on the <i>Lingo Chaps Operational Protocols</i>.
+            </p>
+
+            <div class="sheet-container">
+                <table class="sheet-table">
+                    <thead>
+                        <tr>
+                            <th class="sheet-th">ID</th>
+                            <th class="sheet-th">Language</th>
+                            <th class="sheet-th">Linguist</th>
+                            <th class="sheet-th">Status</th>
+                            <th class="sheet-th">ETA</th>
+                            <th class="sheet-th">Template Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="sheet-tr" onclick="selectPhase2Row(1)" id="sheet-row-1">
+                            <td class="sheet-td">LC-291</td>
+                            <td class="sheet-td">Spanish</td>
+                            <td class="sheet-td">Maria G.</td>
+                            <td class="sheet-td" style="color: var(--secondary); font-weight: 600;">In Progress</td>
+                            <td class="sheet-td">May 23, 2026</td>
+                            <td class="sheet-td">Spanish_00:00:00-00:01:45</td>
+                        </tr>
+                        <tr class="sheet-tr" onclick="selectPhase2Row(2)" id="sheet-row-2">
+                            <td class="sheet-td">LC-292</td>
+                            <td class="sheet-td">Arabic</td>
+                            <td class="sheet-td">Ahmed K.</td>
+                            <td class="sheet-td" style="color: var(--text-light);">Not Logged Yet</td>
+                            <td class="sheet-td">--</td>
+                            <td class="sheet-td">Template.docx</td>
+                        </tr>
+                        <tr class="sheet-tr" onclick="selectPhase2Row(3)" id="sheet-row-3">
+                            <td class="sheet-td">LC-293</td>
+                            <td class="sheet-td">French</td>
+                            <td class="sheet-td">Clara L.</td>
+                            <td class="sheet-td" style="color: var(--secondary); font-weight: 600;">Allocated</td>
+                            <td class="sheet-td">May 23, 2026</td>
+                            <td class="sheet-td">French_00:00:00-00:01:45</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="font-size: 0.9rem; font-style: italic;">Hint: Click on the row that violates the core protocols (real-time milestone log, naming conventions).</p>
+
+            <div class="feedback-box" id="phase2-feedback"></div>
+
+            <div style="text-align: right; margin-top: 1.5rem;">
+                <button class="btn" id="btn-phase2-next" onclick="submitPhase2()" disabled>
+                    Submit Answer <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Phase 3: QC & Review (Linguist Execution Protocol) -->
+        <div id="screen-phase3" class="card" style="display: none;">
+            <h2>Phase 3: Quality Control & Document Audit</h2>
+            <p>
+                The translator has submitted their work. Under the **Linguist Execution Protocol**, 
+                you must verify that the work was completed in the online Google Doc link, that no Machine Translation (MT) was used, 
+                and that all mandatory template header details are filled.
+            </p>
+            <p><strong>Auditing Task:</strong> Click on the rows that represent a **critical protocol violation** in this submission snippet:</p>
+
+            <div class="doc-container">
+                <div class="doc-header-block">
+                    <div style="font-weight: bold; font-size: 1.2rem; text-align: center; margin-bottom: 0.5rem;">LINGUIST AUDIT REPORT</div>
+                    <div style="font-size: 0.9rem; text-align: center;">Project: LC-291-Spanish | Reviewer checklist</div>
+                </div>
+                
+                <div class="doc-row" onclick="toggleDocRow(1)" id="doc-row-1">
+                    <span style="font-weight: 700;">Row 1:</span>
+                    <div>
+                        <b>Linguist Workspace:</b> Work completed directly via Google Docs online link. 
+                        No local files used.
+                    </div>
+                </div>
+
+                <div class="doc-row" onclick="toggleDocRow(2)" id="doc-row-2">
+                    <span style="font-weight: 700;">Row 2:</span>
+                    <div>
+                        <b>Translation Method:</b> Segment 5 used Google Translate to speed up phrasing. 
+                        Linguist did not review context.
+                    </div>
+                </div>
+
+                <div class="doc-row" onclick="toggleDocRow(3)" id="doc-row-3">
+                    <span style="font-weight: 700;">Row 3:</span>
+                    <div>
+                        <b>Video Summary:</b> A concise 3-line video summary is included in the header sheet.
+                    </div>
+                </div>
+
+                <div class="doc-row" onclick="toggleDocRow(4)" id="doc-row-4">
+                    <span style="font-weight: 700;">Row 4:</span>
+                    <div>
+                        <b>Submission Method:</b> Work was exported to a local `.docx` file and sent via email, leaving the online Google Doc blank.
+                    </div>
+                </div>
+            </div>
+
+            <p style="font-size: 0.9rem; font-style: italic;">Hint: Multiple rows can contain violations. Click all that apply.</p>
+
+            <div class="feedback-box" id="phase3-feedback"></div>
+
+            <div style="text-align: right; margin-top: 1.5rem;">
+                <button class="btn" id="btn-phase3-next" onclick="submitPhase3()">
+                    Submit Audit <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Phase 4: Feedback formulation -->
+        <div id="screen-phase4" class="card" style="display: none;">
+            <h2>Phase 4: Rework & Professional Feedback</h2>
+            <p>
+                When a linguist violates guidelines, you must formulate constructive, professional feedback. 
+                Select the feedback draft that aligns best with **Lingo Chaps' core communication standards**:
+            </p>
+
+            <div class="form-group">
+                <div class="option-list">
+                    <div class="option-item" onclick="selectPhase4Option(0)" id="p4-opt-0">
+                        <i class="far fa-circle" id="p4-ico-0"></i>
+                        <span>"Your translation is terrible. You clearly used Google Translate. Do this manually or we will terminate your project."</span>
+                    </div>
+                    <div class="option-item" onclick="selectPhase4Option(1)" id="p4-opt-1">
+                        <i class="far fa-circle" id="p4-ico-1"></i>
+                        <span>"Hi there! Thanks for your submission. We noticed a couple of sections (e.g., segment 5) that resemble machine translation, and the work was submitted offline instead of the online doc. As per our standards, please migrate the translation to the Google Doc link, review the phrasing to ensure it is 100% human-verified, and add the video summary. Thank you for your support!"</span>
+                    </div>
+                    <div class="option-item" onclick="selectPhase4Option(2)" id="p4-opt-2">
+                        <i class="far fa-circle" id="p4-ico-2"></i>
+                        <span>"We accepted your file but please do it better next time."</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback-box" id="phase4-feedback"></div>
+
+            <div style="text-align: right; margin-top: 1.5rem;">
+                <button class="btn" id="btn-phase4-next" onclick="submitPhase4()" disabled>
+                    Submit Feedback <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Screen & Certificate -->
+        <div id="screen-results" class="card" style="display: none;">
+            <h1 style="text-align: center;">Assessment Results</h1>
+            
+            <div class="score-display">
+                <div class="score-circle" id="scoreCircle">
+                    <div class="score-value" id="scoreValue">0%</div>
+                    <div class="score-label">Score</div>
+                </div>
+            </div>
+
+            <p style="text-align: center; font-size: 1.1rem;" id="resultsExplanation">
+                Evaluating answers...
+            </p>
+
+            <!-- Certificate layout -->
+            <div class="certificate-container" id="certificate" style="display: none;">
+                <div class="cert-stamp">Verified</div>
+                <div class="cert-title">Reviewer Certification</div>
+                <div>This is to certify that</div>
+                <div class="cert-name" id="certName">JANE DOE</div>
+                <div>has successfully demonstrated proficiency in the</div>
+                <div style="font-weight: 700; margin: 10px 0; color: var(--primary);">Lingo Chaps YouTube Operational Workflow</div>
+                <div>covering Intake speed, Allocation logging, and QC Audit protocols.</div>
+                
+                <div class="cert-meta">
+                    <div>
+                        <div style="font-weight: 700;">DATE</div>
+                        <div id="certDate">May 22, 2026</div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 700;">ISSUED BY</div>
+                        <div class="cert-sign">Lingo Chaps Ops</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2.5rem; display: flex; justify-content: center; gap: 15px;">
+                <button class="btn" onclick="retryQuiz()"><i class="fas fa-redo"></i> Try Again</button>
+                <button class="btn btn-secondary" onclick="window.print()" id="btnPrint"><i class="fas fa-print"></i> Print Certificate</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p style="text-align: center; font-size: 0.85rem; color: var(--text-light); margin: 0;">
+            &copy; 2026 Lingo Chaps. Managed with Precision.
+        </p>
+    </footer>
+
+    <script>
+        // Set your Google Sheet Script Web App URL here
+        // Set this to enable automatic logging of scores
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZaJs9gLLoV_eSC0L-uMG4YMNB82i1kC9rlxMwUsI8pK5kBfE2NxpNBIu7Pm5LV3RW/exec"; 
+
+        let currentPhase = 1;
+        let userName = "";
+        let timerInterval = null;
+        let p1Selected = null;
+        let p2Selected = null;
+        let p3SelectedRows = [];
+        let p4Selected = null;
+        let finalScore = 0;
+        let secondsLeft = 300; // 5 Minutes in seconds
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const toggleIcon = document.getElementById('themeToggle').querySelector('i');
+            if (body.classList.contains('dark-mode')) {
+                toggleIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                toggleIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Initialize theme based on preference
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeToggle').querySelector('i').classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // Start Assessment
+        function startAssessment() {
+            const nameInput = document.getElementById('userName').value.trim();
+            if (!nameInput) {
+                alert("Please enter your name to start the test.");
+                return;
+            }
+            userName = nameInput;
+            document.getElementById('screen-welcome').style.display = 'none';
+            document.getElementById('assessment-progress').style.display = 'block';
+            showPhase(1);
+        }
+
+        // Timer for Phase 1
+        function startTimer() {
+            secondsLeft = 300;
+            const timerDiv = document.getElementById('whatsappTimer');
+            timerInterval = setInterval(() => {
+                secondsLeft--;
+                let mins = Math.floor(secondsLeft / 60);
+                let secs = secondsLeft % 60;
+                timerDiv.innerText = `Time Left: ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                
+                if (secondsLeft <= 30) {
+                    timerDiv.style.color = '#ff3333';
+                }
+
+                if (secondsLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerDiv.innerText = "Time Expired!";
+                    alert("Time expired! Under the Lingo Chaps workflow, client responses must be prompt.");
+                    submitPhase1(true); // submit with automatic fail due to time
+                }
+            }, 1000);
+        }
+
+        // Update progress bar
+        function updateProgress(step, label) {
+            document.getElementById('progress-phase-name').innerText = label;
+            document.getElementById('progress-step-text').innerText = `Step ${step} of 4`;
+            const fillPct = ((step - 1) / 4) * 100;
+            document.getElementById('progressBarFill').style.width = `${fillPct}%`;
+        }
+
+        function showPhase(phase) {
+            currentPhase = phase;
+            
+            // Hide all phases
+            document.getElementById('screen-phase1').style.display = 'none';
+            document.getElementById('screen-phase2').style.display = 'none';
+            document.getElementById('screen-phase3').style.display = 'none';
+            document.getElementById('screen-phase4').style.display = 'none';
+
+            if (phase === 1) {
+                document.getElementById('screen-phase1').style.display = 'block';
+                updateProgress(1, 'Phase 1: Intake Test');
+                startTimer();
+            } else if (phase === 2) {
+                document.getElementById('screen-phase2').style.display = 'block';
+                updateProgress(2, 'Phase 2: Tracking Check');
+            } else if (phase === 3) {
+                document.getElementById('screen-phase3').style.display = 'block';
+                updateProgress(3, 'Phase 3: Quality Control');
+            } else if (phase === 4) {
+                document.getElementById('screen-phase4').style.display = 'block';
+                updateProgress(4, 'Phase 4: Feedback Check');
+            }
+        }
+
+        // Phase 1 Option Select
+        function selectPhase1Option(index) {
+            p1Selected = index;
+            for (let i = 0; i < 3; i++) {
+                const opt = document.getElementById(`p1-opt-${i}`);
+                const ico = document.getElementById(`p1-ico-${i}`);
+                if (i === index) {
+                    opt.classList.add('selected');
+                    ico.classList.replace('far', 'fas');
+                    ico.classList.replace('fa-circle', 'fa-check-circle');
+                } else {
+                    opt.classList.remove('selected');
+                    ico.classList.replace('fas', 'far');
+                    ico.classList.replace('fa-check-circle', 'fa-circle');
+                }
+            }
+            document.getElementById('btn-phase1-next').removeAttribute('disabled');
+        }
+
+        // Submit Phase 1
+        function submitPhase1(timeExpired = false) {
+            clearInterval(timerInterval);
+            const feedback = document.getElementById('phase1-feedback');
+            feedback.style.display = 'block';
+
+            if (timeExpired) {
+                feedback.innerHTML = `<h4 style="color: var(--danger);"><i class="fas fa-times-circle"></i> RESPONSE TIMED OUT</h4>
+                                      <p style="margin: 0.5rem 0 0 0;">Lingo Chaps requires an <b>Instant Reply</b> in WhatsApp/Email groups within 2-5 minutes. You failed to respond in time.</p>`;
+                finalScore += 0;
+            } else if (p1Selected === 1) {
+                feedback.innerHTML = `<h4 style="color: var(--secondary);"><i class="fas fa-check-circle"></i> CORRECT</h4>
+                                      <p style="margin: 0.5rem 0 0 0;">Excellent! The 5-Minute Rule mandates an immediate confirmation reply to reassure the client, while stating that resource and timezone details are being reviewed.</p>`;
+                finalScore += 25;
+            } else {
+                feedback.innerHTML = `<h4 style="color: var(--danger);"><i class="fas fa-times-circle"></i> INCORRECT ACTION</h4>
+                                      <p style="margin: 0.5rem 0 0 0;"><b>Incorrect option selected:</b> Waiting for translators violates the 5-Minute rule. Conversely, confirming immediately without verification might result in missed deadlines if resources are busy.</p>`;
+            }
+
+            // Highlight answer states
+            for (let i = 0; i < 3; i++) {
+                const opt = document.getElementById(`p1-opt-${i}`);
+                opt.style.pointerEvents = 'none';
+                if (i === 1) opt.classList.add('correct');
+                else if (i === p1Selected) opt.classList.add('incorrect');
+            }
+
+            // Move to Next button styling
+            const btn = document.getElementById('btn-phase1-next');
+            btn.innerHTML = `Proceed to Phase 2 <i class="fas fa-arrow-right"></i>`;
+            btn.onclick = () => showPhase(2);
+        }
+
+        // Phase 2 Row Select
+        function selectPhase2Row(index) {
+            p2Selected = index;
+            for (let i = 1; i <= 3; i++) {
+                const row = document.getElementById(`sheet-row-${i}`);
+                if (i === index) {
+                    row.classList.add('selected');
+                } else {
+                    row.classList.remove('selected');
+                }
+            }
+            document.getElementById('btn-phase2-next').removeAttribute('disabled');
+        }
+
+        // Submit Phase 2
+        function submitPhase2() {
+            const feedback = document.getElementById('phase2-feedback');
+            feedback.style.display = 'block';
+
+            if (p2Selected === 2) {
+                feedback.innerHTML = `<h4 style="color: var(--secondary);"><i class="fas fa-check-circle"></i> CORRECT</h4>
+                                      <p style="margin: 0.5rem 0 0 0;">Spot on! Row 2 shows status as 'Not Logged Yet' and template status as 'Template.docx'. The Zero-Delay protocol mandates updating details and renaming files immediately upon project allocation.</p>`;
+                finalScore += 25;
+            } else {
+                feedback.innerHTML = `<h4 style="color: var(--danger);"><i class="fas fa-times-circle"></i> INCORRECT ROW SELECTED</h4>
+                                      <p style="margin: 0.5rem 0 0 0;"><b>Incorrect option selected:</b> Rows 1 and 3 correctly show that the status is updated, and the template files are renamed per naming standards.</p>`;
+            }
+
+            // Highlight rows
+            for (let i = 1; i <= 3; i++) {
+                const row = document.getElementById(`sheet-row-${i}`);
+                row.style.pointerEvents = 'none';
+                if (i === 2) row.classList.add('flagged');
+            }
+
+            const btn = document.getElementById('btn-phase2-next');
+            btn.innerHTML = `Proceed to Phase 3 <i class="fas fa-arrow-right"></i>`;
+            btn.onclick = () => showPhase(3);
+        }
+
+        // Phase 3 Row Toggle
+        function toggleDocRow(index) {
+            const row = document.getElementById(`doc-row-${index}`);
+            const pos = p3SelectedRows.indexOf(index);
+            if (pos === -1) {
+                p3SelectedRows.push(index);
+                row.classList.add('selected');
+            } else {
+                p3SelectedRows.splice(pos, 1);
+                row.classList.remove('selected');
+            }
+        }
+
+        // Submit Phase 3
+        function submitPhase3() {
+            const feedback = document.getElementById('phase3-feedback');
+            feedback.style.display = 'block';
+
+            // Correct rows to check are 2 (MT usage) and 4 (offline document submission)
+            const isRow2Selected = p3SelectedRows.includes(2);
+            const isRow4Selected = p3SelectedRows.includes(4);
+            const isRow1Selected = p3SelectedRows.includes(1);
+            const isRow3Selected = p3SelectedRows.includes(3);
+
+            if (isRow2Selected && isRow4Selected && !isRow1Selected && !isRow3Selected) {
+                feedback.innerHTML = `<h4 style="color: var(--secondary);"><i class="fas fa-check-circle"></i> AUDIT COMPLETE: 100% CORRECT</h4>
+                                      <p style="margin: 0.5rem 0 0 0;">Superb! You correctly identified both violations:
+                                      <br>1. Machine Translation (MT) is strictly prohibited.
+                                      <br>2. Translators must work directly on the Google Doc link provided (offline work is unacceptable).</p>`;
+                finalScore += 25;
+            } else {
+                let text = "<b>Missing/Incorrect flags:</b> You should have flagged only Row 2 and Row 4.";
+                if (isRow1Selected) text += "<br>- Row 1 is actually correct behavior.";
+                if (isRow3Selected) text += "<br>- Row 3 is actually correct behavior.";
+                if (!isRow2Selected) text += "<br>- You missed the prohibited Google Translate usage in Row 2.";
+                if (!isRow4Selected) text += "<br>- You missed the prohibited offline file submission in Row 4.";
+                
+                feedback.innerHTML = `<h4 style="color: var(--danger);"><i class="fas fa-times-circle"></i> AUDIT FAILED</h4>
+                                      <p style="margin: 0.5rem 0 0 0;">${text}</p>`;
+            }
+
+            // Flag correct incorrect rows
+            for (let i = 1; i <= 4; i++) {
+                const row = document.getElementById(`doc-row-${i}`);
+                row.style.pointerEvents = 'none';
+                if (i === 2 || i === 4) {
+                    row.classList.add('flagged');
+                }
+            }
+
+            const btn = document.getElementById('btn-phase3-next');
+            btn.innerHTML = `Proceed to Phase 4 <i class="fas fa-arrow-right"></i>`;
+            btn.onclick = () => showPhase(4);
+        }
+
+        // Phase 4 Option Select
+        function selectPhase4Option(index) {
+            p4Selected = index;
+            for (let i = 0; i < 3; i++) {
+                const opt = document.getElementById(`p4-opt-${i}`);
+                const ico = document.getElementById(`p4-ico-${i}`);
+                if (i === index) {
+                    opt.classList.add('selected');
+                    ico.classList.replace('far', 'fas');
+                    ico.classList.replace('fa-circle', 'fa-check-circle');
+                } else {
+                    opt.classList.remove('selected');
+                    ico.classList.replace('fas', 'far');
+                    ico.classList.replace('fa-check-circle', 'fa-circle');
+                }
+            }
+            document.getElementById('btn-phase4-next').removeAttribute('disabled');
+        }
+
+        // Submit Phase 4
+        function submitPhase4() {
+            const feedback = document.getElementById('phase4-feedback');
+            feedback.style.display = 'block';
+
+            if (p4Selected === 1) {
+                feedback.innerHTML = `<h4 style="color: var(--secondary);"><i class="fas fa-check-circle"></i> CORRECT</h4>
+                                      <p style="margin: 0.5rem 0 0 0;">Excellent! Constructive feedback is respectful, points directly to operational guidelines, and provides clear steps to fix the issues.</p>`;
+                finalScore += 25;
+            } else {
+                feedback.innerHTML = `<h4 style="color: var(--danger);"><i class="fas fa-times-circle"></i> INCORRECT ANSWER</h4>
+                                      <p style="margin: 0.5rem 0 0 0;"><b>Incorrect option selected:</b> Threatening translators violates internal collaboration principles, and accepting flawed files violates our 100% acceptance standard.</p>`;
+            }
+
+            for (let i = 0; i < 3; i++) {
+                const opt = document.getElementById(`p4-opt-${i}`);
+                opt.style.pointerEvents = 'none';
+                if (i === 1) opt.classList.add('correct');
+                else if (i === p4Selected) opt.classList.add('incorrect');
+            }
+
+            const btn = document.getElementById('btn-phase4-next');
+            btn.innerHTML = `Calculate & Submit Score <i class="fas fa-poll"></i>`;
+            btn.onclick = () => showResults();
+        }
+
+        // Show Results Screen
+        function showResults() {
+            document.getElementById('assessment-progress').style.display = 'none';
+            document.getElementById('screen-phase4').style.display = 'none';
+            document.getElementById('screen-results').style.display = 'block';
+
+            const scoreCircle = document.getElementById('scoreCircle');
+            const scoreValue = document.getElementById('scoreValue');
+            const resultsExplanation = document.getElementById('resultsExplanation');
+            const certificate = document.getElementById('certificate');
+
+            scoreValue.innerText = `${finalScore}%`;
+
+            if (finalScore >= 75) {
+                scoreCircle.style.borderColor = 'var(--secondary)';
+                scoreValue.style.color = 'var(--secondary)';
+                resultsExplanation.innerHTML = `<b>Congratulations!</b> You passed with a perfect score. You are now fully certified to review Lingo Chaps YouTube translation projects.`;
+                
+                // Show Certificate
+                document.getElementById('certName').innerText = userName.toUpperCase();
+                document.getElementById('certDate').innerText = new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                certificate.style.display = 'block';
+            } else {
+                scoreCircle.style.borderColor = 'var(--danger)';
+                scoreValue.style.color = 'var(--danger)';
+                resultsExplanation.innerHTML = `<b>Score below standard.</b> You scored ${finalScore}%. Review the <a href="youtube_project_guide.html">YouTube Project Guide</a> and try again to obtain your reviewer certification.`;
+                document.getElementById('btnPrint').style.display = 'none';
+            }
+
+            // Log score in Google Sheet
+            sendLogData();
+        }
+
+        // Send logs to Google Sheet Web App
+        function sendLogData() {
+            if (!GOOGLE_SCRIPT_URL) {
+                console.log("No Google Web App URL configured. Score saved locally.");
+                localStorage.setItem(`lc-score-${userName}`, finalScore);
+                return;
+            }
+
+            const p1Answers = [
+                "Wait for translator",
+                "Acknowledge & check timezone/ETA (Correct)",
+                "Confirm immediately without checking resources"
+            ];
+            const p2Answers = [
+                "", // 1-indexed
+                "Row 1 (Spanish - Maria G.)",
+                "Row 2 (Arabic - Ahmed K. - Violation) (Correct)",
+                "Row 3 (French - Clara L.)"
+            ];
+            const p3Answers = {
+                1: "Row 1 (Google Docs online link - Correct)",
+                2: "Row 2 (Google Translate used - Violation) (Correct Flag)",
+                3: "Row 3 (Video summary - Correct)",
+                4: "Row 4 (Local .docx submission - Violation) (Correct Flag)"
+            };
+            const p4Answers = [
+                "Threatening/Rude tone",
+                "Constructive/Professional feedback (Correct)",
+                "Passive/Lenient feedback"
+            ];
+
+            const p1Text = p1Selected === null ? "Timed Out" : p1Answers[p1Selected];
+            const p2Text = p2Selected === null ? "None selected" : p2Answers[p2Selected];
+            const p3Text = p3SelectedRows.length === 0 ? "None selected" : p3SelectedRows.map(r => p3Answers[r]).join(', ');
+            const p4Text = p4Selected === null ? "None selected" : p4Answers[p4Selected];
+
+            const detailedFeedback = `Phase 1 (Intake): Selected "${p1Text}" | Phase 2 (Tracking): Flagged "${p2Text}" | Phase 3 (QC): Flagged [${p3Text}] | Phase 4 (Feedback): Selected "${p4Text}"`;
+
+            const payload = {
+                name: userName,
+                score: finalScore,
+                feedback: detailedFeedback
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify(payload)
+            })
+            .then(() => console.log("Request sent to Google Sheets Web App."))
+            .catch(error => console.error("Error logging score: ", error));
+        }
+
+        // Retry Quiz
+        function retryQuiz() {
+            location.reload();
+        }
+    </script>
+</body>
+
+</html>
