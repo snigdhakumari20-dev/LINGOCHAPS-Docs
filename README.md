@@ -8,9 +8,8 @@ Welcome to the central repository for **Lingo Chaps** operational standards and 
 
 | Asset | Purpose | Access |
 | :--- | :--- | :--- |
-| **YouTube Project Guide** | End-to-end execution manual for YouTube video projects. | [Live Link](https://youtubeprojectportal.netlify.app) |
-| **Translator Portal** | Execution dashboard specifically for linguists and translators. | [Access Portal](youtube_translator_portal.html) |
-| **Internal Onboarding** | Comprehensive training manual for new team members. | [Live Link](https://lingochapsinternal.netlify.app) |
+| **YouTube Project Guide** | End-to-end execution manual for YouTube video projects. | [Live Link](https://conversify-india.github.io/LINGOCHAPS-Docs/youtube_project_guide.html) |
+| **Internal Onboarding** | Comprehensive training manual for new team members. | [Live Link](https://conversify-india.github.io/LINGOCHAPS-Docs/internal_onboarding.html) |
 
 ---
 
@@ -35,8 +34,9 @@ To view these interactive guides as live websites:
 
 1.  Go to your repository **Settings** > **Pages**.
 2.  Set the Source to **Deploy from a branch** and select `main`.
-3.  Once the site is live, you can navigate to the portals by adding the filename to your URL:
-    *   `https://snigdhakumari20-dev.github.io/LINGOCHAPS-Docs/youtube_project_guide.html`
+3.  Once the site is live, you can navigate to the portals by using the following URLs:
+    *   YouTube Project Guide: `https://conversify-india.github.io/LINGOCHAPS-Docs/youtube_project_guide.html`
+    *   Internal Onboarding Portal: `https://conversify-india.github.io/LINGOCHAPS-Docs/internal_onboarding.html`
 
 ---
 
