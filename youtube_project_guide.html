@@ -1241,6 +1241,56 @@
                     </div>
                 </div>
 
+                <!-- Existing image grids (Allocation Sheet and Template.docx visual guides) -->
+                <div
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 2rem; margin-bottom: 2rem;">
+                    <div id="yt-allocation-sheet" class="protocol-box"
+                        style="background: #eff6ff; border-color: #bfdbfe; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <h4
+                                style="margin-bottom: 10px; color: var(--primary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
+                                Allocation Sheet</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 1.5rem;">Maintains real-time
+                                status of translator IDs, language pairs, and progress milestones.</p>
+
+                            <div style="display: flex; gap: 10px; margin-bottom: 1.5rem;">
+                                <div style="flex: 1; border-radius: 8px; overflow: hidden; border: 1px solid #bfdbfe; cursor: pointer; background: #fff; display: flex; align-items: center; justify-content: center;"
+                                    onclick="openZoomModal(this, 'Allocation Sheet - Part 1')">
+                                    <img src="allocation_part1.jpg"
+                                        onerror="loadFallbackImage(this, 'allocation_part1')"
+                                        alt="Allocation Status Part 1"
+                                        style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
+                                </div>
+                                <div style="flex: 1; border-radius: 8px; overflow: hidden; border: 1px solid #bfdbfe; cursor: pointer; background: #fff; display: flex; align-items: center; justify-content: center;"
+                                    onclick="openZoomModal(this, 'Allocation Sheet - Part 2')">
+                                    <img src="allocation_part2.jpg"
+                                        onerror="loadFallbackImage(this, 'allocation_part2')"
+                                        alt="Allocation Status Part 2"
+                                        style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="yt-template-docx" class="protocol-box"
+                        style="background: #f0fdf4; border-color: #bbf7d0; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <h4
+                                style="margin-bottom: 10px; color: var(--secondary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
+                                Template.docx</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 1.5rem;">The
+                                template file should be renamed correctly with all the required details.</p>
+
+                            <div style="border-radius: 8px; overflow: hidden; border: 1px solid #bbf7d0; cursor: pointer; margin-bottom: 0.5rem; background: #fff; display: flex; align-items: center; justify-content: center;"
+                                onclick="openZoomModal(this, 'Standardized Translation Format Blueprint')">
+                                <img src="template_format.png" onerror="loadFallbackImage(this, 'template_format')"
+                                    alt="Template Format Guide"
+                                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Point 2: Resource Selection & Escalation -->
                 <div class="rule-card"
                     style="border-left: 5px solid var(--secondary); background: rgba(16, 185, 129, 0.05); padding: 2rem; margin: 2rem 0;">
@@ -1347,55 +1397,6 @@
                 </div>
 
 
-                <!-- Existing image grids (Allocation Sheet and Template.docx visual guides) -->
-                <div
-                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 2rem; margin-bottom: 2rem;">
-                    <div id="yt-allocation-sheet" class="protocol-box"
-                        style="background: #eff6ff; border-color: #bfdbfe; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <h4
-                                style="margin-bottom: 10px; color: var(--primary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
-                                Allocation Sheet</h4>
-                            <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 1.5rem;">Maintains real-time
-                                status of translator IDs, language pairs, and progress milestones.</p>
-
-                            <div style="display: flex; gap: 10px; margin-bottom: 1.5rem;">
-                                <div style="flex: 1; border-radius: 8px; overflow: hidden; border: 1px solid #bfdbfe; cursor: pointer; background: #fff; display: flex; align-items: center; justify-content: center;"
-                                    onclick="openZoomModal(this, 'Allocation Sheet - Part 1')">
-                                    <img src="allocation_part1.jpg"
-                                        onerror="loadFallbackImage(this, 'allocation_part1')"
-                                        alt="Allocation Status Part 1"
-                                        style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
-                                </div>
-                                <div style="flex: 1; border-radius: 8px; overflow: hidden; border: 1px solid #bfdbfe; cursor: pointer; background: #fff; display: flex; align-items: center; justify-content: center;"
-                                    onclick="openZoomModal(this, 'Allocation Sheet - Part 2')">
-                                    <img src="allocation_part2.jpg"
-                                        onerror="loadFallbackImage(this, 'allocation_part2')"
-                                        alt="Allocation Status Part 2"
-                                        style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="yt-template-docx" class="protocol-box"
-                        style="background: #f0fdf4; border-color: #bbf7d0; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <h4
-                                style="margin-bottom: 10px; color: var(--secondary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
-                                Template.docx</h4>
-                            <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 1.5rem;">The
-                                template file should be renamed correctly with all the required details.</p>
-
-                            <div style="border-radius: 8px; overflow: hidden; border: 1px solid #bbf7d0; cursor: pointer; margin-bottom: 0.5rem; background: #fff; display: flex; align-items: center; justify-content: center;"
-                                onclick="openZoomModal(this, 'Standardized Translation Format Blueprint')">
-                                <img src="template_format.png" onerror="loadFallbackImage(this, 'template_format')"
-                                    alt="Template Format Guide"
-                                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
 
             <section id="yt-template-guide">
