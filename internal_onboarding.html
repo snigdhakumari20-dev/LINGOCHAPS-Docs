@@ -1563,6 +1563,21 @@
             icon.classList.toggle('fa-sun');
         });
 
+        // Collapsible Sidebar Menu Toggle
+        document.querySelectorAll('.collapsible-parent').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                trigger.classList.toggle('expanded');
+            });
+        });
+
+        // Sidebar Navigation Active State Toggle
+        document.querySelectorAll('.nav-item a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item a').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
         // IMAGE ZOOM MODAL FUNCTIONS
         function openZoomModal(src, captionText) {
             const modal = document.getElementById('imageZoomModal');
