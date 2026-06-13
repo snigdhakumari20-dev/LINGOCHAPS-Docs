@@ -1570,11 +1570,22 @@
             });
         });
 
-        // Sidebar Navigation Active State Toggle
+        // Sidebar Navigation Active State Toggle & Smooth Scroll
         document.querySelectorAll('.nav-item a').forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
                 document.querySelectorAll('.nav-item a').forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
+
+                const target = document.querySelector(href);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+                history.pushState(null, null, href);
             });
         });
 
