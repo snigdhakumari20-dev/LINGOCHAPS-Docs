@@ -26,6 +26,13 @@
             --rule-bg: #fef2f2;
             --rule-text: #991b1b;
             --example-bg: #1e293b;
+            /* Glossary theme variables */
+            --g-bg-file: #E6F1FB; --g-border-file: #B5D4F4; --g-text-file: #042C53;
+            --g-bg-process: #E1F5EE; --g-border-process: #9FE1CB; --g-text-process: #04342C;
+            --g-bg-tool: #EEEDFE; --g-border-tool: #CECBF6; --g-text-tool: #26215C;
+            --g-bg-client: #FAEEDA; --g-border-client: #FAC775; --g-text-client: #412402;
+            --g-bg-quality: #FAECE7; --g-border-quality: #F5C4B3; --g-text-quality: #4A1B0C;
+            --g-ftag-bg: #ffffff; --g-ftag-border: #dddddd; --g-ftag-color: #555555;
         }
 
         body.dark-mode {
@@ -39,6 +46,13 @@
             --rule-bg: rgba(239, 68, 68, 0.1);
             --rule-text: #fca5a5;
             --secondary-bg: #1e293b;
+            /* Glossary theme dark mode variables */
+            --g-bg-file: rgba(24, 95, 165, 0.15); --g-border-file: rgba(24, 95, 165, 0.4); --g-text-file: #93c5fd;
+            --g-bg-process: rgba(15, 110, 86, 0.15); --g-border-process: rgba(15, 110, 86, 0.4); --g-text-process: #6ee7b7;
+            --g-bg-tool: rgba(83, 74, 183, 0.15); --g-border-tool: rgba(83, 74, 183, 0.4); --g-text-tool: #c7d2fe;
+            --g-bg-client: rgba(133, 79, 11, 0.15); --g-border-client: rgba(133, 79, 11, 0.4); --g-text-client: #fde047;
+            --g-bg-quality: rgba(153, 60, 29, 0.15); --g-border-quality: rgba(153, 60, 29, 0.4); --g-text-quality: #fca5a5;
+            --g-ftag-bg: #1e293b; --g-ftag-border: rgba(255, 255, 255, 0.1); --g-ftag-color: #94a3b8;
         }
 
         * {
@@ -1080,6 +1094,126 @@
                 flex-direction: column;
             }
         }
+
+        /* CUSTOM KEYBOARD & TABLE STYLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--sidebar-bg);
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        td {
+            color: var(--text-dark);
+        }
+
+        kbd {
+            background-color: var(--sidebar-bg);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            box-shadow: 0 2px 0 var(--border);
+            color: var(--text-dark);
+            display: inline-block;
+            font-family: monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1;
+            padding: 4px 7px;
+            margin: 0 2px;
+        }
+
+        code.naming-badge {
+            font-family: monospace;
+            font-weight: 700;
+            color: #f472b6;
+            background-color: rgba(244, 114, 182, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(244, 114, 182, 0.2);
+            font-size: 0.95rem;
+        }
+
+        /* GLOSSARY CUSTOM SYSTEM */
+        .glossary-filter-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .glossary-ftag {
+            border: 1.5px solid var(--g-ftag-border);
+            background: var(--g-ftag-bg);
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--g-ftag-color);
+            transition: all .15s ease-in-out;
+        }
+        .glossary-ftag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .glossary-ftag.active[data-f="all"]    { background: var(--text-dark); border-color: var(--text-dark); color: var(--bg); }
+        .glossary-ftag.active[data-f="file"]   { background: #185FA5; border-color: #185FA5; color: white; }
+        .glossary-ftag.active[data-f="process"]{ background: #0F6E56; border-color: #0F6E56; color: white; }
+        .glossary-ftag.active[data-f="tool"]   { background: #534AB7; border-color: #534AB7; color: white; }
+        .glossary-ftag.active[data-f="client"] { background: #854F0B; border-color: #854F0B; color: white; }
+        .glossary-ftag.active[data-f="quality"]{ background: #993C1D; border-color: #993C1D; color: white; }
+        
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            padding: 10px 0;
+        }
+        .glossary-card {
+            border-radius: 14px;
+            padding: 20px 22px;
+            border: 1px solid transparent;
+            transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+        }
+        .glossary-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        }
+        .glossary-card[data-c="file"]    { background: var(--g-bg-file); border-color: var(--g-border-file); color: var(--g-text-file); }
+        .glossary-card[data-c="process"] { background: var(--g-bg-process); border-color: var(--g-border-process); color: var(--g-text-process); }
+        .glossary-card[data-c="tool"]    { background: var(--g-bg-tool); border-color: var(--g-border-tool); color: var(--g-text-tool); }
+        .glossary-card[data-c="client"]  { background: var(--g-bg-client); border-color: var(--g-border-client); color: var(--g-text-client); }
+        .glossary-card[data-c="quality"] { background: var(--g-bg-quality); border-color: var(--g-border-quality); color: var(--g-text-quality); }
+        
+        .glossary-card .abbr   { font-size: 24px; font-weight: 800; margin-bottom: 3px; }
+        .glossary-card .full   { font-size: 11px; font-weight: 700; margin-bottom: 12px; opacity: .7; text-transform: uppercase; letter-spacing: .05em; }
+        .glossary-card .meaning{ font-size: 0.9rem; line-height: 1.6; }
+        .glossary-card .eg     { font-size: 0.8rem; margin-top: 10px; padding: 9px 12px; border-radius: 8px; background: rgba(0,0,0,.05); line-height: 1.5; font-style: italic; opacity: 0.9; }
+        
+        /* Adapt .eg background for dark mode */
+        body.dark-mode .glossary-card .eg {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .glossary-card .pill   { display: inline-block; font-size: 9px; font-weight: 700; padding: 3px 10px; border-radius: 10px; margin-top: 12px; letter-spacing: .05em; text-transform: uppercase; background: rgba(0,0,0,.08); }
+        body.dark-mode .glossary-card .pill {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .glossary-card.hidden  { display: none; }
     </style>
 </head>
 
@@ -1116,6 +1250,30 @@
                                 class="fas fa-file-import" style="width: 16px; text-align: center;"></i> 1. Project Prerequisites</a></li>
                     <li class="nav-item"><a href="#folders" style="display: flex; align-items: center; gap: 8px;"><i
                                 class="fas fa-folder-open" style="width: 16px; text-align: center;"></i> 2. Folder Hierarchy</a></li>
+                </ul>
+            </div>
+
+            <!-- CORE SKILLS NAVIGATION -->
+            <div class="collapsible-parent expanded" id="skills-trigger" style="margin-top: 1.5rem;">
+                <span><i class="fas fa-toolbox" style="color: var(--primary); margin-right: 10px;"></i> CORE SKILLS</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="submenu">
+                <ul style="list-style: none;">
+                    <li class="nav-item"><a href="#skill-split-screen" style="display: flex; align-items: center; gap: 8px;"><i
+                                class="fas fa-columns" style="width: 16px; text-align: center;"></i> 1. Split Screen</a></li>
+                    <li class="nav-item"><a href="#skill-copy-paste" style="display: flex; align-items: center; gap: 8px;"><i
+                                class="fas fa-copy" style="width: 16px; text-align: center;"></i> 2. Copy/Paste & Spacing</a></li>
+                    <li class="nav-item"><a href="#skill-download-upload" style="display: flex; align-items: center; gap: 8px;"><i
+                                class="fas fa-cloud-upload-alt" style="width: 16px; text-align: center;"></i> 3. Download & Upload</a></li>
+                    <li class="nav-item"><a href="#skill-naming-convention" style="display: flex; align-items: center; gap: 8px;"><i
+                                class="fas fa-tag" style="width: 16px; text-align: center;"></i> 4. Naming Convention</a></li>
+                    <li class="nav-item"><a href="#skill-abbyy-finereader" style="display: flex; align-items: center; gap: 8px;"><i
+                                class="fas fa-file-invoice" style="width: 16px; text-align: center;"></i> 5. ABBYY FineReader</a></li>
+                    <li class="nav-item"><a href="#skill-audio-comments" style="display: flex; align-items: center; gap: 8px;"><i
+                                class="fas fa-headphones-alt" style="width: 16px; text-align: center;"></i> 6. Audio & Comments</a></li>
+                    <li class="nav-item"><a href="#glossary" style="display: flex; align-items: center; gap: 8px;"><i
+                                class="fas fa-book" style="width: 16px; text-align: center;"></i> Translation Glossary</a></li>
                 </ul>
             </div>
         </aside>
@@ -1526,6 +1684,430 @@
                     </div>
                 </div>
             </section>
+
+            <!-- CORE SKILLS SECTIONS -->
+            <!-- Core Skill 1: Split Screen -->
+            <section id="skill-split-screen">
+                <div class="outer-card" style="margin-top: 2rem;">
+                    <div class="step-badge">3</div>
+                    <h3 class="step-title-ss">Core Skill 1: Split Screen Configuration</h3>
+                    <p class="step-desc-ss">How to position your desktop workspace so that reference videos/audios and translation documents are visible concurrently.</p>
+                    
+                    <div class="diagram-container" style="display: flex; gap: 10px; align-items: center; justify-content: center; background: var(--section-bg); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                        <div style="flex: 1; text-align: center; padding: 1rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; font-weight: 700; font-size: 0.9rem;">Source Window (50%)<br><span style="font-size: 0.75rem; color: var(--text-light); font-weight: 400;">Video / Audio / Reference</span></div>
+                        <div style="font-size: 1.2rem; color: var(--text-light);"><i class="fas fa-arrows-left-right"></i></div>
+                        <div style="flex: 1; text-align: center; padding: 1rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; font-weight: 700; font-size: 0.9rem;">Google Doc (50%)<br><span style="font-size: 0.75rem; color: var(--text-light); font-weight: 400;">Translation Template</span></div>
+                    </div>
+
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">Setup Guide:</h4>
+                    <p style="margin-bottom: 1rem;">To avoid clicking back and forth between browser tabs and losing context, split your monitor equally:</p>
+                    
+                    <h5 style="font-weight: 700; margin-bottom: 0.5rem;">On Windows Systems:</h5>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 8px;">
+                        <li>Select the browser tab with the video or audio playback.</li>
+                        <li>Press and hold the <kbd>Win</kbd> key, then press the <kbd>←</kbd> (Left Arrow) key. The window will snap to the left 50% of the screen.</li>
+                        <li>A selection panel of other active windows will display on the right. Select your Google Doc.</li>
+                    </ol>
+
+                    <h5 style="font-weight: 700; margin-bottom: 0.5rem;">On macOS Systems:</h5>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 8px;">
+                        <li>Hover your mouse pointer over the <strong>green full-screen icon</strong> in the upper-left corner of the source window.</li>
+                        <li>From the dropdown menu, click <strong>Tile Window to Left of Screen</strong>.</li>
+                        <li>Click the window containing your Google Doc to tile it on the right side.</li>
+                    </ol>
+
+                    <div class="action-block action-primary">
+                        <p><i class="fas fa-lightbulb"></i> Pro Tip:</p>
+                        <p>If you are working on a smaller laptop monitor, adjust the divider line slightly to give 60% of the screen to the Google Doc and 40% to the video playback.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Skill 2: Copy-Pasting & Spacing Rules -->
+            <section id="skill-copy-paste">
+                <div class="outer-card" style="margin-top: 2rem;">
+                    <div class="step-badge">4</div>
+                    <h3 class="step-title-ss">Core Skill 2: Copy-Pasting & Spacing Rules</h3>
+                    <p class="step-desc-ss">Best practices for transferring transcripts into Google Docs without breaking template formats and keeping text neatly spaced.</p>
+
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">A. Pasting Plain Text</h4>
+                    <p style="margin-bottom: 1rem;">When you copy transcription segments from LingoChaps Studio or online text fields, they carry over background styles. Standard pasting will alter the target template's fonts, colors, and line spacing.</p>
+                    
+                    <div class="action-block action-warning" style="margin-bottom: 1.5rem;">
+                        <p><i class="fas fa-exclamation-triangle"></i> The Golden Rule:</p>
+                        <p>Always paste plain text without formatting using these specific commands:</p>
+                        <div style="margin-top: 10px; font-weight: 700;">
+                            Windows: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd><br>
+                            macOS: <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">B. Handling Paragraph & Line Spacing</h4>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 8px;">
+                        <li><strong>No Empty Line Carriage Returns:</strong> Avoid hitting <kbd>Enter</kbd> twice to create vertical whitespace. Instead, select the text, go to the top menu, choose <strong>Format > Line & paragraph spacing</strong>, and click <strong>Add space after paragraph</strong>.</li>
+                        <li><strong>Speaker Break Spacing:</strong> Separate different speaker turns and new timestamps with exactly one blank paragraph line. Inside a speaker's turn, keep sentences contiguous.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Core Skill 3: Download & Uploading Procedure -->
+            <section id="skill-download-upload">
+                <div class="outer-card" style="margin-top: 2rem;">
+                    <div class="step-badge">5</div>
+                    <h3 class="step-title-ss">Core Skill 3: Download & Uploading Procedure</h3>
+                    <p class="step-desc-ss">Standard steps to save raw files locally, verify sizes, and upload them back to designated Google Drive folders.</p>
+
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">A. Local Download Pipeline</h4>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 8px;">
+                        <li>Never download files onto your Desktop. This clutter causes file mix-ups.</li>
+                        <li>Create a folder on your system local disk: <kbd>D:\Videostowords\</kbd>.</li>
+                        <li>Save all downloaded MP4/MP3 files into this folder.</li>
+                        <li><strong>Confirm completeness:</strong> Ensure that the download progress bar has fully finished. Check the file size on your disk against the server size to prevent working on a corrupted, half-downloaded file.</li>
+                    </ol>
+                    
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">B. Cloud Upload Pipeline</h4>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 8px;">
+                        <li>Open the LingoChaps shared Google Drive.</li>
+                        <li>Navigate to the folder corresponding to the current date and client code.</li>
+                        <li>Drag the file from your local disk <kbd>D:\Videostowords\</kbd> into the folder.</li>
+                        <li>Once uploaded, right-click the file in Drive, select <strong>Share > Copy Link</strong>. Make sure it is shareable, and paste the link into the <strong>Allocation Sheet</strong>.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Core Skill 4: Standardized Naming Convention -->
+            <section id="skill-naming-convention">
+                <div class="outer-card" style="margin-top: 2rem;">
+                    <div class="step-badge">6</div>
+                    <h3 class="step-title-ss">Core Skill 4: Standardized Naming Convention</h3>
+                    <p class="step-desc-ss">A strict file-naming structure to keep project archives organized and prevent translation mix-ups.</p>
+
+                    <div class="action-block action-primary" style="margin-bottom: 1.5rem;">
+                        <p><i class="fas fa-folder-open"></i> Naming Rule Formula:</p>
+                        <p>All file names must strictly match the following convention:</p>
+                        <div style="margin-top: 10px;">
+                            <code class="naming-badge">([Language]_[Start_Timestamp]-[End_Timestamp]_[Video_Code])</code>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">Reference Table:</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="background-color: var(--sidebar-bg);">
+                                <th style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left; font-weight: 700;">Language</th>
+                                <th style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left; font-weight: 700;">Segment Timestamp</th>
+                                <th style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left; font-weight: 700;">Video Code</th>
+                                <th style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left; font-weight: 700;">Standard Output Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">Arabic</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">00:00:00 to 00:00:25</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">fa231x</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;"><code>(Arabic_00:00:00-00:00:25_fa231x).mp4</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">Persian</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">00:02:15 to 00:05:30</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">yt883k</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;"><code>(Persian_00:02:15-00:05:30_yt883k).mp4</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">English</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">00:00:00 to 00:15:00</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">tr920m</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;"><code>(English_00:00:00-00:15:00_tr920m).mp3</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="action-block action-danger">
+                        <p><i class="fas fa-ban"></i> Prohibited Formats:</p>
+                        <p>Names like <code>trim_video.mp4</code>, <code>output_fa.mp4</code>, or <code>Persian_4mins.mp4</code> are not acceptable.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Skill 5: ABBYY FineReader OCR Reading -->
+            <section id="skill-abbyy-finereader">
+                <div class="outer-card" style="margin-top: 2rem;">
+                    <div class="step-badge">7</div>
+                    <h3 class="step-title-ss">Core Skill 5: ABBYY FineReader OCR Reading</h3>
+                    <p class="step-desc-ss">How to use ABBYY FineReader to convert image-based PDFs or screenshots into editable text for translation check.</p>
+
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">What is ABBYY FineReader?</h4>
+                    <p style="margin-bottom: 1.5rem;">It is an Optical Character Recognition (OCR) software that converts scanned documents, PDFs, and images containing text (such as foreign dialogue cards or video subtitles) into digital, selectable, and editable layouts.</p>
+
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">Standard Operating Procedure:</h4>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 8px;">
+                        <li>Launch <strong>ABBYY FineReader</strong> on your workstation.</li>
+                        <li>Select <strong>Open PDF/Image Document</strong> and choose your target file.</li>
+                        <li>Set the document language (e.g., Arabic, Persian, English) in the toolbar.</li>
+                        <li>Click the <strong>Recognize</strong> button to scan the layout.</li>
+                        <li><strong>Verification Phase (Critical):</strong> ABBYY will highlight words with low-confidence recognition in blue or red. Review these specific areas side-by-side against the original image. Correct character reading errors manually.</li>
+                        <li>Highlight the verified text blocks, click copy, and paste them into your Google Doc using <kbd>Ctrl+Shift+V</kbd> / <kbd>Cmd+Shift+V</kbd>.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Core Skill 6: Audio Listening, Video Playback & Google Doc Comments -->
+            <section id="skill-audio-comments">
+                <div class="outer-card" style="margin-top: 2rem;">
+                    <div class="step-badge">8</div>
+                    <h3 class="step-title-ss">Core Skill 6: Audio Listening & Google Doc Comments</h3>
+                    <p class="step-desc-ss">How to transcribe complex audio segments and record questions using standardized comment tags in Google Docs.</p>
+
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">A. Precise Audio Listening Rules</h4>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 8px;">
+                        <li><strong>Wear Headphones:</strong> Over-ear headphones are required. Do not use open speakers.</li>
+                        <li><strong>Adjust Playback Speed:</strong> When speech is fast, dialect-heavy, or overlaps, slow down playback in your media player to <strong>0.75x</strong> or <strong>0.8x</strong>.</li>
+                        <li><strong>Three-Times Rule:</strong> Play unclear audio segments at least <strong>three times</strong> at different volumes and speeds before flagging.</li>
+                    </ul>
+
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700;">B. Adding Context Comments in Google Docs</h4>
+                    <p style="margin-bottom: 1rem;">When spelling, proper nouns, or audio words remain unclear, insert a comment using <kbd>Ctrl + Alt + M</kbd> (Windows) or <kbd>Cmd + Option + M</kbd> (Mac) and apply these exact tags:</p>
+
+                    <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="background-color: var(--sidebar-bg);">
+                                <th style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left; font-weight: 700;">Standard Tag</th>
+                                <th style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left; font-weight: 700;">When to Use</th>
+                                <th style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left; font-weight: 700;">Example Comment Form</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;"><code>[UNCLEAR @ MM:SS]</code></td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">Muffled speech, background noises, overlapping dialogues.</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;"><code>[UNCLEAR @ 04:12] Sounds like "distribute" or "attribute".</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;"><code>[TERM QUERY]</code></td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">Specific technical terminology needing client check.</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;"><code>[TERM QUERY] Local industry reference for logistics framework.</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;"><code>[PROPER NOUN]</code></td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;">Names, locations, or brands whose spellings are unverified.</td>
+                                <td style="padding: 0.75rem 1rem; border: 1px solid var(--border); text-align: left;"><code>[PROPER NOUN] Spelled phonetic name "Snigdha" - check.</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Translation Glossary Section -->
+            <section id="glossary">
+                <div class="outer-card" style="margin-top: 2rem;">
+                    <div class="step-badge">9</div>
+                    <h3 class="step-title-ss">Translation Glossary & Terms</h3>
+                    <p class="step-desc-ss">Every term you will hear at LingoChaps, explained simply. Click a category to filter.</p>
+                    
+                    <div class="glossary-filter-row">
+                        <span class="glossary-ftag active" data-f="all"     onclick="filterGlossary('all')">All terms</span>
+                        <span class="glossary-ftag"        data-f="file"    onclick="filterGlossary('file')">File formats</span>
+                        <span class="glossary-ftag"        data-f="process" onclick="filterGlossary('process')">Process</span>
+                        <span class="glossary-ftag"        data-f="tool"    onclick="filterGlossary('tool')">Tools</span>
+                        <span class="glossary-ftag"        data-f="client"  onclick="filterGlossary('client')">Client terms</span>
+                        <span class="glossary-ftag"        data-f="quality" onclick="filterGlossary('quality')">Quality</span>
+                    </div>
+
+                    <div class="glossary-grid" id="glossary-grid">
+                      <div class="glossary-card" data-c="file">
+                        <div class="abbr">SRT</div>
+                        <div class="full">SubRip Subtitle</div>
+                        <div class="meaning">The most common subtitle file. Contains text with timestamps telling the video player when to show each line.</div>
+                        <div class="eg">"The client sent an SRT — translate the text, never touch the timestamps."</div>
+                        <div class="pill">File format</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="file">
+                        <div class="abbr">VTT</div>
+                        <div class="full">Web Video Text Tracks</div>
+                        <div class="meaning">Same as SRT but used on websites and HTML5 players. Treat it exactly like an SRT file.</div>
+                        <div class="eg">"YouTube accepts SRT and VTT — check which format the client needs back."</div>
+                        <div class="pill">File format</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="file">
+                        <div class="abbr">DOCX</div>
+                        <div class="full">Microsoft Word Document</div>
+                        <div class="meaning">The main editable format we deliver translated documents in. Clients can open and edit it in Microsoft Word.</div>
+                        <div class="eg">"Convert to DOCX before sending — the client needs to edit it."</div>
+                        <div class="pill">File format</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="file">
+                        <div class="abbr">PDF</div>
+                        <div class="full">Portable Document Format</div>
+                        <div class="meaning">Fixed-layout file that looks the same on every device. Clients often send source files as PDFs. We translate and usually deliver as DOCX unless asked otherwise.</div>
+                        <div class="eg">"Source is a PDF — extract text, translate, rebuild layout in DOCX."</div>
+                        <div class="pill">File format</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="file">
+                        <div class="abbr">EPS / AI / CDR</div>
+                        <div class="full">Vector design files</div>
+                        <div class="meaning">Design files from Adobe Illustrator (AI / EPS) or CorelDRAW (CDR). Contain text inside graphics — the DTP team handles these after translation.</div>
+                        <div class="eg">"The brochure is an EPS — send to DTP once the text translation is done."</div>
+                        <div class="pill">File format</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="file">
+                        <div class="abbr">DWG / DXF</div>
+                        <div class="full">CAD Drawing Files</div>
+                        <div class="meaning">Technical drawing files from AutoCAD used in engineering projects. Text labels inside the drawings need translating — the drawing structure must never be changed.</div>
+                        <div class="eg">"Client sent DWG files — only translate the text labels, never move anything."</div>
+                        <div class="pill">File format</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="process">
+                        <div class="abbr">OCR</div>
+                        <div class="full">Optical Character Recognition</div>
+                        <div class="meaning">Technology that reads text from scanned images or image-based PDFs. If a PDF is scanned (not native), we run OCR first to extract the text before translating.</div>
+                        <div class="eg">"This PDF is scanned — run OCR first before we can extract the text."</div>
+                        <div class="pill">Process</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="process">
+                        <div class="abbr">DTP</div>
+                        <div class="full">Desktop Publishing</div>
+                        <div class="meaning">Placing the translated text back into the original design — matching fonts, spacing, and layout so the final file looks like the original document.</div>
+                        <div class="eg">"Translation done — send to DTP to put the text back into the layout."</div>
+                        <div class="pill">Process</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="process">
+                        <div class="abbr">TM</div>
+                        <div class="full">Translation Memory</div>
+                        <div class="meaning">A database that saves previously approved translations. When the same sentence appears again in a future project, TM suggests the old approved translation automatically.</div>
+                        <div class="eg">"Check the TM first — this client has lots of repeated sentences."</div>
+                        <div class="pill">Process</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="process">
+                        <div class="abbr">OST</div>
+                        <div class="full">On-Screen Text</div>
+                        <div class="meaning">Any text that appears visually on a video — titles, lower thirds, graphic captions. Needs to be translated separately from dialogue and often requires DTP work to replace it.</div>
+                        <div class="eg">"The video has OST in the corner — flag to client, we need the editable video file."</div>
+                        <div class="pill">Process</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="process">
+                        <div class="abbr">Localisation</div>
+                        <div class="full">More than just translation</div>
+                        <div class="meaning">Adapting content for a specific region — language, dates, currencies, units, cultural references. Example: changing £ to $ and UK spellings to US spellings.</div>
+                        <div class="eg">"Full localisation needed — translate AND adapt date formats and currency."</div>
+                        <div class="pill">Process</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="process">
+                        <div class="abbr">Transcreation</div>
+                        <div class="full">Creative re-writing across languages</div>
+                        <div class="meaning">Used for marketing. Instead of translating, you recreate the message so it has the same emotional impact. A pun in English needs a new pun in the target language — not a literal translation.</div>
+                        <div class="eg">"This ad slogan needs transcreation — direct translation would make no sense."</div>
+                        <div class="pill">Process</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="process">
+                        <div class="abbr">Source / Target</div>
+                        <div class="full">The two languages in every job</div>
+                        <div class="meaning">Source = original language the document is written in. Target = language we are translating into. Written as Source→Target. EN→DE means English to German.</div>
+                        <div class="eg">"Language pair is EN→FR — English is the source, French is the target."</div>
+                        <div class="pill">Process</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="tool">
+                        <div class="abbr">CAT tool</div>
+                        <div class="full">Computer-Assisted Translation</div>
+                        <div class="meaning">Software that helps translators work faster. Splits the document into segments, shows TM suggestions, and keeps terminology consistent. Examples: SDL Trados, memoQ, Phrase.</div>
+                        <div class="eg">"Our translators use CAT tools — make sure they deliver in our required format."</div>
+                        <div class="pill">Tool</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="tool">
+                        <div class="abbr">Aura</div>
+                        <div class="full">LingoChaps translation platform</div>
+                        <div class="meaning">Our in-house tool at lingochaps.com for uploading, translating, and downloading documents. It uses an AI translation pipeline. Still being developed — report any issues to the tech team.</div>
+                        <div class="eg">"Upload the file to Aura, select the target language, download the result."</div>
+                        <div class="pill">Tool</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="tool">
+                        <div class="abbr">Subtitle Edit</div>
+                        <div class="full">Free subtitle editing software</div>
+                        <div class="meaning">The tool we use for SRT and VTT files. Free to download. Shows timestamps, character count per line, and lets you play the video alongside the subtitles to check sync.</div>
+                        <div class="eg">"Open the SRT in Subtitle Edit — character count shows in real time."</div>
+                        <div class="pill">Tool</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="client">
+                        <div class="abbr">LSP</div>
+                        <div class="full">Language Service Provider</div>
+                        <div class="meaning">That is us — LingoChaps. Any company that provides translation, interpretation, or localisation services professionally is called an LSP.</div>
+                        <div class="eg">"Client brief says 'send to your LSP' — that means send it to us internally."</div>
+                        <div class="pill">Client term</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="client">
+                        <div class="abbr">Brief</div>
+                        <div class="full">Job instructions from the client</div>
+                        <div class="meaning">The document or message describing what the client needs — language pair, tone, deadline, file format, special instructions. Always read the full brief before starting.</div>
+                        <div class="eg">"Brief says formal tone, Brazilian Portuguese — confirm both with the translator."</div>
+                        <div class="pill">Client term</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="client">
+                        <div class="abbr">Word count</div>
+                        <div class="full">How we measure job size</div>
+                        <div class="meaning">Translation is priced by word count, not page count. Always run word count before quoting. In Word: Review tab → Word Count.</div>
+                        <div class="eg">"Client wants a quote — Word Count first, then calculate rate × words."</div>
+                        <div class="pill">Client term</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="client">
+                        <div class="abbr">Glossary</div>
+                        <div class="full">Approved terms list</div>
+                        <div class="meaning">A list of specific words that must always be translated the same way. Always share the glossary with the translator before they start — never after.</div>
+                        <div class="eg">"Share the client glossary first — their product names stay in English."</div>
+                        <div class="pill">Client term</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="quality">
+                        <div class="abbr">QA</div>
+                        <div class="full">Quality Assurance</div>
+                        <div class="meaning">The final check before anything goes to the client. File name correct? Format right? No missing pages? Translation matches the brief? QA is done by the associate — it is not the same as review.</div>
+                        <div class="eg">"QA check before sending — correct name, right format, no missing pages."</div>
+                        <div class="pill">Quality</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="quality">
+                        <div class="abbr">Back-translation</div>
+                        <div class="full">Translating back to check accuracy</div>
+                        <div class="meaning">Translating the translated text back into the source language to verify the meaning was preserved correctly. Used on medical and legal documents where accuracy is critical.</div>
+                        <div class="eg">"Client wants a back-translation — translate the German version back to English."</div>
+                        <div class="pill">Quality</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="quality">
+                        <div class="abbr">Track changes</div>
+                        <div class="full">Editing with a visible trail</div>
+                        <div class="meaning">A Word feature showing every edit — who changed what and when. Reviewers must always use Track Changes so translators can see exactly what was corrected and why.</div>
+                        <div class="eg">"Always turn on Track Changes before reviewing. Ctrl+Shift+E in Word."</div>
+                        <div class="pill">Quality</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="quality">
+                        <div class="abbr">Native speaker</div>
+                        <div class="full">Why it matters for quality</div>
+                        <div class="meaning">Someone who grew up speaking a language as their first language. We always hire native speakers of the target language — not people who learned it as a second language.</div>
+                        <div class="eg">"For French translation — hire a native French speaker, not a learner."</div>
+                        <div class="pill">Quality</div>
+                      </div>
+                    </div>
+                </div>
+            </section>
             </div> <!-- End screen-onboarding -->
         </main>
     </div> <!-- End layout-container -->
@@ -1618,6 +2200,18 @@
                 closeZoomModal();
             }
         });
+
+        // Glossary interactive filter logic
+        function filterGlossary(f) {
+            document.querySelectorAll('.glossary-ftag').forEach(t => t.classList.remove('active'));
+            const activeTag = document.querySelector(`.glossary-ftag[data-f="${f}"]`);
+            if (activeTag) {
+                activeTag.classList.add('active');
+            }
+            document.querySelectorAll('.glossary-card').forEach(c => {
+                c.classList.toggle('hidden', f !== 'all' && c.dataset.c !== f);
+            });
+        }
     </script>
 
     <!-- Image Zoom Modal -->
