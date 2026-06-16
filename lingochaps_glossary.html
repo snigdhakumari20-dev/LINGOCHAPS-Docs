@@ -44,11 +44,10 @@
 </div>
 
 <div class="filter-row">
-  <span class="ftag active" data-f="all"     onclick="filter('all')">All terms</span>
-  <span class="ftag"        data-f="file"    onclick="filter('file')">File formats</span>
-  <span class="ftag"        data-f="process" onclick="filter('process')">Process</span>
-  <span class="ftag"        data-f="tool"    onclick="filter('tool')">Tools</span>
+  <span class="ftag active" data-f="process" onclick="filter('process')">Process</span>
   <span class="ftag"        data-f="client"  onclick="filter('client')">Client terms</span>
+  <span class="ftag"        data-f="tool"    onclick="filter('tool')">Tool</span>
+  <span class="ftag"        data-f="file"    onclick="filter('file')">Format</span>
   <span class="ftag"        data-f="quality" onclick="filter('quality')">Quality</span>
 </div>
 
@@ -111,14 +110,6 @@
   </div>
 
   <div class="card" data-c="process">
-    <div class="abbr">DTP</div>
-    <div class="full">Desktop Publishing</div>
-    <div class="meaning">Placing the translated text back into the original design — matching fonts, spacing, and layout so the final file looks like the original document.</div>
-    <div class="eg">"Translation done — send to DTP to put the text back into the layout."</div>
-    <div class="pill">Process</div>
-  </div>
-
-  <div class="card" data-c="process">
     <div class="abbr">TM</div>
     <div class="full">Translation Memory</div>
     <div class="meaning">A database that saves previously approved translations. When the same sentence appears again in a future project, TM suggests the old approved translation automatically.</div>
@@ -155,6 +146,14 @@
     <div class="full">The two languages in every job</div>
     <div class="meaning">Source = original language the document is written in. Target = language we are translating into. Written as Source→Target. EN→DE means English to German.</div>
     <div class="eg">"Language pair is EN→FR — English is the source, French is the target."</div>
+    <div class="pill">Process</div>
+  </div>
+
+  <div class="card" data-c="process">
+    <div class="abbr">DTP</div>
+    <div class="full">Desktop Publishing</div>
+    <div class="meaning">Placing the translated text back into the original design — matching fonts, spacing, and layout so the final file looks like the original document.</div>
+    <div class="eg">"Translation done — send to DTP to put the text back into the layout."</div>
     <div class="pill">Process</div>
   </div>
 
@@ -258,6 +257,8 @@ function filter(f) {
     c.classList.toggle('hidden', f !== 'all' && c.dataset.c !== f);
   });
 }
+// Set initial active category on load
+filter('process');
 </script>
 </body>
 </html>
