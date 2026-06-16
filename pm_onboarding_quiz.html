@@ -567,12 +567,9 @@
                 </p>
             </div>
 
-            <div class="btn-container" style="justify-content: center; flex-wrap: wrap;">
+            <div class="btn-container" style="justify-content: center;">
                 <button class="btn" onclick="startQuiz()">
                     Start Quiz <i class="fas fa-arrow-right"></i>
-                </button>
-                <button class="btn btn-secondary" onclick="downloadReferenceDoc()">
-                    <i class="fas fa-file-word"></i> Download Reference Guide
                 </button>
             </div>
         </div>
@@ -1070,81 +1067,6 @@
                 .catch(err => console.error("Failed to send result email:", err));
         }
 
-        function downloadReferenceDoc() {
-            const letters = ["A", "B", "C", "D"];
-            let questionsHtml = "";
-
-            QUIZ_QUESTIONS.forEach((q, idx) => {
-                const optionsHtml = q.options.map((opt, optIdx) => {
-                    const isCorrect = optIdx === q.correctAnswer;
-                    return `<p class="option ${isCorrect ? "correct" : "incorrect"}">${letters[optIdx]}. ${isCorrect ? "&#10003; " : ""}${opt}</p>`;
-                }).join("");
-
-                questionsHtml += `
-                    <hr class="divider">
-                    <h2>Question ${idx + 1}: ${q.category}</h2>
-                    <p class="question">${q.question}</p>
-                    ${optionsHtml}
-                    <p class="answer-label">Correct Answer:</p>
-                    <p class="answer">${letters[q.correctAnswer]} — ${q.options[q.correctAnswer]}</p>
-                    <p class="explanation-label">Explanation:</p>
-                    <p class="explanation">${q.explanation}</p>
-                `;
-            });
-
-            const summaryRows = QUIZ_QUESTIONS.map((q, idx) => {
-                const bg = idx % 2 === 0 ? "" : ' style="background:#f8fafc;"';
-                return `<tr${bg}><td>Q${idx + 1}</td><td>${q.category}</td><td>${letters[q.correctAnswer]}</td></tr>`;
-            }).join("");
-
-            const content = `
-<html xmlns:o="urn:schemas-microsoft-com:office:office"
-      xmlns:w="urn:schemas-microsoft-com:office:word"
-      xmlns="http://www.w3.org/TR/REC-html40">
-<head>
-<meta charset="UTF-8">
-<style>
-  body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; color: #1e293b; margin: 40px; line-height: 1.6; }
-  h1 { font-size: 18pt; color: #4f46e5; text-align: center; margin-bottom: 4px; }
-  h2 { font-size: 13pt; color: #4f46e5; margin-top: 24px; margin-bottom: 6px; border-bottom: 1px solid #4f46e5; padding-bottom: 4px; }
-  .subtitle { text-align: center; color: #64748b; font-size: 10pt; margin-bottom: 24px; }
-  .divider { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
-  .question { font-weight: bold; margin-top: 12px; margin-bottom: 6px; }
-  .option { margin-left: 20px; margin-bottom: 3px; }
-  .option.correct { color: #166534; font-weight: bold; }
-  .option.incorrect { color: #64748b; }
-  .answer-label, .explanation-label { font-size: 9pt; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-top: 8px; }
-  .answer { color: #166534; font-weight: bold; margin-bottom: 4px; }
-  .explanation { color: #1e293b; background: #f8fafc; border-left: 3px solid #4f46e5; padding: 6px 10px; margin: 4px 0 12px 0; font-size: 10.5pt; }
-  .footer { text-align: center; font-size: 9pt; color: #94a3b8; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 12px; }
-</style>
-</head>
-<body>
-<h1>Lingo Chaps — PM Onboarding & CAT Tool Quiz</h1>
-<p class="subtitle">Question & Answer Reference Guide • All ${QUIZ_QUESTIONS.length} Questions</p>
-${questionsHtml}
-<hr class="divider">
-<h2>Quick Summary — Correct Answers</h2>
-<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-size:10pt;">
-  <tr style="background:#4f46e5; color:white;"><th>#</th><th>Category</th><th>Answer</th></tr>
-  ${summaryRows}
-</table>
-<p class="footer">&copy; 2026 Lingo Chaps — PM Training Portal. For internal use only.</p>
-</body>
-</html>`;
-
-            const blob = new Blob(['\ufeff', content], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'LingoChaps_PM_Quiz_Reference_Guide.doc';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        // RESTART QUIZ
         function restartQuiz() {
             location.reload();
         }
