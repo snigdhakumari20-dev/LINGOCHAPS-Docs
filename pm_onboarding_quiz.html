@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         :root {
             --primary: #4f46e5;
@@ -434,6 +435,83 @@
             margin-top: auto;
         }
 
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--card-bg);
+            color: var(--text-dark);
+            transition: border-color 0.2s;
+        }
+
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .welcome-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .welcome-desc {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .guidelines-box {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .guidelines-box h3 {
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        .guidelines-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
         @media (max-width: 600px) {
             .quiz-card {
                 padding: 2rem 1.5rem;
@@ -456,8 +534,51 @@
     </header>
 
     <div class="container">
+        <!-- Welcome Screen -->
+        <div class="quiz-card" id="welcome-screen">
+            <div style="text-align: center;">
+                <i class="fas fa-user-tie welcome-icon"></i>
+                <h1 class="welcome-title">PM Onboarding & CAT Tool Quiz</h1>
+                <p class="welcome-desc">
+                    Validate your understanding of Lingo Chaps CAT tools, translation memories,
+                    client protocols, and PM operational workflows.
+                </p>
+            </div>
+
+            <div class="guidelines-box">
+                <h3><i class="fas fa-info-circle"></i> Assessment Guidelines</h3>
+                <ul>
+                    <li><i class="fas fa-list-ol" style="color: var(--primary);"></i> <b>Questions:</b> 14 scenario-based questions covering CAT tools, client protocols, and PM workflows.</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> <b>Passing Grade:</b> Score 80% or above to clear PM certification.</li>
+                    <li><i class="fas fa-envelope" style="color: var(--primary);"></i> <b>Result Emailed:</b> A detailed score report will be sent to your email after completion.</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <label for="userName">Enter Your Full Name:</label>
+                <input type="text" id="userName" placeholder="e.g., Jane Doe" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="userEmail">Enter Your Email Address:</label>
+                <input type="text" id="userEmail" placeholder="e.g., jane@example.com" required autocomplete="off">
+                <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.4rem; margin-bottom: 0;">
+                    <i class="fas fa-info-circle"></i> Your score report will be sent here after you complete the quiz.
+                </p>
+            </div>
+
+            <div class="btn-container" style="justify-content: center; flex-wrap: wrap;">
+                <button class="btn" onclick="startQuiz()">
+                    Start Quiz <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-secondary" onclick="downloadReferenceDoc()">
+                    <i class="fas fa-file-word"></i> Download Reference Guide
+                </button>
+            </div>
+        </div>
+
         <!-- QUIZ MODULE -->
-        <div class="quiz-card" id="quiz-container">
+        <div class="quiz-card" id="quiz-container" style="display: none;">
             <div class="progress-bar-container">
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
@@ -689,7 +810,16 @@
             }
         ];
 
+        // EmailJS Configuration
+        const EMAILJS_PUBLIC_KEY  = "NdvDVRE2cChjri2_E";
+        const EMAILJS_SERVICE_ID  = "service_npbh4fn";
+        const EMAILJS_TEMPLATE_ID = "template_idx5c9b";
+
         // STATE VARIABLES
+        let userName = "";
+        let userEmail = "";
+        let quizStartTime = null;
+        let userAnswers = [];
         let currentQuestionIndex = 0;
         let selectedOption = null;
         let answered = false;
@@ -723,12 +853,40 @@
             icon.classList.toggle('fa-sun');
         });
 
+        window.addEventListener('DOMContentLoaded', () => {
+            if (EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
+                emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+            }
+        });
+
+        function startQuiz() {
+            const nameInput = document.getElementById('userName').value.trim();
+            const emailInput = document.getElementById('userEmail').value.trim();
+
+            if (!nameInput) {
+                alert("Please enter your name to start the quiz.");
+                return;
+            }
+            if (!emailInput || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput)) {
+                alert("Please enter a valid email address to receive your result.");
+                return;
+            }
+
+            userName = nameInput;
+            userEmail = emailInput;
+            quizStartTime = Date.now();
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            initQuiz();
+        }
+
         // INIT QUIZ
         function initQuiz() {
             currentQuestionIndex = 0;
             score = 0;
             answered = false;
             selectedOption = null;
+            userAnswers = [];
             questionScreen.style.display = "block";
             resultScreen.style.display = "none";
             loadQuestion();
@@ -817,7 +975,12 @@
                 score++;
             }
 
-            nextBtn.innerHTML = (currentQuestionIndex === QUIZ_QUESTIONS.length - 1) 
+            userAnswers[currentQuestionIndex] = {
+                selected: selectedOption,
+                correct: isCorrect
+            };
+
+            nextBtn.innerHTML = (currentQuestionIndex === QUIZ_QUESTIONS.length - 1)
                 ? 'Finish Quiz <i class="fas fa-flag-checkered"></i>' 
                 : 'Next Question <i class="fas fa-chevron-right"></i>';
         }
@@ -854,15 +1017,137 @@
                 resultTitle.style.color = "var(--warning)";
                 resultDesc.textContent = `You scored ${score}/${QUIZ_QUESTIONS.length} (${finalPct}%). We recommend going through the Process Guidelines and Onboarding Manual once more to secure a firm understanding of terminology structures, safeguards, and client response requirements.`;
             }
+
+            sendResultEmail(finalPct);
+        }
+
+        function sendResultEmail(finalPct) {
+            if (!EMAILJS_SERVICE_ID || EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID") {
+                console.warn("EmailJS not configured. Skipping result email.");
+                return;
+            }
+
+            const elapsedMs = quizStartTime ? Date.now() - quizStartTime : 0;
+            const minsTaken = Math.floor(elapsedMs / 60000);
+            const secsTaken = Math.floor((elapsedMs % 60000) / 1000);
+            const timeTakenStr = `${minsTaken}m ${secsTaken}s`;
+            const resultStatus = finalPct >= 80 ? "PASSED ✅" : "FAILED ❌";
+
+            const phaseBreakdown = QUIZ_QUESTIONS.map((q, idx) => {
+                const answer = userAnswers[idx];
+                const status = answer && answer.correct ? "✅ Correct" : "❌ Incorrect";
+                return `Q${idx + 1} (${q.category}): ${status}`;
+            }).join("\n");
+
+            const templateParams = {
+                to_name: userName,
+                to_email: userEmail,
+                score: `${finalPct}%`,
+                result_status: resultStatus,
+                correct_answers: `${score} out of ${QUIZ_QUESTIONS.length}`,
+                time_taken: timeTakenStr,
+                phase_breakdown: phaseBreakdown
+            };
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then(() => {
+                    const toast = document.createElement('div');
+                    toast.innerText = `📧 Score report sent to ${userEmail}`;
+                    toast.style.cssText = `
+                        position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+                        background: #1e293b; color: #fff; padding: 12px 24px; border-radius: 12px;
+                        font-size: 0.9rem; font-weight: 600; z-index: 9999;
+                        box-shadow: 0 8px 24px rgba(0,0,0,0.2); opacity: 0;
+                        transition: opacity 0.4s ease;
+                    `;
+                    document.body.appendChild(toast);
+                    requestAnimationFrame(() => { toast.style.opacity = '1'; });
+                    setTimeout(() => {
+                        toast.style.opacity = '0';
+                        setTimeout(() => toast.remove(), 400);
+                    }, 4000);
+                })
+                .catch(err => console.error("Failed to send result email:", err));
+        }
+
+        function downloadReferenceDoc() {
+            const letters = ["A", "B", "C", "D"];
+            let questionsHtml = "";
+
+            QUIZ_QUESTIONS.forEach((q, idx) => {
+                const optionsHtml = q.options.map((opt, optIdx) => {
+                    const isCorrect = optIdx === q.correctAnswer;
+                    return `<p class="option ${isCorrect ? "correct" : "incorrect"}">${letters[optIdx]}. ${isCorrect ? "&#10003; " : ""}${opt}</p>`;
+                }).join("");
+
+                questionsHtml += `
+                    <hr class="divider">
+                    <h2>Question ${idx + 1}: ${q.category}</h2>
+                    <p class="question">${q.question}</p>
+                    ${optionsHtml}
+                    <p class="answer-label">Correct Answer:</p>
+                    <p class="answer">${letters[q.correctAnswer]} — ${q.options[q.correctAnswer]}</p>
+                    <p class="explanation-label">Explanation:</p>
+                    <p class="explanation">${q.explanation}</p>
+                `;
+            });
+
+            const summaryRows = QUIZ_QUESTIONS.map((q, idx) => {
+                const bg = idx % 2 === 0 ? "" : ' style="background:#f8fafc;"';
+                return `<tr${bg}><td>Q${idx + 1}</td><td>${q.category}</td><td>${letters[q.correctAnswer]}</td></tr>`;
+            }).join("");
+
+            const content = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; color: #1e293b; margin: 40px; line-height: 1.6; }
+  h1 { font-size: 18pt; color: #4f46e5; text-align: center; margin-bottom: 4px; }
+  h2 { font-size: 13pt; color: #4f46e5; margin-top: 24px; margin-bottom: 6px; border-bottom: 1px solid #4f46e5; padding-bottom: 4px; }
+  .subtitle { text-align: center; color: #64748b; font-size: 10pt; margin-bottom: 24px; }
+  .divider { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
+  .question { font-weight: bold; margin-top: 12px; margin-bottom: 6px; }
+  .option { margin-left: 20px; margin-bottom: 3px; }
+  .option.correct { color: #166534; font-weight: bold; }
+  .option.incorrect { color: #64748b; }
+  .answer-label, .explanation-label { font-size: 9pt; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-top: 8px; }
+  .answer { color: #166534; font-weight: bold; margin-bottom: 4px; }
+  .explanation { color: #1e293b; background: #f8fafc; border-left: 3px solid #4f46e5; padding: 6px 10px; margin: 4px 0 12px 0; font-size: 10.5pt; }
+  .footer { text-align: center; font-size: 9pt; color: #94a3b8; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+</style>
+</head>
+<body>
+<h1>Lingo Chaps — PM Onboarding & CAT Tool Quiz</h1>
+<p class="subtitle">Question & Answer Reference Guide • All ${QUIZ_QUESTIONS.length} Questions</p>
+${questionsHtml}
+<hr class="divider">
+<h2>Quick Summary — Correct Answers</h2>
+<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-size:10pt;">
+  <tr style="background:#4f46e5; color:white;"><th>#</th><th>Category</th><th>Answer</th></tr>
+  ${summaryRows}
+</table>
+<p class="footer">&copy; 2026 Lingo Chaps — PM Training Portal. For internal use only.</p>
+</body>
+</html>`;
+
+            const blob = new Blob(['\ufeff', content], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'LingoChaps_PM_Quiz_Reference_Guide.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         // RESTART QUIZ
         function restartQuiz() {
-            initQuiz();
+            location.reload();
         }
-
-        // Start
-        initQuiz();
     </script>
 </body>
 
