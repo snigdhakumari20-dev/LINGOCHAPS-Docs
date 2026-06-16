@@ -777,15 +777,39 @@
         }
 
         @keyframes toggleSwitchBg {
-            0%, 20% { background: #e2e8f0; }
-            30%, 80% { background: var(--secondary); }
-            90%, 100% { background: #e2e8f0; }
+
+            0%,
+            20% {
+                background: #e2e8f0;
+            }
+
+            30%,
+            80% {
+                background: var(--secondary);
+            }
+
+            90%,
+            100% {
+                background: #e2e8f0;
+            }
         }
 
         @keyframes toggleSwitchKnob {
-            0%, 20% { transform: translateX(0); }
-            30%, 80% { transform: translateX(22px); }
-            90%, 100% { transform: translateX(0); }
+
+            0%,
+            20% {
+                transform: translateX(0);
+            }
+
+            30%,
+            80% {
+                transform: translateX(22px);
+            }
+
+            90%,
+            100% {
+                transform: translateX(0);
+            }
         }
 
         .switch {
@@ -851,7 +875,8 @@
                             <a href="#yt-intake" class="active"><i class="fas fa-inbox"></i> Intake & Comm</a>
                             <ul class="nav-sub-menu">
                                 <li><a href="#yt-prerequisites"><i class="fas fa-tools"></i> Basic Requirements</a></li>
-                                <li><a href="#yt-client-protocols"><i class="fas fa-envelope-open-text"></i> Client Protocols</a></li>
+                                <li><a href="#yt-client-protocols"><i class="fas fa-envelope-open-text"></i> Client
+                                        Protocols</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -882,46 +907,74 @@
                     project begins here — follow these protocols to ensure nothing is missed before work begins.</p>
 
                 <!-- Basic Requirements & Prerequisites for Shift Handlers -->
-                <div id="yt-prerequisites" class="roadmap-container" style="margin-top: 2rem; margin-bottom: 2.5rem; padding: 2.5rem;">
-                    <div class="mission-badge" style="margin-bottom: 1.5rem;"><i class="fas fa-tools"></i> Basic Requirements for Starting Work</div>
-                    <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem; border-left: none; padding-left: 0;">1. Browser & Environment Setup (Mandatory)</h2>
+                <div id="yt-prerequisites" class="roadmap-container"
+                    style="margin-top: 2rem; margin-bottom: 2.5rem; padding: 2.5rem;">
+                    <div class="mission-badge" style="margin-bottom: 1.5rem;"><i class="fas fa-tools"></i> Basic
+                        Requirements for Starting Work</div>
+                    <h2
+                        style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem; border-left: none; padding-left: 0;">
+                        1. Browser & Environment Setup (Mandatory)</h2>
                     <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
-                        Before processing any YouTube project files or contacting linguists, your browser must be configured with a dedicated profile and strict download prompts.
+                        Before processing any YouTube project files or contacting linguists, your browser must be
+                        configured with a dedicated profile and strict download prompts.
                     </p>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 2rem;">
-                        <div class="briefing-card" style="padding: 1.5rem; margin: 0; border-top: 4px solid var(--primary); background: var(--card-bg);">
-                            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; font-weight: 800;"><i class="fab fa-chrome" style="color: var(--primary); margin-right: 8px;"></i> Dedicated Chrome Profile</h3>
+                        <div class="briefing-card"
+                            style="padding: 1.5rem; margin: 0; border-top: 4px solid var(--primary); background: var(--card-bg);">
+                            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; font-weight: 800;"><i
+                                    class="fab fa-chrome" style="color: var(--primary); margin-right: 8px;"></i>
+                                Dedicated Chrome Profile</h3>
                             <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">
-                                Create a dedicated Google Chrome profile named <b>"Lingo Chaps"</b>. All translation, tracking, and sheet access must happen exclusively within this profile to prevent credential or search leakage.
+                                Create a dedicated Google Chrome profile named <b>"Lingo Chaps"</b>. All translation,
+                                tracking, and sheet access must happen exclusively within this profile to prevent
+                                credential or search leakage.
                             </p>
-                            <div class="setup-image-frame" style="max-width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); cursor: zoom-in;" onclick="openZoomModal(this, 'Chrome Profile Setup Guide')">
-                                <img src="./chrome_profile_setup.png" alt="Chrome Profile Setup" style="width: 100%; height: auto; display: block;">
+                            <div class="setup-image-frame"
+                                style="max-width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); cursor: zoom-in;"
+                                onclick="openZoomModal(this, 'Chrome Profile Setup Guide')">
+                                <img src="./chrome_profile_setup.png" alt="Chrome Profile Setup"
+                                    style="width: 100%; height: auto; display: block;">
                             </div>
                         </div>
 
-                        <div class="briefing-card" style="padding: 1.5rem; margin: 0; border-top: 4px solid var(--secondary); background: var(--card-bg);">
-                            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; font-weight: 800;"><i class="fas fa-star" style="color: var(--secondary); margin-right: 8px;"></i> Bookmark Organization</h3>
+                        <div class="briefing-card"
+                            style="padding: 1.5rem; margin: 0; border-top: 4px solid var(--secondary); background: var(--card-bg);">
+                            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; font-weight: 800;"><i class="fas fa-star"
+                                    style="color: var(--secondary); margin-right: 8px;"></i> Bookmark Organization</h3>
                             <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">
-                                Organize your bookmark bar with folders named <b>"Allocation Sheet"</b>, <b>"Templates"</b>, and <b>"Active Projects"</b>. Label bookmarks clearly for zero-delay navigation when files are requested.
+                                Organize your bookmark bar with folders named <b>"Allocation Sheet"</b>,
+                                <b>"Templates"</b>, and <b>"Active Projects"</b>. Label bookmarks clearly for zero-delay
+                                navigation when files are requested.
                             </p>
-                            <div class="setup-image-frame" style="max-width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); cursor: zoom-in;" onclick="openZoomModal(this, 'Chrome Bookmarks Guide')">
-                                <img src="./chrome_bookmarks_guide.png" alt="Chrome Bookmarks Setup" style="width: 100%; height: auto; display: block;">
+                            <div class="setup-image-frame"
+                                style="max-width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); cursor: zoom-in;"
+                                onclick="openZoomModal(this, 'Chrome Bookmarks Guide')">
+                                <img src="./chrome_bookmarks_guide.png" alt="Chrome Bookmarks Setup"
+                                    style="width: 100%; height: auto; display: block;">
                             </div>
                         </div>
                     </div>
 
-                    <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem; margin-top: 2.5rem; border-left: none; padding-left: 0;">2. Mandatory Browser Settings</h2>
+                    <h2
+                        style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem; margin-top: 2.5rem; border-left: none; padding-left: 0;">
+                        2. Mandatory Browser Settings</h2>
                     <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
-                        Adjust your Chrome download settings to ensure immediate control and verification over client files. <b>These settings are non-negotiable:</b>
+                        Adjust your Chrome download settings to ensure immediate control and verification over client
+                        files. <b>These settings are non-negotiable:</b>
                     </p>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 1rem;">
                         <div class="animation-card" style="margin: 0;">
                             <div class="anim-info">
-                                <p style="font-size: 0.75rem; font-weight: 800; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Save Prompt</p>
-                                <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2px;">Ask Where to Save Each File</p>
-                                <p style="font-size: 0.85rem; color: var(--text-light);">Enable "Ask where to save each file before downloading" in Chrome settings.</p>
+                                <p
+                                    style="font-size: 0.75rem; font-weight: 800; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">
+                                    Save Prompt</p>
+                                <p
+                                    style="font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2px;">
+                                    Ask Where to Save Each File</p>
+                                <p style="font-size: 0.85rem; color: var(--text-light);">Enable "Ask where to save each
+                                    file before downloading" in Chrome settings.</p>
                             </div>
                             <div class="toggle-box">
                                 <div class="switch"></div>
@@ -930,9 +983,14 @@
 
                         <div class="animation-card" style="margin: 0;">
                             <div class="anim-info">
-                                <p style="font-size: 0.75rem; font-weight: 800; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Tray Notification</p>
-                                <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2px;">Show Downloads When Complete</p>
-                                <p style="font-size: 0.85rem; color: var(--text-light);">Enable "Show downloads when they're done" for instant tracking and verification.</p>
+                                <p
+                                    style="font-size: 0.75rem; font-weight: 800; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">
+                                    Tray Notification</p>
+                                <p
+                                    style="font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2px;">
+                                    Show Downloads When Complete</p>
+                                <p style="font-size: 0.85rem; color: var(--text-light);">Enable "Show downloads when
+                                    they're done" for instant tracking and verification.</p>
                             </div>
                             <div class="toggle-box">
                                 <div class="switch"></div>
@@ -941,15 +999,21 @@
                     </div>
 
                     <!-- The Mandatory Folder Hierarchy -->
-                    <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem; margin-top: 2.5rem; border-left: none; padding-left: 0;">3. The Mandatory Folder Hierarchy</h2>
+                    <h2
+                        style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem; margin-top: 2.5rem; border-left: none; padding-left: 0;">
+                        3. The Mandatory Folder Hierarchy</h2>
                     <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
-                        When Chrome prompts you for a save location, navigate to your <b>Desktop</b>, open <b>Drive D</b>, and then create a new folder with your name (e.g., <b>Riya</b>) to build this exact nested structure:
+                        When Chrome prompts you for a save location, navigate to your <b>Desktop</b>, open <b>Drive
+                            D</b>, and then create a new folder with your name (e.g., <b>Riya</b>) to build this exact
+                        nested structure:
                     </p>
 
                     <!-- STANDARD CLIENT PATH -->
-                    <div style="border: 1px solid var(--border); border-radius: 20px; padding: 2rem; border-top: 4px solid var(--primary); background: var(--card-bg); margin-bottom: 2rem;">
+                    <div
+                        style="border: 1px solid var(--border); border-radius: 20px; padding: 2rem; border-top: 4px solid var(--primary); background: var(--card-bg); margin-bottom: 2rem;">
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
-                            <div style="width: 36px; height: 36px; background: var(--primary); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
+                            <div
+                                style="width: 36px; height: 36px; background: var(--primary); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
                                 <i class="fas fa-building"></i>
                             </div>
                             <div>
@@ -958,37 +1022,46 @@
                             </div>
                         </div>
 
-                        <div class="hierarchy-tree" style="padding: 1.5rem; margin: 0; background: transparent; border: none; border-radius: 0;">
+                        <div class="hierarchy-tree"
+                            style="padding: 1.5rem; margin: 0; background: transparent; border: none; border-radius: 0;">
                             <div class="tree-branch root">
-                                <div class="tree-leaf"><i class="fas fa-desktop" style="color:var(--text-light);"></i> Desktop</div>
+                                <div class="tree-leaf"><i class="fas fa-desktop" style="color:var(--text-light);"></i>
+                                    Desktop</div>
                             </div>
                             <div class="tree-branch">
                                 <div class="tree-leaf"><i class="fas fa-hdd" style="color:#94a3b8;"></i> Drive D</div>
                             </div>
                             <div class="tree-branch" style="margin-left: 15px;">
-                                <div class="tree-leaf"><i class="fas fa-user-circle" style="color:var(--primary);"></i> Riya <span class="leaf-hint">(Your Name)</span></div>
+                                <div class="tree-leaf"><i class="fas fa-user-circle" style="color:var(--primary);"></i>
+                                    Riya <span class="leaf-hint">(Your Name)</span></div>
                             </div>
                             <div class="tree-branch" style="margin-left: 30px;">
-                                <div class="tree-leaf"><i class="fas fa-calendar" style="color:var(--secondary);"></i> 2026 <span class="leaf-hint">(Current Year)</span></div>
+                                <div class="tree-leaf"><i class="fas fa-calendar" style="color:var(--secondary);"></i>
+                                    2026 <span class="leaf-hint">(Current Year)</span></div>
                             </div>
                             <div class="tree-branch" style="margin-left: 45px;">
-                                <div class="tree-leaf"><i class="fas fa-building" style="color:#60a5fa;"></i> British Council <span class="leaf-hint">(Client Name)</span></div>
+                                <div class="tree-leaf"><i class="fas fa-building" style="color:#60a5fa;"></i> British
+                                    Council <span class="leaf-hint">(Client Name)</span></div>
                             </div>
                             <div class="tree-branch" style="margin-left: 60px;">
-                                <div class="tree-leaf"><i class="fas fa-calendar-alt" style="color:#a78bfa;"></i> January <span class="leaf-hint">(Month)</span></div>
+                                <div class="tree-leaf"><i class="fas fa-calendar-alt" style="color:#a78bfa;"></i>
+                                    January <span class="leaf-hint">(Month)</span></div>
                             </div>
                             <div class="tree-branch" style="margin-left: 75px;">
-                                <div class="tree-leaf"><i class="fas fa-folder-open" style="color:#fbbf24;"></i> 02-05-2026 <span class="leaf-hint">(Date)</span></div>
+                                <div class="tree-leaf"><i class="fas fa-folder-open" style="color:#fbbf24;"></i>
+                                    02-05-2026 <span class="leaf-hint">(Date)</span></div>
                             </div>
                             <div class="tree-branch" style="margin-left: 90px;">
-                                <div class="tree-leaf" style="color:var(--danger);"><i class="fas fa-file-alt"></i> Hindi to English <span class="leaf-hint">← Language folder</span></div>
+                                <div class="tree-leaf" style="color:var(--danger);"><i class="fas fa-file-alt"></i>
+                                    Hindi to English <span class="leaf-hint">← Language folder</span></div>
                             </div>
                         </div>
 
                         <div class="example-path" style="margin-top: 1.5rem;">
                             <p class="example-label">Example Path</p>
                             <div class="path-bar" style="font-size: 0.8rem;">
-                                Desktop <span>&gt;</span> D: <span>&gt;</span> Riya <span>&gt;</span> 2026 <span>&gt;</span>
+                                Desktop <span>&gt;</span> D: <span>&gt;</span> Riya <span>&gt;</span> 2026
+                                <span>&gt;</span>
                                 British Council <span>&gt;</span> Jan <span>&gt;</span> 02-05-2026 <span>&gt;</span>
                                 <span class="path-highlight">Hindi to English</span>
                             </div>
@@ -996,336 +1069,403 @@
                     </div>
 
                     <!-- RULES -->
-                    <div class="rule-card" style="border-left: 5px solid var(--primary); background: rgba(79, 70, 229, 0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; line-height: 1.6;">
-                        <b>Rule:</b> Create a separate <u>language folder</u> for every language in the task. If a project has 3 languages, there should be 3 folders inside the date folder. Never mix languages in the same folder unless the documents are short and easy to manage.
+                    <div class="rule-card"
+                        style="border-left: 5px solid var(--primary); background: rgba(79, 70, 229, 0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; line-height: 1.6;">
+                        <b>Rule:</b> Create a separate <u>language folder</u> for every language in the task. If a
+                        project has 3 languages, there should be 3 folders inside the date folder. Never mix languages
+                        in the same folder unless the documents are short and easy to manage.
                     </div>
                 </div>
 
                 <div id="yt-client-protocols">
 
-                <!-- Immediate Action Protocol & Triple-Path Escalation Component -->
-                <div class="briefing-card" style="border-top: 4px solid var(--primary); background: var(--card-bg); padding: 2.5rem; margin-top: 2rem; margin-bottom: 2.5rem; border-radius: 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);">
-                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
-                        <div style="background: rgba(79,70,229,0.15); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.3rem;">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <div>
-                            <span style="font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Rapid Response</span>
-                            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin: 0;">Immediate Action Protocol</h3>
-                        </div>
-                    </div>
-
-                    <div style="border-left: 4px solid var(--primary); padding-left: 15px; margin-bottom: 2rem; font-size: 1.15rem; font-weight: 600; color: var(--text-dark); line-height: 1.5; font-style: italic;">
-                        "Distribute the task immediately while simultaneously securing data on Drive D."
-                    </div>
-
-                    <!-- Four columns (tabs style) -->
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 2.5rem;">
-                        <div style="background: rgba(59, 130, 246, 0.04); border-left: 4px solid #3b82f6; border-radius: 8px; padding: 1.25rem; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-                            <div style="color: #3b82f6; font-size: 1.4rem; margin-bottom: 8px;"><i class="fas fa-file-alt"></i></div>
-                            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">Brief Analysis</h4>
-                            <p style="font-size: 0.8rem; color: var(--text-light); line-height: 1.4; margin: 0;">Analyze task details and complexity immediately.</p>
-                        </div>
-                        <div style="background: rgba(236, 72, 153, 0.04); border-left: 4px solid #ec4899; border-radius: 8px; padding: 1.25rem; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-                            <div style="color: #ec4899; font-size: 1.4rem; margin-bottom: 8px;"><i class="fas fa-sticky-note"></i></div>
-                            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">Deadline Notes</h4>
-                            <p style="font-size: 0.8rem; color: var(--text-light); line-height: 1.4; margin: 0;">Document specific client ETAs and timeframes.</p>
-                        </div>
-                        <div style="background: rgba(16, 185, 129, 0.04); border-left: 4px solid #10b981; border-radius: 8px; padding: 1.25rem; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-                            <div style="color: #10b981; font-size: 1.4rem; margin-bottom: 8px;"><i class="fas fa-hdd"></i></div>
-                            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">Securely save</h4>
-                            <p style="font-size: 0.8rem; color: var(--text-light); line-height: 1.4; margin: 0;">Store raw and trimmed assets in dedicated directories.</p>
-                        </div>
-                        <div style="background: rgba(245, 158, 11, 0.04); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 1.25rem; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-                            <div style="color: #f59e0b; font-size: 1.4rem; margin-bottom: 8px;"><i class="fas fa-broadcast-tower"></i></div>
-                            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">Resource Outreach</h4>
-                            <p style="font-size: 0.8rem; color: var(--text-light); line-height: 1.4; margin: 0;">Outreach primary and fallback linguists immediately.</p>
-                        </div>
-                    </div>
-
-                    <!-- Triple-Path Escalation Strategy sub-component -->
-                    <div style="border-top: 1px solid var(--border); padding-top: 2rem;">
-                        <h4 style="font-size: 0.8rem; font-weight: 900; color: var(--text-dark); text-transform: uppercase; letter-spacing: 0.05em; text-align: center; margin-bottom: 1.5rem;">
-                            Triple-Path Escalation Strategy
-                        </h4>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
-                            <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.01); transition: transform 0.2s ease;">
-                                <div style="color: #3b82f6; font-size: 1.2rem; margin-bottom: 8px;"><i class="fas fa-user-check"></i></div>
-                                <span style="font-size: 0.9rem; font-weight: 700; color: var(--text-dark); display: block;">Direct Contact</span>
+                    <!-- Immediate Action Protocol & Triple-Path Escalation Component -->
+                    <div class="briefing-card"
+                        style="border-top: 4px solid var(--primary); background: var(--card-bg); padding: 2.5rem; margin-top: 2rem; margin-bottom: 2.5rem; border-radius: 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
+                            <div
+                                style="background: rgba(79,70,229,0.15); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.3rem;">
+                                <i class="fas fa-bolt"></i>
                             </div>
-                            <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.01); transition: transform 0.2s ease;">
-                                <div style="color: #f59e0b; font-size: 1.2rem; margin-bottom: 8px;"><i class="fas fa-briefcase"></i></div>
-                                <span style="font-size: 0.9rem; font-weight: 700; color: var(--text-dark); display: block;">Upwork Post</span>
-                            </div>
-                            <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.01); transition: transform 0.2s ease;">
-                                <div style="color: #10b981; font-size: 1.2rem; margin-bottom: 8px;"><i class="fas fa-phone-alt"></i></div>
-                                <span style="font-size: 0.9rem; font-weight: 700; color: var(--text-dark); display: block;">Offline Sync</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="action-block action-danger" style="margin-bottom: 2.5rem;">
-                    <p><i class="fas fa-bolt"></i> CRITICAL REQUIREMENT: INSTANT REPLY</p>
-                    <p style="font-size: 1.1rem;"><b>"YouTube project clients are on WhatsApp and Email — every message
-                            demands a reply the second it comes in, zero delay."</b>
-                    </p>
-                </div>
-
-                <div class="action-block action-warning" style="margin-bottom: 2.5rem;">
-                    <p><i class="fas fa-eye"></i> IMPORTANT: CONTINUOUS OVERSIGHT & PARALLEL EXECUTION</p>
-                    <p style="font-size: 1.1rem; margin-top: 10px;"><b>Reviewers must conduct full-time tracking even if
-                            you are working on multiple files. Tracking, OST, and Metadata must be filled concurrently
-                            with the WFW translation.</b></p>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 2rem;">
-                    <!-- Additional Prerequisites -->
-                    <div class="rule-card"
-                        style="border-left: 5px solid #64748b; background: rgba(100, 116, 139, 0.05); padding: 1.5rem; margin: 0;">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <div style="display: flex; gap: 12px; align-items: flex-start;">
-                                <i class="fas fa-video" style="color: var(--secondary); margin-top: 4px;"></i>
-                                <span><b>Virtual Room:</b> Stay connected via <b>Google Meet</b> at all times
-                                    (muted/video off) for instant collaboration.</span>
-                            </div>
-                            <div style="display: flex; gap: 12px; align-items: flex-start;">
-                                <i class="fas fa-users-cog" style="color: var(--secondary); margin-top: 4px;"></i>
-                                <span><b>Resource Splitting:</b> Be prepared to divide high-quantity tasks across
-                                    multiple linguists to protect deadlines.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; margin-top: 2rem;">We
-                    primarily manage two
-                    types of clients: <b>(Client C1)</b> and <b>(Client C2)</b>. Their distinct intake and
-                    operational requirements are detailed below.</p>
-
-                <div class="briefing-grid" style="margin-bottom: 2.5rem; margin-top: 2rem;">
-                    <!-- Client A -->
-                    <div class="briefing-card" style="border-top: 4px solid var(--primary);">
-                        <h3 style="margin-bottom: 1.5rem; font-weight: 800;"><i class="fas fa-envelope-open-text"
-                                style="color: var(--primary); margin-right: 10px;"></i> Client C1 Protocol</h3>
-                        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Tasks arrive via <b>Email</b> with
-                            comprehensive documentation (Timestamps, ETA, and specific instructions). </p>
-                        <div class="protocol-box">
-                            <ul style="list-style: none; font-size: 0.9rem;">
-                                <li style="margin-bottom: 12px; display: flex; align-items: flex-start;"><i
-                                        class="fas fa-check-circle"
-                                        style="color: var(--primary); margin-right: 10px; margin-top: 4px;"></i>
-                                    <span>Review the OST quantity and ETA shared by the client, assess how much workload
-                                        can realistically be handled within the given timeline, and consult with a
-                                        senior if ETA negotiation is required.</span>
-                                </li>
-                                <li style="display: flex; align-items: flex-start;"><i class="fas fa-language"
-                                        style="color: var(--primary); margin-right: 10px; margin-top: 4px;"></i>
-                                    <span><b>Foreign Language Check:</b> If a foreign language is detected in the video,
-                                        inform the client and get confirmation whether the additional task needs to be
-                                        done.</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div
-                            style="margin-top: 1.5rem; background: rgba(79, 70, 229, 0.04); border-radius: 12px; padding: 1rem; border: 1px dashed var(--primary);">
-                            <p
-                                style="font-size: 0.85rem; color: var(--text-dark); margin: 0; display: flex; gap: 10px; align-items: flex-start;">
-                                <i class="fas fa-book" style="color: var(--primary); margin-top: 3px;"></i>
-                                <span><b>GLOSSARY TIP:</b> "Foreign Language" refers to <b>any</b> language detected in
-                                    the video apart from the specific task languages. This includes background noise,
-                                    music, or speech in another language.</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Client B -->
-                    <div class="briefing-card" style="border-top: 4px solid #25D366;">
-                        <h3 style="margin-bottom: 1.5rem; font-weight: 800;"><i class="fab fa-whatsapp"
-                                style="color: #25D366; margin-right: 10px;"></i> Client C2 Protocol</h3>
-                        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Communication is via
-                            <b>WhatsApp or Email within few seconds.</b>
-                        </p>
-                        <div class="protocol-box">
-                            <ul style="list-style: none; font-size: 0.9rem;">
-                                <li style="margin-bottom: 12px; display: flex; align-items: flex-start;"><i
-                                        class="fas fa-search"
-                                        style="color: #25D366; margin-right: 10px; margin-top: 4px;"></i>
-                                    <span><b>Triad Check:</b> Immediately review Video, OST, and Deadline.</span>
-                                </li>
-                                <li style="margin-bottom: 12px; display: flex; align-items: flex-start;"><i
-                                        class="fas fa-history"
-                                        style="color: #25D366; margin-right: 10px; margin-top: 4px;"></i>
-                                    <span><b>Foreign Language Check :</b> If any foreign language is detected check if
-                                        translation can be done within the given ETA. If not, request a time limit
-                                        extension to get the job done correctly.</span>
-                                </li>
-
-                                <li style="display: flex; align-items: flex-start;"><i class="fas fa-handshake"
-                                        style="color: var(--primary); margin-right: 10px; margin-top: 4px;"></i>
-                                    <span><b>Negotiation:</b> Request an extension only if criteria (e.g., resource
-                                        availability, tight time limits) are technically impossible.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="briefing-card" style="margin-bottom: 2.5rem; border-top: 4px solid var(--primary);">
-                    <h3 style="margin-bottom: 1.5rem; font-weight: 800;"><i class="fas fa-globe-americas"
-                            style="color: var(--primary); margin-right: 10px;"></i> Timezone Alignment Check</h3>
-                    <p style="color: var(--text-light); margin-bottom: 1.5rem;">The Project Manager or Associate
-                        should have a clear understanding of different <b>time zones</b> to ensure effective <b>task
-                            management</b> when work is assigned by the client. This helps maintain a smooth
-                        workflow and
-                        ensures <b>timely delivery.</b>
-                    </p>
-                    <div class="protocol-box">
-                        <ul style="list-style: none; font-size: 0.95rem;">
-                            <li style="margin-bottom: 15px; display: flex; align-items: flex-start;"><i
-                                    class="fas fa-check-circle"
-                                    style="color: var(--secondary); margin-right: 10px; margin-top: 4px;"></i>
-                                <span>Align resources according to the client’s deadline.</span>
-                            </li>
-                            <li style="margin-bottom: 15px; display: flex; align-items: flex-start;"><i
-                                    class="fas fa-check-circle"
-                                    style="color: var(--secondary); margin-right: 10px; margin-top: 4px;"></i>
-                                <span>Be aware of time zone differences based on the language resources requested by
-                                    the client.</span>
-                            </li>
-                            <li style="display: flex; align-items: flex-start;"><i class="fas fa-check-circle"
-                                    style="color: var(--secondary); margin-right: 10px; margin-top: 4px;"></i>
-                                <span>Assess whether the task can be completed within the given ETA, whether an
-                                    extension should be requested to ensure proper delivery of the file, or whether the
-                                    task should be declined due to a significant time zone gap (Consult with senior when
-                                    in such situation).</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h2
-                    style="margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 800; border-bottom: none; padding-bottom: 0;">
-                    Procedure in Details</h2>
-
-                <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 2rem;">
-                    <!-- Point 1: Mandatory OST Check + Scenarios -->
-                    <div class="rule-card"
-                        style="border-left: 5px solid var(--primary); background: rgba(79, 70, 229, 0.05); padding: 2rem; margin: 0;">
-                        <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 2rem;">
-                            <i class="fas fa-file-invoice"
-                                style="color: var(--primary); font-size: 1.5rem; margin-top: 5px;"></i>
                             <div>
-                                <h3 style="color: var(--text-dark); margin-bottom: 0.5rem; font-weight: 800;">1.
-                                    Mandatory OST, Timezone, ETA, quantity of work Check</h3>
-                                <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Verify the OST
-                                    quantity,Timezone, ETA, quantity of work immediately. Your ability to hit the ETA is
-                                    directly tied to the text
-                                    quantity of the video or timezone of the resource. Use the following decision tree:
+                                <span
+                                    style="font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Rapid
+                                    Response</span>
+                                <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin: 0;">
+                                    Immediate Action Protocol</h3>
+                            </div>
+                        </div>
+
+                        <div
+                            style="border-left: 4px solid var(--primary); padding-left: 15px; margin-bottom: 2rem; font-size: 1.15rem; font-weight: 600; color: var(--text-dark); line-height: 1.5; font-style: italic;">
+                            "Distribute the task immediately while simultaneously securing data on Drive D."
+                        </div>
+
+                        <!-- Four columns (tabs style) -->
+                        <div
+                            style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 2.5rem;">
+                            <div
+                                style="background: rgba(59, 130, 246, 0.04); border-left: 4px solid #3b82f6; border-radius: 8px; padding: 1.25rem; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                                <div style="color: #3b82f6; font-size: 1.4rem; margin-bottom: 8px;"><i
+                                        class="fas fa-file-alt"></i></div>
+                                <h4
+                                    style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">
+                                    Brief Analysis</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-light); line-height: 1.4; margin: 0;">
+                                    Analyze task details and complexity immediately.</p>
+                            </div>
+                            <div
+                                style="background: rgba(236, 72, 153, 0.04); border-left: 4px solid #ec4899; border-radius: 8px; padding: 1.25rem; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                                <div style="color: #ec4899; font-size: 1.4rem; margin-bottom: 8px;"><i
+                                        class="fas fa-sticky-note"></i></div>
+                                <h4
+                                    style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">
+                                    Deadline Notes</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-light); line-height: 1.4; margin: 0;">
+                                    Document specific client ETAs and timeframes.</p>
+                            </div>
+                            <div
+                                style="background: rgba(16, 185, 129, 0.04); border-left: 4px solid #10b981; border-radius: 8px; padding: 1.25rem; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                                <div style="color: #10b981; font-size: 1.4rem; margin-bottom: 8px;"><i
+                                        class="fas fa-hdd"></i></div>
+                                <h4
+                                    style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">
+                                    Securely save</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-light); line-height: 1.4; margin: 0;">
+                                    Store raw and trimmed assets in dedicated directories.</p>
+                            </div>
+                            <div
+                                style="background: rgba(245, 158, 11, 0.04); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 1.25rem; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                                <div style="color: #f59e0b; font-size: 1.4rem; margin-bottom: 8px;"><i
+                                        class="fas fa-broadcast-tower"></i></div>
+                                <h4
+                                    style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">
+                                    Resource Outreach</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-light); line-height: 1.4; margin: 0;">
+                                    Outreach primary and fallback linguists immediately.</p>
+                            </div>
+                        </div>
+
+                        <!-- Triple-Path Escalation Strategy sub-component -->
+                        <div style="border-top: 1px solid var(--border); padding-top: 2rem;">
+                            <h4
+                                style="font-size: 0.8rem; font-weight: 900; color: var(--text-dark); text-transform: uppercase; letter-spacing: 0.05em; text-align: center; margin-bottom: 1.5rem;">
+                                Triple-Path Escalation Strategy
+                            </h4>
+
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                                <div
+                                    style="background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.01); transition: transform 0.2s ease;">
+                                    <div style="color: #3b82f6; font-size: 1.2rem; margin-bottom: 8px;"><i
+                                            class="fas fa-user-check"></i></div>
+                                    <span
+                                        style="font-size: 0.9rem; font-weight: 700; color: var(--text-dark); display: block;">Direct
+                                        Contact</span>
+                                </div>
+                                <div
+                                    style="background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.01); transition: transform 0.2s ease;">
+                                    <div style="color: #f59e0b; font-size: 1.2rem; margin-bottom: 8px;"><i
+                                            class="fas fa-briefcase"></i></div>
+                                    <span
+                                        style="font-size: 0.9rem; font-weight: 700; color: var(--text-dark); display: block;">Upwork
+                                        Post</span>
+                                </div>
+                                <div
+                                    style="background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.01); transition: transform 0.2s ease;">
+                                    <div style="color: #10b981; font-size: 1.2rem; margin-bottom: 8px;"><i
+                                            class="fas fa-phone-alt"></i></div>
+                                    <span
+                                        style="font-size: 0.9rem; font-weight: 700; color: var(--text-dark); display: block;">Offline
+                                        Sync</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-block action-danger" style="margin-bottom: 2.5rem;">
+                        <p><i class="fas fa-bolt"></i> CRITICAL REQUIREMENT: INSTANT REPLY</p>
+                        <p style="font-size: 1.1rem;"><b>"YouTube project clients are on WhatsApp and Email — every
+                                message
+                                demands a reply the second it comes in, zero delay."</b>
+                        </p>
+                    </div>
+
+                    <div class="action-block action-warning" style="margin-bottom: 2.5rem;">
+                        <p><i class="fas fa-eye"></i> IMPORTANT: CONTINUOUS OVERSIGHT & PARALLEL EXECUTION</p>
+                        <p style="font-size: 1.1rem; margin-top: 10px;"><b>Reviewers must conduct full-time tracking
+                                even if
+                                you are working on multiple files. Tracking, OST, and Metadata must be filled
+                                concurrently
+                                with the WFW translation.</b></p>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 2rem;">
+                        <!-- Additional Prerequisites -->
+                        <div class="rule-card"
+                            style="border-left: 5px solid #64748b; background: rgba(100, 116, 139, 0.05); padding: 1.5rem; margin: 0;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                    <i class="fas fa-video" style="color: var(--secondary); margin-top: 4px;"></i>
+                                    <span><b>Virtual Room:</b> Stay connected via <b>Google Meet</b> at all times
+                                        (muted/video off) for instant collaboration.</span>
+                                </div>
+                                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                    <i class="fas fa-users-cog" style="color: var(--secondary); margin-top: 4px;"></i>
+                                    <span><b>Resource Splitting:</b> Be prepared to divide high-quantity tasks across
+                                        multiple linguists to protect deadlines.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; margin-top: 2rem;">We
+                        primarily manage two
+                        types of clients: <b>(Client C1)</b> and <b>(Client C2)</b>. Their distinct intake and
+                        operational requirements are detailed below.</p>
+
+                    <div class="briefing-grid" style="margin-bottom: 2.5rem; margin-top: 2rem;">
+                        <!-- Client A -->
+                        <div class="briefing-card" style="border-top: 4px solid var(--primary);">
+                            <h3 style="margin-bottom: 1.5rem; font-weight: 800;"><i class="fas fa-envelope-open-text"
+                                    style="color: var(--primary); margin-right: 10px;"></i> Client C1 Protocol</h3>
+                            <p style="color: var(--text-light); margin-bottom: 1.5rem;">Tasks arrive via <b>Email</b>
+                                with
+                                comprehensive documentation (Timestamps, ETA, and specific instructions). </p>
+                            <div class="protocol-box">
+                                <ul style="list-style: none; font-size: 0.9rem;">
+                                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start;"><i
+                                            class="fas fa-check-circle"
+                                            style="color: var(--primary); margin-right: 10px; margin-top: 4px;"></i>
+                                        <span>Review the OST quantity and ETA shared by the client, assess how much
+                                            workload
+                                            can realistically be handled within the given timeline, and consult with a
+                                            senior if ETA negotiation is required.</span>
+                                    </li>
+                                    <li style="display: flex; align-items: flex-start;"><i class="fas fa-language"
+                                            style="color: var(--primary); margin-right: 10px; margin-top: 4px;"></i>
+                                        <span><b>Foreign Language Check:</b> If a foreign language is detected in the
+                                            video,
+                                            inform the client and get confirmation whether the additional task needs to
+                                            be
+                                            done.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div
+                                style="margin-top: 1.5rem; background: rgba(79, 70, 229, 0.04); border-radius: 12px; padding: 1rem; border: 1px dashed var(--primary);">
+                                <p
+                                    style="font-size: 0.85rem; color: var(--text-dark); margin: 0; display: flex; gap: 10px; align-items: flex-start;">
+                                    <i class="fas fa-book" style="color: var(--primary); margin-top: 3px;"></i>
+                                    <span><b>GLOSSARY TIP:</b> "Foreign Language" refers to <b>any</b> language detected
+                                        in
+                                        the video apart from the specific task languages. This includes background
+                                        noise,
+                                        music, or speech in another language.</span>
                                 </p>
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
-                            <div class="briefing-card"
-                                style="border-top: 3px solid var(--secondary); background: white; padding: 1.2rem;">
-                                <h4
-                                    style="color: var(--secondary); margin-bottom: 0.8rem; font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">
-                                    Scenario A: Low OST, manageable ETA (e.g., 3–4 hours), or availability in the actual
-                                    required timezone.</h4>
-                                <div style="margin-top: 1rem;">
-                                    <button
-                                        style="background: var(--secondary); color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2); transition: all 0.2s ease;">
-                                        <i class="fas fa-check-circle" style="margin-right: 5px;"></i> Accept
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="briefing-card"
-                                style="border-top: 3px solid var(--danger); background: white; padding: 1.2rem; grid-column: span 2;">
-                                <h4
-                                    style="color: var(--danger); margin-bottom: 0.8rem; font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">
-                                    Scenario B: High OST, Insufficient ETA, or Timezone Conflict, Negotiate a realistic
-                                    ETA based on quantity of work before starting execution. (Consult with senior, don't
-                                    reject without consulting.)</h4>
-                                <div style="margin-top: 1rem;">
-                                    <button
-                                        style="background: var(--danger); color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2); transition: all 0.2s ease;">
-                                        <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i> Negotiate
-                                    </button>
-                                </div>
+                        <!-- Client B -->
+                        <div class="briefing-card" style="border-top: 4px solid #25D366;">
+                            <h3 style="margin-bottom: 1.5rem; font-weight: 800;"><i class="fab fa-whatsapp"
+                                    style="color: #25D366; margin-right: 10px;"></i> Client C2 Protocol</h3>
+                            <p style="color: var(--text-light); margin-bottom: 1.5rem;">Communication is via
+                                <b>WhatsApp or Email within few seconds.</b>
+                            </p>
+                            <div class="protocol-box">
+                                <ul style="list-style: none; font-size: 0.9rem;">
+                                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start;"><i
+                                            class="fas fa-search"
+                                            style="color: #25D366; margin-right: 10px; margin-top: 4px;"></i>
+                                        <span><b>Triad Check:</b> Immediately review Video, OST, and Deadline.</span>
+                                    </li>
+                                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start;"><i
+                                            class="fas fa-history"
+                                            style="color: #25D366; margin-right: 10px; margin-top: 4px;"></i>
+                                        <span><b>Foreign Language Check :</b> If any foreign language is detected check
+                                            if
+                                            translation can be done within the given ETA. If not, request a time limit
+                                            extension to get the job done correctly.</span>
+                                    </li>
+
+                                    <li style="display: flex; align-items: flex-start;"><i class="fas fa-handshake"
+                                            style="color: var(--primary); margin-right: 10px; margin-top: 4px;"></i>
+                                        <span><b>Negotiation:</b> Request an extension only if criteria (e.g., resource
+                                            availability, tight time limits) are technically impossible.</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                </div>
-
-
-
-                <!-- Whatsapp Forwarding Protocol -->
-                <div class="briefing-card"
-                    style="border-top: 4px solid #10b981; margin-top: 2rem; margin-bottom: 2rem;">
-                    <h3
-                        style="margin-bottom: 1.5rem; font-weight: 800; color: #0f766e; display: flex; align-items: center; gap: 10px;">
-                        <i class="fab fa-whatsapp" style="color: #22c55e;"></i> Whatsapp Forwarding Protocol
-                    </h3>
-                    <p style="font-size: 1.05rem; color: #475569; margin-bottom: 2rem; line-height: 1.6;">
-                        All client communications must be instantly mirrored to the relevant internal execution groups.
-                    </p>
-
-                    <div
-                        style="background: #f0f9ff; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
-                        <h4
-                            style="color: #1e40af; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">
-                            REQUIRED MESSAGES TO FORWARD:
-                        </h4>
-                        <ul style="list-style: none; font-size: 1rem; color: #1e3a8a; margin: 0; padding: 0;">
-                            <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 8px;">
-                                <i class="fas fa-circle" style="font-size: 6px; margin-top: 8px; color: #3b82f6;"></i>
-                                <span><b>ETA:</b> Share the confirmed deadline in the group.</span>
-                            </li>
-                            <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 8px;">
-                                <i class="fas fa-circle" style="font-size: 6px; margin-top: 8px; color: #3b82f6;"></i>
-                                <span><b>Proceed:</b> Forward the client's confirmation or go-ahead message.</span>
-                            </li>
-                            <li style="display: flex; align-items: flex-start; gap: 8px;">
-                                <i class="fas fa-circle" style="font-size: 6px; margin-top: 8px; color: #3b82f6;"></i>
-                                <span><b>Video Link:</b> Share the direct/raw video links provided by the client.</span>
-                            </li>
-                        </ul>
+                    <div class="briefing-card" style="margin-bottom: 2.5rem; border-top: 4px solid var(--primary);">
+                        <h3 style="margin-bottom: 1.5rem; font-weight: 800;"><i class="fas fa-globe-americas"
+                                style="color: var(--primary); margin-right: 10px;"></i> Timezone Alignment Check</h3>
+                        <p style="color: var(--text-light); margin-bottom: 1.5rem;">The Project Manager or Associate
+                            should have a clear understanding of different <b>time zones</b> to ensure effective <b>task
+                                management</b> when work is assigned by the client. This helps maintain a smooth
+                            workflow and
+                            ensures <b>timely delivery.</b>
+                        </p>
+                        <div class="protocol-box">
+                            <ul style="list-style: none; font-size: 0.95rem;">
+                                <li style="margin-bottom: 15px; display: flex; align-items: flex-start;"><i
+                                        class="fas fa-check-circle"
+                                        style="color: var(--secondary); margin-right: 10px; margin-top: 4px;"></i>
+                                    <span>Align resources according to the client’s deadline.</span>
+                                </li>
+                                <li style="margin-bottom: 15px; display: flex; align-items: flex-start;"><i
+                                        class="fas fa-check-circle"
+                                        style="color: var(--secondary); margin-right: 10px; margin-top: 4px;"></i>
+                                    <span>Be aware of time zone differences based on the language resources requested by
+                                        the client.</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start;"><i class="fas fa-check-circle"
+                                        style="color: var(--secondary); margin-right: 10px; margin-top: 4px;"></i>
+                                    <span>Assess whether the task can be completed within the given ETA, whether an
+                                        extension should be requested to ensure proper delivery of the file, or whether
+                                        the
+                                        task should be declined due to a significant time zone gap (Consult with senior
+                                        when
+                                        in such situation).</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div
-                        style="background: #f0fdf4; border-left: 6px solid #10b981; border-radius: 12px; padding: 1.5rem;">
-                        <h4
-                            style="color: #065f46; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">
-                            STANDARDIZED UPDATE TEMPLATES:
-                        </h4>
+                    <h2
+                        style="margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 800; border-bottom: none; padding-bottom: 0;">
+                        Procedure in Details</h2>
+
+                    <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 2rem;">
+                        <!-- Point 1: Mandatory OST Check + Scenarios -->
+                        <div class="rule-card"
+                            style="border-left: 5px solid var(--primary); background: rgba(79, 70, 229, 0.05); padding: 2rem; margin: 0;">
+                            <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 2rem;">
+                                <i class="fas fa-file-invoice"
+                                    style="color: var(--primary); font-size: 1.5rem; margin-top: 5px;"></i>
+                                <div>
+                                    <h3 style="color: var(--text-dark); margin-bottom: 0.5rem; font-weight: 800;">1.
+                                        Mandatory OST, Timezone, ETA, quantity of work Check</h3>
+                                    <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Verify the
+                                        OST
+                                        quantity,Timezone, ETA, quantity of work immediately. Your ability to hit the
+                                        ETA is
+                                        directly tied to the text
+                                        quantity of the video or timezone of the resource. Use the following decision
+                                        tree:
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                                <div class="briefing-card"
+                                    style="border-top: 3px solid var(--secondary); background: white; padding: 1.2rem;">
+                                    <h4
+                                        style="color: var(--secondary); margin-bottom: 0.8rem; font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">
+                                        Scenario A: Low OST, manageable ETA (e.g., 3–4 hours), or availability in the
+                                        actual
+                                        required timezone.</h4>
+                                    <div style="margin-top: 1rem;">
+                                        <button
+                                            style="background: var(--secondary); color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2); transition: all 0.2s ease;">
+                                            <i class="fas fa-check-circle" style="margin-right: 5px;"></i> Accept
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="briefing-card"
+                                    style="border-top: 3px solid var(--danger); background: white; padding: 1.2rem; grid-column: span 2;">
+                                    <h4
+                                        style="color: var(--danger); margin-bottom: 0.8rem; font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">
+                                        Scenario B: High OST, Insufficient ETA, or Timezone Conflict, Negotiate a
+                                        realistic
+                                        ETA based on quantity of work before starting execution. (Consult with senior,
+                                        don't
+                                        reject without consulting.)</h4>
+                                    <div style="margin-top: 1rem;">
+                                        <button
+                                            style="background: var(--danger); color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2); transition: all 0.2s ease;">
+                                            <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i>
+                                            Negotiate
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Whatsapp Forwarding Protocol -->
+                    <div class="briefing-card"
+                        style="border-top: 4px solid #10b981; margin-top: 2rem; margin-bottom: 2rem;">
+                        <h3
+                            style="margin-bottom: 1.5rem; font-weight: 800; color: #0f766e; display: flex; align-items: center; gap: 10px;">
+                            <i class="fab fa-whatsapp" style="color: #22c55e;"></i> Whatsapp Forwarding Protocol
+                        </h3>
+                        <p style="font-size: 1.05rem; color: #475569; margin-bottom: 2rem; line-height: 1.6;">
+                            All client communications must be instantly mirrored to the relevant internal execution
+                            groups.
+                        </p>
+
                         <div
-                            style="background: #ffffff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text-dark); border: 1px solid #d1fae5;">
-                            <span
-                                style="font-weight: 700; color: #10b981; display: block; margin-bottom: 8px; font-size: 0.9rem;">1.
-                                TASK ASSIGNMENT TEMPLATE</span>
-                            Language: [Name]<br>
-                            Video Min: [Total Duration]<br>
-                            Assigned To: [Translator Name(s)]<br>
-                            <span
-                                style="color: #64748b; font-style: italic; display: block; padding-left: 20px; margin: 4px 0;">
-                                For multiple translators, list as follows:<br>
-                                <span style="padding-left: 20px; display: block;">Name, [Timestamp Range]
-                                    &nbsp;&nbsp;&nbsp;&nbsp; Name, [Timestamp Range]</span>
-                            </span>
-                            Deadline: [HH:MM AM/PM]
+                            style="background: #f0f9ff; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                            <h4
+                                style="color: #1e40af; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">
+                                REQUIRED MESSAGES TO FORWARD:
+                            </h4>
+                            <ul style="list-style: none; font-size: 1rem; color: #1e3a8a; margin: 0; padding: 0;">
+                                <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 8px;">
+                                    <i class="fas fa-circle"
+                                        style="font-size: 6px; margin-top: 8px; color: #3b82f6;"></i>
+                                    <span><b>ETA:</b> Share the confirmed deadline in the group.</span>
+                                </li>
+                                <li style="margin-bottom: 10px; display: flex; align-items: flex-start; gap: 8px;">
+                                    <i class="fas fa-circle"
+                                        style="font-size: 6px; margin-top: 8px; color: #3b82f6;"></i>
+                                    <span><b>Proceed:</b> Forward the client's confirmation or go-ahead message.</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; gap: 8px;">
+                                    <i class="fas fa-circle"
+                                        style="font-size: 6px; margin-top: 8px; color: #3b82f6;"></i>
+                                    <span><b>Video Link:</b> Share the direct/raw video links provided by the
+                                        client.</span>
+                                </li>
+                            </ul>
+                        </div>
 
-                            <div style="border-top: 1px dashed #a7f3d0; margin: 15px 0; height: 1px;"></div>
+                        <div
+                            style="background: #f0fdf4; border-left: 6px solid #10b981; border-radius: 12px; padding: 1.5rem;">
+                            <h4
+                                style="color: #065f46; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">
+                                STANDARDIZED UPDATE TEMPLATES:
+                            </h4>
+                            <div
+                                style="background: #ffffff; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text-dark); border: 1px solid #d1fae5;">
+                                <span
+                                    style="font-weight: 700; color: #10b981; display: block; margin-bottom: 8px; font-size: 0.9rem;">1.
+                                    TASK ASSIGNMENT TEMPLATE</span>
+                                Language: [Name]<br>
+                                Video Min: [Total Duration]<br>
+                                Assigned To: [Translator Name(s)]<br>
+                                <span
+                                    style="color: #64748b; font-style: italic; display: block; padding-left: 20px; margin: 4px 0;">
+                                    For multiple translators, list as follows:<br>
+                                    <span style="padding-left: 20px; display: block;">Name, [Timestamp Range]
+                                        &nbsp;&nbsp;&nbsp;&nbsp; Name, [Timestamp Range]</span>
+                                </span>
+                                Deadline: [HH:MM AM/PM]
 
-                            <span
-                                style="font-weight: 700; color: #10b981; display: block; margin-bottom: 8px; font-size: 0.9rem;">2.
-                                SUBMISSION UPDATE PROTOCOL</span>
-                            Send: "Submitted" by tagging the required task message immediately after delivery.
+                                <div style="border-top: 1px dashed #a7f3d0; margin: 15px 0; height: 1px;"></div>
+
+                                <span
+                                    style="font-weight: 700; color: #10b981; display: block; margin-bottom: 8px; font-size: 0.9rem;">2.
+                                    SUBMISSION UPDATE PROTOCOL</span>
+                                Send: "Submitted" by tagging the required task message immediately after delivery.
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </section>
 
@@ -1464,6 +1604,13 @@
                                                 <span style="font-size: 0.8rem; line-height: 1.4; color: #14532d;">
                                                     Simply <strong>copy and paste</strong> the public YouTube link
                                                     directly in the <strong>Allocation Sheet</strong>.
+                                                </span>
+                                            </div>
+                                            <div style="display: flex; gap: 8px; align-items: flex-start;">
+                                                <span
+                                                    style="background: #c6f6d5; color: #22543d; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; flex-shrink: 0; margin-top: 2px;">3</span>
+                                                <span style="font-size: 0.8rem; line-height: 1.4; color: #14532d;">
+                                                    Use <a href="https://youtube-thumbnail-grabber.com/" target="_blank" style="color: #15803d; font-weight: 700; text-decoration: underline;">YouTube Thumbnail Grabber</a> to retrieve the video thumbnail, and paste it into the <strong>Template.docx</strong>.
                                                 </span>
                                             </div>
                                         </div>
@@ -1884,9 +2031,15 @@
                             style="background: #fff5f5; padding: 1.5rem; border-radius: 12px; border: 1px solid #fed7d7; grid-column: span 2;">
                             <h4
                                 style="color: #c53030; margin-bottom: 10px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; font-weight: 800;">
-                                <i class="fas fa-clipboard-list" style="margin-right: 6px;"></i> Project Manager Progress &amp; Notes Logging</h4>
+                                <i class="fas fa-clipboard-list" style="margin-right: 6px;"></i> Project Manager
+                                Progress &amp; Notes Logging
+                            </h4>
                             <p style="font-size: 0.95rem; line-height: 1.6; color: #742a2a; margin: 0;">
-                                <b>Project Managers must maintain detailed tracking notes on a project-by-project basis.</b> These notes must document: how responsibilities are divided among different team members (with clear records of who is handling what), which translator is assigned to which timestamp range, how much work has been completed, and what tasks remain. Project Managers are responsible for maintaining and updating these notes for their own reference and operational oversight.
+                                <b>Project Managers must maintain detailed tracking notes on a project-by-project
+                                    basis.</b> These notes must document: how responsibilities are divided among
+                                different team members (with clear records of who is handling what), which translator is
+                                assigned to which timestamp range. Project Managers are responsible for maintaining and
+                                updating these notes for their own reference and operational oversight.
                             </p>
                         </div>
                     </div>
