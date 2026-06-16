@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lingo Chaps | PM Onboarding & CAT Tool Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --option-bg: #f8fafc;
+            --option-border: #e2e8f0;
+            --option-hover: #eff6ff;
+            --option-active: #3b82f6;
+        }
+
+        body.dark-mode {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --border: rgba(255, 255, 255, 0.1);
+            --text-dark: #f1f5f9;
+            --text-light: #94a3b8;
+            --option-bg: #1e293b;
+            --option-border: rgba(255, 255, 255, 0.08);
+            --option-hover: rgba(59, 130, 246, 0.08);
+            --option-active: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg);
+            line-height: 1.6;
+            transition: 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            height: 64px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            z-index: 1000;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: 0.2s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .quiz-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .question-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .option-item {
+            background: var(--option-bg);
+            border: 1.5px solid var(--option-border);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .option-item:hover {
+            background: var(--option-hover);
+            border-color: var(--primary-light);
+            transform: translateX(4px);
+        }
+
+        .option-item.selected {
+            background: var(--option-hover);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+
+        .option-item.correct {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: var(--secondary);
+            color: #15803d;
+        }
+        body.dark-mode .option-item.correct {
+            color: #86efac;
+        }
+
+        .option-item.wrong {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: var(--danger);
+            color: #b91c1c;
+        }
+        body.dark-mode .option-item.wrong {
+            color: #fca5a5;
+        }
+
+        .option-letter {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--border);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .option-item:hover .option-letter {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .option-item.selected .option-letter {
+            background: var(--primary);
+            color: white;
+        }
+
+        .option-item.correct .option-letter {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .option-item.wrong .option-letter {
+            background: var(--danger);
+            color: white;
+        }
+
+        .feedback-box {
+            display: none;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            border-left: 5px solid var(--primary);
+            margin-bottom: 2rem;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .feedback-box.correct {
+            background: rgba(16, 185, 129, 0.05);
+            border-left-color: var(--secondary);
+            color: var(--text-dark);
+        }
+
+        .feedback-box.wrong {
+            background: rgba(239, 68, 68, 0.05);
+            border-left-color: var(--danger);
+            color: var(--text-dark);
+        }
+
+        .feedback-title {
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .feedback-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+        }
+
+        .btn:disabled {
+            background: var(--border);
+            color: var(--text-light);
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-dark);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--card-hover);
+            border-color: var(--text-light);
+            box-shadow: none;
+            transform: translateY(-2px);
+        }
+
+        /* Result Screen Styles */
+        .result-screen {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .score-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3);
+        }
+
+        .score-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+
+        .result-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .result-desc {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer.site-footer {
+            padding: 2.5rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            background: var(--card-bg);
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            .quiz-card {
+                padding: 2rem 1.5rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="youtube_project_guide.html" class="logo">
+            <i class="fab fa-youtube"></i>
+            <span>Lingo Chaps PM Portal</span>
+        </a>
+        <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
+    </header>
+
+    <div class="container">
+        <!-- QUIZ MODULE -->
+        <div class="quiz-card" id="quiz-container">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- Active Question Screen -->
+            <div id="question-screen">
+                <div class="question-meta">
+                    <span id="question-category">CAT Tools &amp; TM</span>
+                    <span id="question-number">Question 1 of 7</span>
+                </div>
+                <h2 class="question-title" id="question-text">
+                    Loading Question...
+                </h2>
+
+                <div class="options-list" id="options-container">
+                    <!-- Loaded dynamically -->
+                </div>
+
+                <div class="feedback-box" id="feedback-box">
+                    <div class="feedback-title" id="feedback-title">Correct!</div>
+                    <div class="feedback-text" id="feedback-text">
+                        Explanation content goes here...
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button class="btn btn-secondary" id="exit-btn" onclick="location.href='youtube_project_guide.html'">Exit</button>
+                    <button class="btn" id="next-btn" disabled>Submit Answer <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div class="result-screen" id="result-screen">
+                <div class="score-circle">
+                    <span class="score-value" id="final-score">85%</span>
+                    <span class="score-label">Score</span>
+                </div>
+                <h2 class="result-title" id="result-title">PM Certification Cleared!</h2>
+                <p class="result-desc" id="result-desc">
+                    Outstanding job! You have demonstrated a firm understanding of Lingo Chaps translation memories, project workflows, timestamp structures, and client intake guidelines.
+                </p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-val" id="stat-total">7</div>
+                        <div class="stat-label">Total Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-val" style="color: var(--secondary);" id="stat-correct">6</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-val" style="color: var(--danger);" id="stat-wrong">1</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                </div>
+
+                <div class="btn-container" style="justify-content: center; gap: 15px;">
+                    <button class="btn btn-secondary" onclick="restartQuiz()"><i class="fas fa-redo"></i> Retake Quiz</button>
+                    <button class="btn" onclick="location.href='youtube_project_guide.html'"><i class="fas fa-book"></i> Back to Process Guide</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Lingo Chaps | Interactive PM Training Portal</p>
+        <p style="margin-top: 8px; font-size: 0.75rem; opacity: 0.6;">Confidential Internal Asset - For Training Purposes Only</p>
+    </footer>
+
+    <script>
+        // QUIZ DATA
+        const QUIZ_QUESTIONS = [
+            {
+                category: "CAT Tools & TM",
+                question: "What is the primary purpose of a Translation Memory (TM) in CAT tools such as Phrase (Memsource) or MemoQ?",
+                options: [
+                    "It automatically translates the entire document using AI engines, removing the need for human linguists.",
+                    "It stores previously translated source and target segments to suggest matching content for identical or similar sentences in new files.",
+                    "It automatically plays the client's video file at a slower speed to help translators catch accurate timestamps.",
+                    "It acts as a dictionary database that only contains single-word terminology definitions and exclusions."
+                ],
+                correctAnswer: 1,
+                explanation: "Translation Memories (TMs) save pairs of translated sentences (segments). When identical or similar sentences appear, the CAT tool suggests the saved translation to ensure stylistic consistency and speed up translation workflows."
+            },
+            {
+                category: "Phrase vs. MemoQ",
+                question: "As a Project Manager, how do you decide whether to use Phrase (Memsource) or MemoQ for a YouTube project?",
+                options: [
+                    "Phrase is primarily web/cloud-based and is used for collaborative real-time editing; MemoQ is preferred for offline resources or complex projects requiring extensive desktop CAT resources.",
+                    "Phrase is configured only for European languages, while MemoQ is only used for Asian languages.",
+                    "MemoQ translates video files automatically using text-to-speech, whereas Phrase only handles plain text documents.",
+                    "There is no difference between the two; they are identical systems hosted on the Lingo Chaps network."
+                ],
+                correctAnswer: 0,
+                explanation: "Phrase is highly agile and collaborative because it is native to the cloud. MemoQ has strong desktop capabilities that allow handlers and reviewers to process large offline packages, custom TM schemas, and complex layout configurations."
+            },
+            {
+                category: "Client C1 Templates",
+                question: "When delivering completed translations to Client C1, which of the following represents the MANDATORY format for timestamp annotations?",
+                options: [
+                    "Just write the translated content without timestamps to make formatting easier.",
+                    "[HH:MM:SS] Target Translation only.",
+                    "[HH:MM:SS] Target Translation + Origin Text (verbatim speech in source language) + Context Explanations & Notes (including abbreviation meanings).",
+                    "[MM:SS] Target Translation translated with machine translation tools."
+                ],
+                correctAnswer: 2,
+                explanation: "Client C1 requires full-context records: the timestamp, target translation, the exact verbatim source text (origin text), and contextual annotations or explanatory notes (especially for abbreviations)."
+            },
+            {
+                category: "Live Client Scenario",
+                question: "A client email states: 'The video is in English but has Arabic speech from 01:23 to 01:45. Please check.' What is the PM's correct action?",
+                options: [
+                    "Ignore the Arabic speech segments because the client requested an English translation guide.",
+                    "Translate it using public machine translation tools and paste it into the file without telling the client.",
+                    "Notify the client, verify whether translation of the Arabic portion is required, and align a bilingual resource to handle the segment (negotiating an ETA extension if needed).",
+                    "Cancel the project immediately to avoid mixing languages in the translation tracking sheet."
+                ],
+                correctAnswer: 2,
+                explanation: "Under Lingo Chaps protocols, if a foreign language is detected inside the video, you must report it to the client, obtain verification on whether the additional segment needs translation, and allocate resources or adjust the ETA accordingly."
+            },
+            {
+                category: "Immediate Action Protocol",
+                question: "An urgent client WhatsApp comes in: 'Need this 15-minute video translated in 1.5 hours.' According to the Lingo Chaps Rapid Response standard, what is the PM's sequence of actions?",
+                options: [
+                    "Wait 30 minutes to check if any translator answers, then reply to the client.",
+                    "Reply to the client immediately (zero delay), analyze length/ETA, download assets locally (never share the client's direct link), and launch the Triple-Path Sourcing strategy (Direct Contact, Upwork Post, Offline Sync).",
+                    "Forward the client's drive link directly to active translators on Skype to save time.",
+                    "Decline the task immediately because a 15-minute video cannot be completed by a single resource in 1.5 hours."
+                ],
+                correctAnswer: 1,
+                explanation: "Immediate response is critical. You must reply immediately, securely intake files (isolated from direct client drive links), and execute parallel outreach to multiple linguists (splitting resource allocation if the volume demands it)."
+            },
+            {
+                category: "Backup & Sync Safeguard",
+                question: "Why does Lingo Chaps require Project Managers to download and save backups of live translator sheets/documents locally at regular intervals?",
+                options: [
+                    "To monitor the translator's computer processing speed.",
+                    "To prove to the Project Director that the PM is keeping their browser open.",
+                    "To safeguard work progress in case a translator drops off, goes offline, or accidentally/intentionally deletes the shared file, protecting our delivery commitment.",
+                    "To upload the backup zip file to the client's backup drive every 30 minutes."
+                ],
+                correctAnswer: 2,
+                explanation: "Maintaining regular local backups prevents loss of progress if a translator drops out or a technical failure/accidental deletion occurs on the cloud doc. Backups are mandatory for all projects regardless of length."
+            },
+            {
+                category: "CAT Termbase (TB)",
+                question: "What is a Termbase (TB) in CAT tools, and how does it help a Project Manager maintain quality control?",
+                options: [
+                    "It is the billing repository that registers segment word counts to calculate payment rates.",
+                    "It is an integrated glossary containing approved terms, brand names, and translation rules that prompts linguists in real-time, preventing naming deviations.",
+                    "It is a backup drive partition on local computers used for storing raw audio/video streams.",
+                    "It is an automated script that checks if timestamps are formatted correctly."
+                ],
+                correctAnswer: 1,
+                explanation: "A Termbase (TB) acts as an active glossary inside the CAT editor. It ensures terminology uniformity by flagging brand names, specific abbreviations, and approved translations in real-time."
+            }
+        ];
+
+        // STATE VARIABLES
+        let currentQuestionIndex = 0;
+        let selectedOption = null;
+        let answered = false;
+        let score = 0;
+
+        // ELEMENT REFERENCES
+        const progressBar = document.getElementById("progress-bar");
+        const categoryLabel = document.getElementById("question-category");
+        const numberLabel = document.getElementById("question-number");
+        const questionText = document.getElementById("question-text");
+        const optionsContainer = document.getElementById("options-container");
+        const feedbackBox = document.getElementById("feedback-box");
+        const feedbackTitle = document.getElementById("feedback-title");
+        const feedbackText = document.getElementById("feedback-text");
+        const nextBtn = document.getElementById("next-btn");
+        const questionScreen = document.getElementById("question-screen");
+        const resultScreen = document.getElementById("result-screen");
+        const finalScore = document.getElementById("final-score");
+        const resultTitle = document.getElementById("result-title");
+        const resultDesc = document.getElementById("result-desc");
+        const statTotal = document.getElementById("stat-total");
+        const statCorrect = document.getElementById("stat-correct");
+        const statWrong = document.getElementById("stat-wrong");
+
+        // THEME LIGHT/DARK TOGGLE
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeBtn.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+
+        // INIT QUIZ
+        function initQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            answered = false;
+            selectedOption = null;
+            questionScreen.style.display = "block";
+            resultScreen.style.display = "none";
+            loadQuestion();
+        }
+
+        // LOAD QUESTION
+        function loadQuestion() {
+            answered = false;
+            selectedOption = null;
+            nextBtn.disabled = true;
+            nextBtn.innerHTML = 'Submit Answer <i class="fas fa-arrow-right"></i>';
+            feedbackBox.style.display = "none";
+
+            const currentQuestion = QUIZ_QUESTIONS[currentQuestionIndex];
+            
+            // Progress Bar Update
+            const pct = ((currentQuestionIndex) / QUIZ_QUESTIONS.length) * 100;
+            progressBar.style.width = `${pct}%`;
+
+            categoryLabel.textContent = currentQuestion.category;
+            numberLabel.textContent = `Question ${currentQuestionIndex + 1} of ${QUIZ_QUESTIONS.length}`;
+            questionText.textContent = currentQuestion.question;
+
+            optionsContainer.innerHTML = "";
+            currentQuestion.options.forEach((opt, idx) => {
+                const optLetter = String.fromCharCode(65 + idx); // A, B, C, D
+                const item = document.createElement("div");
+                item.className = "option-item";
+                item.id = `opt-${idx}`;
+                item.innerHTML = `
+                    <div class="option-letter">${optLetter}</div>
+                    <span style="flex: 1;">${opt}</span>
+                `;
+                item.onclick = () => selectOption(idx);
+                optionsContainer.appendChild(item);
+            });
+        }
+
+        // SELECT OPTION
+        function selectOption(idx) {
+            if (answered) return;
+            selectedOption = idx;
+            nextBtn.disabled = false;
+
+            // Highlight selected
+            const items = optionsContainer.getElementsByClassName("option-item");
+            for (let i = 0; i < items.length; i++) {
+                items[i].classList.remove("selected");
+            }
+            document.getElementById(`opt-${idx}`).classList.add("selected");
+        }
+
+        // SUBMIT OR NEXT
+        nextBtn.onclick = () => {
+            if (!answered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        };
+
+        // CHECK ANSWER
+        function checkAnswer() {
+            answered = true;
+            const currentQuestion = QUIZ_QUESTIONS[currentQuestionIndex];
+            const isCorrect = (selectedOption === currentQuestion.correctAnswer);
+
+            // Highlight Correct / Incorrect options
+            const items = optionsContainer.getElementsByClassName("option-item");
+            for (let i = 0; i < items.length; i++) {
+                items[i].classList.remove("selected");
+                if (i === currentQuestion.correctAnswer) {
+                    items[i].classList.add("correct");
+                } else if (i === selectedOption && !isCorrect) {
+                    items[i].classList.add("wrong");
+                }
+            }
+
+            // Set Feedback Content
+            feedbackBox.style.display = "block";
+            feedbackBox.className = "feedback-box " + (isCorrect ? "correct" : "wrong");
+            feedbackTitle.textContent = isCorrect ? "✓ Correct!" : "✗ Incorrect";
+            feedbackText.textContent = currentQuestion.explanation;
+
+            if (isCorrect) {
+                score++;
+            }
+
+            nextBtn.innerHTML = (currentQuestionIndex === QUIZ_QUESTIONS.length - 1) 
+                ? 'Finish Quiz <i class="fas fa-flag-checkered"></i>' 
+                : 'Next Question <i class="fas fa-chevron-right"></i>';
+        }
+
+        // NEXT QUESTION
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < QUIZ_QUESTIONS.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // SHOW RESULTS
+        function showResults() {
+            progressBar.style.width = `100%`;
+            questionScreen.style.display = "none";
+            resultScreen.style.display = "block";
+
+            const finalPct = Math.round((score / QUIZ_QUESTIONS.length) * 100);
+            finalScore.textContent = `${finalPct}%`;
+
+            statTotal.textContent = QUIZ_QUESTIONS.length;
+            statCorrect.textContent = score;
+            statWrong.textContent = QUIZ_QUESTIONS.length - score;
+
+            if (finalPct >= 80) {
+                resultTitle.textContent = "PM Certification Cleared!";
+                resultTitle.style.color = "var(--secondary)";
+                resultDesc.textContent = `Outstanding job! You scored ${score}/${QUIZ_QUESTIONS.length} (${finalPct}%). You have demonstrated a solid operational understanding of Lingo Chaps CAT tool settings, timestamp parameters, backup requirements, and immediate sourcing protocols.`;
+            } else {
+                resultTitle.textContent = "Review Recommended";
+                resultTitle.style.color = "var(--warning)";
+                resultDesc.textContent = `You scored ${score}/${QUIZ_QUESTIONS.length} (${finalPct}%). We recommend going through the Process Guidelines and Onboarding Manual once more to secure a firm understanding of terminology structures, safeguards, and client response requirements.`;
+            }
+        }
+
+        // RESTART QUIZ
+        function restartQuiz() {
+            initQuiz();
+        }
+
+        // Start
+        initQuiz();
+    </script>
+</body>
+
+</html>
