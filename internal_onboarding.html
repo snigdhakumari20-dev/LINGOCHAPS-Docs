@@ -414,6 +414,12 @@
             top: 64px;
             height: calc(100vh - 64px);
             overflow-y: auto;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        aside::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
         }
 
         .toc-title {
@@ -909,7 +915,8 @@
         }
 
         footer {
-            padding: 4rem;
+            padding: 2rem 0;
+            margin-top: 4rem;
             text-align: center;
             border-top: 1px solid var(--border);
             color: var(--text-light);
@@ -1288,7 +1295,6 @@
                         your role like a project conductor — you’re not translating, you’re making sure everything
                         runs smoothly, on time, and at quality.
                     </p>
-
                     <!-- Workspace Setup Section -->
                     <div class="workspace-setup-container">
                         <div class="mission-badge" style="margin-bottom: 1.5rem;"><i class="fas fa-tools"></i> Step 0: Essential Workspace Environment Setup</div>
@@ -1443,73 +1449,6 @@
                             </div>
                         </div>
 
-                        <div class="briefing-card" style="background: var(--section-bg); padding: 2rem;">
-                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
-                                <div class="icon-box"><i class="fas fa-bolt"></i></div>
-                                <div>
-                                    <span class="goal-badge">Rapid Response</span>
-                                    <h3 style="font-size: 1.4rem; margin-top: 4px;">Immediate Action Protocol</h3>
-                                </div>
-                            </div>
-                            <p
-                                style="font-size: 1.05rem; color: var(--text-dark); font-weight: 500; border-left: 3px solid var(--primary); padding-left: 1.5rem; margin-bottom: 2rem;">
-                                "Distribute the task immediately while simultaneously securing data on Drive D."
-                            </p>
-
-                            <div
-                                style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2rem;">
-                                <div class="animated-card"
-                                    style="margin: 0; padding: 1rem; background: #f0f9ff; border-left: 4px solid #3b82f6; text-align: center;">
-                                    <i class="fas fa-file-contract" style="color: #3b82f6;"></i>
-                                    <b style="display: block; font-size: 0.75rem; margin-top: 5px;">Brief Analysis</b>
-                                </div>
-                                <div class="animated-card"
-                                    style="margin: 0; padding: 1rem; background: #fdf2f8; border-left: 4px solid #ec4899; text-align: center;">
-                                    <i class="fas fa-sticky-note" style="color: #ec4899;"></i>
-                                    <b style="display: block; font-size: 0.75rem; margin-top: 5px;">Deadline Notes</b>
-                                </div>
-                                <div class="animated-card"
-                                    style="margin: 0; padding: 1rem; background: #ecfdf5; border-left: 4px solid #10b981; text-align: center;">
-                                    <i class="fas fa-hdd" style="color: #10b981;"></i>
-                                    <b style="display: block; font-size: 0.75rem; margin-top: 5px;"> Securely save
-                                    </b>
-                                </div>
-                                <div class="animated-card"
-                                    style="margin: 0; padding: 1rem; background: #fffbeb; border-left: 4px solid #f59e0b; text-align: center;">
-                                    <i class="fas fa-broadcast-tower" style="color: #f59e0b;"></i>
-                                    <b style="display: block; font-size: 0.75rem; margin-top: 5px;">Resource
-                                        Outreach</b>
-                                </div>
-                            </div>
-
-                            <div
-                                style="background: #f8fafc; border-radius: 12px; padding: 1.2rem; border: 1px solid #e2e8f0;">
-                                <h4
-                                    style="font-size: 0.75rem; text-transform: uppercase; color: #1e293b; margin-bottom: 1rem; font-weight: 800; text-align: center;">
-                                    Triple-Path Escalation Strategy
-                                </h4>
-                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                                    <div
-                                        style="text-align: center; padding: 10px; background: white; border-radius: 10px; border: 1px solid #cbd5e1;">
-                                        <i class="fas fa-user-check"
-                                            style="color: #0369a1; font-size: 0.8rem; margin-bottom: 5px;"></i>
-                                        <b style="font-size: 0.7rem; display: block;">Direct Contact</b>
-                                    </div>
-                                    <div
-                                        style="text-align: center; padding: 10px; background: white; border-radius: 10px; border: 1px solid #cbd5e1;">
-                                        <i class="fas fa-briefcase"
-                                            style="color: #92400e; font-size: 0.8rem; margin-bottom: 5px;"></i>
-                                        <b style="font-size: 0.7rem; display: block;">Upwork Post</b>
-                                    </div>
-                                    <div
-                                        style="text-align: center; padding: 10px; background: white; border-radius: 10px; border: 1px solid #cbd5e1;">
-                                        <i class="fas fa-phone-alt"
-                                            style="color: #166534; font-size: 0.8rem; margin-bottom: 5px;"></i>
-                                        <b style="font-size: 0.7rem; display: block;">Offline Sync</b>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- SECTION 2 (AS PER SCREENSHOT) -->
@@ -2120,18 +2059,33 @@
                         <div class="eg">"For French translation — hire a native French speaker, not a learner."</div>
                         <div class="pill">Quality</div>
                       </div>
+
+                      <div class="glossary-card" data-c="process">
+                        <div class="abbr">Annotations</div>
+                        <div class="full">Explanatory comments or notes</div>
+                        <div class="meaning">Comments or notes added to a text or video layout to explain linguistic choices, cultural nuances, or query unverified terms for the reviewer or client.</div>
+                        <div class="eg">"Include translator annotations in the margin for proper nouns."</div>
+                        <div class="pill">Process</div>
+                      </div>
+
+                      <div class="glossary-card" data-c="file">
+                        <div class="abbr">Metadata</div>
+                        <div class="full">Hidden document description data</div>
+                        <div class="meaning">Embedded data in a document or subtitle file (such as creation dates, author information, file properties, or structural tags) that describes the file but must remain unaltered during translation.</div>
+                        <div class="eg">"Keep the file metadata intact when exporting the translated SRT."</div>
+                        <div class="pill">File format</div>
+                      </div>
                     </div>
                 </div>
             </section>
+            
+            <footer>
+                <p>&copy; 2026 Lingo Chaps | Internal Operations Portal</p>
+                <p style="margin-top: 10px; font-size: 0.75rem;">Confidential for internal use only. Zero trace policy active.</p>
+            </footer>
             </div> <!-- End screen-onboarding -->
         </main>
     </div> <!-- End layout-container -->
-
-    <footer>
-        <p>&copy; 2026 Lingo Chaps | Internal Operations Portal</p>
-        <p style="margin-top: 10px; font-size: 0.75rem;">Confidential for internal use only. Zero trace policy
-            active.</p>
-    </footer>
 
     <script>
         // Setup Tab Switching Logic (for Google chrome browser profiles vs bookmarks)
@@ -2173,18 +2127,52 @@
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const href = link.getAttribute('href');
-                document.querySelectorAll('.nav-item a').forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-
                 const target = document.querySelector(href);
                 if (target) {
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - 100;
                     window.scrollTo({
-                        top: target.offsetTop - 100,
+                        top: targetPosition,
                         behavior: 'smooth'
                     });
                 }
                 history.pushState(null, null, href);
             });
+        });
+
+        // Scroll Spy to highlight the active menu item based on current scroll position
+        const spySections = document.querySelectorAll('section[id], div#folders');
+        const navLinks = document.querySelectorAll('.nav-item a');
+
+        window.addEventListener('scroll', () => {
+            let currentId = '';
+            const scrollPos = window.scrollY || window.pageYOffset;
+            
+            spySections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top + scrollPos - 120; // 100px header + buffer
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    currentId = section.getAttribute('id');
+                }
+            });
+
+            if (currentId) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentId}`) {
+                        link.classList.add('active');
+                        
+                        // Automatically expand the parent collapsible if it's not already expanded
+                        const parentSubmenu = link.closest('.submenu');
+                        if (parentSubmenu) {
+                            const trigger = parentSubmenu.previousElementSibling;
+                            if (trigger && !trigger.classList.contains('expanded')) {
+                                trigger.classList.add('expanded');
+                            }
+                        }
+                    }
+                });
+            }
         });
 
         // IMAGE ZOOM MODAL FUNCTIONS

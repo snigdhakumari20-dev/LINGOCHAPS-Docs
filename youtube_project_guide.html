@@ -2075,9 +2075,10 @@
 
         window.addEventListener('scroll', () => {
             let current = "";
+            const scrollPos = window.scrollY || window.pageYOffset;
             sections.forEach(s => {
-                const sectionTop = s.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
+                const sectionTop = s.getBoundingClientRect().top + scrollPos;
+                if (scrollPos >= sectionTop - 150) {
                     current = s.getAttribute('id');
                 }
             });
@@ -2095,10 +2096,13 @@
                 e.preventDefault();
                 const targetId = link.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
-                window.scrollTo({
-                    top: targetSection.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+                if (targetSection) {
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
