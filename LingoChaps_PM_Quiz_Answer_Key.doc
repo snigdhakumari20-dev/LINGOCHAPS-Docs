@@ -1,0 +1,189 @@
+﻿<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; color: #1e293b; margin: 40px; line-height: 1.6; }
+  h1 { font-size: 18pt; color: #4f46e5; text-align: center; margin-bottom: 4px; }
+  h2 { font-size: 13pt; color: #4f46e5; margin-top: 24px; margin-bottom: 6px; border-bottom: 1px solid #4f46e5; padding-bottom: 4px; }
+  .subtitle { text-align: center; color: #64748b; font-size: 10pt; margin-bottom: 24px; }
+  .divider { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
+  .question { font-weight: bold; margin-top: 12px; margin-bottom: 6px; }
+  .option { margin-left: 20px; margin-bottom: 3px; }
+  .option.correct { color: #166534; font-weight: bold; }
+  .option.incorrect { color: #64748b; }
+  .answer-label, .explanation-label { font-size: 9pt; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-top: 8px; }
+  .answer { color: #166534; font-weight: bold; margin-bottom: 4px; }
+  .explanation { color: #1e293b; background: #f8fafc; border-left: 3px solid #4f46e5; padding: 6px 10px; margin: 4px 0 12px 0; font-size: 10.5pt; }
+  .footer { text-align: center; font-size: 9pt; color: #94a3b8; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+</style>
+</head>
+<body>
+<h1>Lingo Chaps &mdash; PM Onboarding &amp; CAT Tool Quiz</h1>
+<p class="subtitle">Question &amp; Answer Reference Guide &bull; All 13 Questions</p>
+
+<hr class="divider">
+<h2>Question 1: CAT Tools &amp; TM</h2>
+<p class="question">What is the primary purpose of a Translation Memory (TM) in CAT tools such as Phrase (Memsource) or MemoQ?</p>
+<p class="option incorrect">A. It automatically translates the entire document using AI engines, removing the need for human linguists.</p>
+<p class="option correct">B. &#10003; It stores previously translated source and target segments to suggest matching content for identical or similar sentences in new files.</p>
+<p class="option incorrect">C. It automatically plays the client's video file at a slower speed to help translators catch accurate timestamps.</p>
+<p class="option incorrect">D. It acts as a dictionary database that only contains single-word terminology definitions and exclusions.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">B &mdash; It stores previously translated source and target segments to suggest matching content for identical or similar sentences in new files.</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Translation Memories (TMs) save pairs of translated sentences (segments). When identical or similar sentences appear, the CAT tool suggests the saved translation to ensure stylistic consistency and speed up translation workflows.</p>
+<hr class="divider">
+<h2>Question 2: Phrase vs. MemoQ</h2>
+<p class="question">As a Project Manager, how do you decide whether to use Phrase (Memsource) or MemoQ for a YouTube project?</p>
+<p class="option correct">A. &#10003; Phrase is primarily web/cloud-based and is used for collaborative real-time editing; MemoQ is preferred for offline resources or complex projects requiring extensive desktop CAT resources.</p>
+<p class="option incorrect">B. Phrase is configured only for European languages, while MemoQ is only used for Asian languages.</p>
+<p class="option incorrect">C. MemoQ translates video files automatically using text-to-speech, whereas Phrase only handles plain text documents.</p>
+<p class="option incorrect">D. There is no difference between the two; they are identical systems hosted on the Lingo Chaps network.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">A &mdash; Phrase is primarily web/cloud-based and is used for collaborative real-time editing; MemoQ is preferred for offline resources or complex projects requiring extensive desktop CAT resources.</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Phrase is highly agile and collaborative because it is native to the cloud. MemoQ has strong desktop capabilities that allow handlers and reviewers to process large offline packages, custom TM schemas, and complex layout configurations.</p>
+<hr class="divider">
+<h2>Question 3: Client C1 Templates</h2>
+<p class="question">When delivering completed translations to Client C1, which of the following represents the MANDATORY format for timestamp annotations?</p>
+<p class="option incorrect">A. Just write the translated content without timestamps to make formatting easier.</p>
+<p class="option incorrect">B. [HH:MM:SS] Target Translation only.</p>
+<p class="option correct">C. &#10003; [HH:MM:SS] Target Translation + Origin Text (verbatim speech in source language) + Context Explanations &amp; Notes (including abbreviation meanings).</p>
+<p class="option incorrect">D. [MM:SS] Target Translation translated with machine translation tools.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">C &mdash; [HH:MM:SS] Target Translation + Origin Text (verbatim speech in source language) + Context Explanations &amp; Notes (including abbreviation meanings).</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Client C1 requires full-context records: the timestamp, target translation, the exact verbatim source text (origin text), and contextual annotations or explanatory notes (especially for abbreviations).</p>
+<hr class="divider">
+<h2>Question 4: Live Client Scenario</h2>
+<p class="question">A client email states: 'The video is in English but has Arabic speech from 01:23 to 01:45. Please check.' What is the PM's correct action?</p>
+<p class="option incorrect">A. Ignore the Arabic speech segments because the client requested an English translation guide.</p>
+<p class="option incorrect">B. Translate it using public machine translation tools and paste it into the file without telling the client.</p>
+<p class="option correct">C. &#10003; Notify the client, verify whether translation of the Arabic portion is required, and align a bilingual resource to handle the segment (negotiating an ETA extension if needed).</p>
+<p class="option incorrect">D. Cancel the project immediately to avoid mixing languages in the translation tracking sheet.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">C &mdash; Notify the client, verify whether translation of the Arabic portion is required, and align a bilingual resource to handle the segment (negotiating an ETA extension if needed).</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Under Lingo Chaps protocols, if a foreign language is detected inside the video, you must report it to the client, obtain verification on whether the additional segment needs translation, and allocate resources or adjust the ETA accordingly.</p>
+<hr class="divider">
+<h2>Question 5: Immediate Action Protocol</h2>
+<p class="question">An urgent client WhatsApp comes in: 'Need this 15-minute video translated in 1.5 hours.' According to the Lingo Chaps Rapid Response standard, what is the PM's sequence of actions?</p>
+<p class="option incorrect">A. Wait 30 minutes to check if any translator answers, then reply to the client.</p>
+<p class="option correct">B. &#10003; Reply to the client immediately (zero delay), analyze length/ETA, download assets locally (never share the client's direct link), and launch the Triple-Path Sourcing strategy (Direct Contact, Upwork Post, Offline Sync).</p>
+<p class="option incorrect">C. Forward the client's drive link directly to active translators on Skype to save time.</p>
+<p class="option incorrect">D. Decline the task immediately because a 15-minute video cannot be completed by a single resource in 1.5 hours.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">B &mdash; Reply to the client immediately (zero delay), analyze length/ETA, download assets locally (never share the client's direct link), and launch the Triple-Path Sourcing strategy (Direct Contact, Upwork Post, Offline Sync).</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Immediate response is critical. You must reply immediately, securely intake files (isolated from direct client drive links), and execute parallel outreach to multiple linguists (splitting resource allocation if the volume demands it).</p>
+<hr class="divider">
+<h2>Question 6: Backup &amp; Sync Safeguard</h2>
+<p class="question">Why does Lingo Chaps require Project Managers to download and save backups of live translator sheets/documents locally at regular intervals?</p>
+<p class="option incorrect">A. To monitor the translator's computer processing speed.</p>
+<p class="option incorrect">B. To prove to the Project Director that the PM is keeping their browser open.</p>
+<p class="option correct">C. &#10003; To safeguard work progress in case a translator drops off, goes offline, or accidentally/intentionally deletes the shared file, protecting our delivery commitment.</p>
+<p class="option incorrect">D. To upload the backup zip file to the client's backup drive every 30 minutes.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">C &mdash; To safeguard work progress in case a translator drops off, goes offline, or accidentally/intentionally deletes the shared file, protecting our delivery commitment.</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Maintaining regular local backups prevents loss of progress if a translator drops out or a technical failure/accidental deletion occurs on the cloud doc. Backups are mandatory for all projects regardless of length.</p>
+<hr class="divider">
+<h2>Question 7: CAT Termbase (TB)</h2>
+<p class="question">What is a Termbase (TB) in CAT tools, and how does it help a Project Manager maintain quality control?</p>
+<p class="option incorrect">A. It is the billing repository that registers segment word counts to calculate payment rates.</p>
+<p class="option correct">B. &#10003; It is an integrated glossary containing approved terms, brand names, and translation rules that prompts linguists in real-time, preventing naming deviations.</p>
+<p class="option incorrect">C. It is a backup drive partition on local computers used for storing raw audio/video streams.</p>
+<p class="option incorrect">D. It is an automated script that checks if timestamps are formatted correctly.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">B &mdash; It is an integrated glossary containing approved terms, brand names, and translation rules that prompts linguists in real-time, preventing naming deviations.</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">A Termbase (TB) acts as an active glossary inside the CAT editor. It ensures terminology uniformity by flagging brand names, specific abbreviations, and approved translations in real-time.</p>
+<hr class="divider">
+<h2>Question 8: Security Safeguards</h2>
+<p class="question">What is the mandatory protocol for handling Google Drive links received directly from a client?</p>
+<p class="option incorrect">A. Share the link directly with translators on Skype or WhatsApp to start immediately.</p>
+<p class="option correct">B. &#10003; Download the files/video locally, upload them to the Lingo Chaps internal project Drive, and share only the internal Drive link with translators.</p>
+<p class="option incorrect">C. Open the file in Google Drive, generate a public shareable link with editor access, and email it to the team.</p>
+<p class="option incorrect">D. Translate the files directly in the client's Drive without downloading them to local storage.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">B &mdash; Download the files/video locally, upload them to the Lingo Chaps internal project Drive, and share only the internal Drive link with translators.</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">The Isolated Intake safeguard mandates that we never share the client's direct Drive link with translators. You must download the files/video locally, upload them to the internal project Drive under the designated date folder, and share only the internal link.</p>
+<hr class="divider">
+<h2>Question 9: Security Safeguards</h2>
+<p class="question">According to the Storage Cleanup Protocol, when is a Project Manager permitted to delete locally downloaded videos and backup files?</p>
+<p class="option incorrect">A. Immediately after confirming the email delivery of the files to the client.</p>
+<p class="option correct">B. &#10003; After a 24-hour buffer period post-delivery to ensure no immediate client revisions or download issues occur.</p>
+<p class="option incorrect">C. Only when the local hard drive is completely full and starts affecting operating system performance.</p>
+<p class="option incorrect">D. Exactly 30 days after project completion, as long as the translator has been paid.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">B &mdash; After a 24-hour buffer period post-delivery to ensure no immediate client revisions or download issues occur.</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">To optimize space while ensuring file safety, locally downloaded videos and backup files can be cleared after a 24-hour (1-day) buffer period following successful delivery to the client.</p>
+<hr class="divider">
+<h2>Question 10: Operational Guidelines</h2>
+<p class="question">What is the requirement for Lingo Chaps shift handlers and reviewers regarding the Google Meet Virtual Room?</p>
+<p class="option incorrect">A. It is optional and should only be joined if a translator asks for a live call.</p>
+<p class="option correct">B. &#10003; Join the Google Meet virtual room at the start of your shift and stay connected (muted/video off) at all times for instant collaboration.</p>
+<p class="option incorrect">C. Keep your camera and microphone on at all times to monitor translator desk activity.</p>
+<p class="option incorrect">D. It is only required for the first 15 minutes of a project shift to align tasks.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">B &mdash; Join the Google Meet virtual room at the start of your shift and stay connected (muted/video off) at all times for instant collaboration.</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Shift handlers and reviewers must stay connected to the Google Meet virtual room at all times (muted/video off) during their shifts to enable real-time communication and immediate resolution of project questions.</p>
+<hr class="divider">
+<h2>Question 11: Operational Guidelines</h2>
+<p class="question">When a new task is accepted, what hierarchy must a Project Manager follow to source resources?</p>
+<p class="option incorrect">A. Step 1: Consult a Senior Manager to post a job; Step 2: Search public online translation directories.</p>
+<p class="option correct">B. &#10003; Step 1: Perform an Internal Search (Language List Excel Sheet + WhatsApp/Upwork); Step 2: Escalation (check prior Upwork job posts of same language, or consult a Senior Manager to post a new job).</p>
+<p class="option incorrect">C. Step 1: Message any online translator on Skype; Step 2: Translate the video internally using machine translation.</p>
+<p class="option incorrect">D. Step 1: Post on Upwork; Step 2: Wait for translators to apply via email.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">B &mdash; Step 1: Perform an Internal Search (Language List Excel Sheet + WhatsApp/Upwork); Step 2: Escalation (check prior Upwork job posts of same language, or consult a Senior Manager to post a new job).</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Lingo Chaps' resource sourcing hierarchy dictates that you first perform an Internal Search by consulting the Language List spreadsheet and contacting known resources. If there's no response, escalate by checking prior Upwork job posts or consulting a senior manager to post a new job.</p>
+<hr class="divider">
+<h2>Question 12: Security Safeguards</h2>
+<p class="question">What is the correct protocol when delivering the final translated work to a client?</p>
+<p class="option incorrect">A. Send the link to the internal working template so the client can review live progress.</p>
+<p class="option incorrect">B. Copy the text from the translator's spreadsheet and paste it directly into an email body.</p>
+<p class="option correct">C. &#10003; Migrate the completed work into the client's master template, add the client-shared video link, verify everything, and deliver that file (never sharing internal template links).</p>
+<p class="option incorrect">D. Upload the internal Lingo Chaps template to Google Drive and grant public access to the client.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">C &mdash; Migrate the completed work into the client's master template, add the client-shared video link, verify everything, and deliver that file (never sharing internal template links).</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Under the Secure Delivery protocol, you must never share internal template links. Migrate the completed work into the client's master template using a new separate template, add the client-shared video link, and deliver that file after verification.</p>
+<hr class="divider">
+<h2>Question 13: Environment Setup</h2>
+<p class="question">Why is a dedicated Chrome profile named 'Lingo Chaps' and specific bookmark structures required for all shift handlers?</p>
+<p class="option incorrect">A. To allow the browser to auto-fill the Project Manager's personal credit card details.</p>
+<p class="option correct">B. &#10003; To keep Lingo Chaps translation work, tracking sheets, and internal credentials isolated, preventing credential leaks and enabling fast navigation.</p>
+<p class="option incorrect">C. To improve internet download speeds when retrieving client videos.</p>
+<p class="option incorrect">D. Because Google Chrome does not allow opening spreadsheets in default guest windows.</p>
+<p class="answer-label">Correct Answer:</p>
+<p class="answer">B &mdash; To keep Lingo Chaps translation work, tracking sheets, and internal credentials isolated, preventing credential leaks and enabling fast navigation.</p>
+<p class="explanation-label">Explanation:</p>
+<p class="explanation">Creating a dedicated 'Lingo Chaps' Chrome profile keeps company credentials and client tracking sheets isolated from personal data, preventing credential leakage. Organized bookmark folders ensure zero-delay access to tools.</p>
+<hr class="divider">
+<h2>Quick Summary &mdash; Correct Answers</h2>
+<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-size:10pt;">
+  <tr style="background:#4f46e5; color:white;"><th>#</th><th>Category</th><th>Answer</th></tr>
+  <tr><td>Q1</td><td>CAT Tools &amp; TM</td><td>B</td></tr>
+<tr style="background:#f8fafc;"><td>Q2</td><td>Phrase vs. MemoQ</td><td>A</td></tr>
+<tr><td>Q3</td><td>Client C1 Templates</td><td>C</td></tr>
+<tr style="background:#f8fafc;"><td>Q4</td><td>Live Client Scenario</td><td>C</td></tr>
+<tr><td>Q5</td><td>Immediate Action Protocol</td><td>B</td></tr>
+<tr style="background:#f8fafc;"><td>Q6</td><td>Backup &amp; Sync Safeguard</td><td>C</td></tr>
+<tr><td>Q7</td><td>CAT Termbase (TB)</td><td>B</td></tr>
+<tr style="background:#f8fafc;"><td>Q8</td><td>Security Safeguards</td><td>B</td></tr>
+<tr><td>Q9</td><td>Security Safeguards</td><td>B</td></tr>
+<tr style="background:#f8fafc;"><td>Q10</td><td>Operational Guidelines</td><td>B</td></tr>
+<tr><td>Q11</td><td>Operational Guidelines</td><td>B</td></tr>
+<tr style="background:#f8fafc;"><td>Q12</td><td>Security Safeguards</td><td>C</td></tr>
+<tr><td>Q13</td><td>Environment Setup</td><td>B</td></tr>
+</table>
+<p class="footer">&copy; 2026 Lingo Chaps &mdash; PM Training Portal. For internal use only.</p>
+</body>
+</html>
