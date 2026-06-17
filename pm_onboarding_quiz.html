@@ -551,6 +551,7 @@
                     <li><i class="fas fa-list-ol" style="color: var(--primary);"></i> <b>Questions:</b> 14 scenario-based questions covering CAT tools, client protocols, and PM workflows.</li>
                     <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> <b>Passing Grade:</b> Score 80% or above to clear PM certification.</li>
                     <li><i class="fas fa-envelope" style="color: var(--primary);"></i> <b>Result Emailed:</b> A detailed score report will be sent to your email after completion.</li>
+                    <li><i class="fas fa-database" style="color: var(--primary);"></i> <b>Result Logged:</b> Your score is automatically recorded in the manager database sheet.</li>
                 </ul>
             </div>
 
@@ -812,6 +813,9 @@
         const EMAILJS_SERVICE_ID  = "service_npbh4fn";
         const EMAILJS_TEMPLATE_ID = "template_idx5c9b";
 
+        // Google Sheets Web App URL — deploy google-sheets/assessment-logger.gs and paste URL here
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZaJs9gLLoV_eSC0L-uMG4YMNB82i1kC9rlxMwUsI8pK5kBfE2NxpNBIu7Pm5LV3RW/exec";
+
         // STATE VARIABLES
         let userName = "";
         let userEmail = "";
@@ -1016,6 +1020,49 @@
             }
 
             sendResultEmail(finalPct);
+            sendLogData(finalPct);
+        }
+
+        function sendLogData(finalPct) {
+            if (!GOOGLE_SCRIPT_URL) {
+                console.log("No Google Web App URL configured.");
+                return;
+            }
+
+            const elapsedMs = quizStartTime ? Date.now() - quizStartTime : 0;
+            const minsTaken = Math.floor(elapsedMs / 60000);
+            const secsTaken = Math.floor((elapsedMs % 60000) / 1000);
+            const timeTakenString = `${minsTaken}m ${secsTaken}s`;
+            const resultStatus = finalPct >= 80 ? "PASSED" : "FAILED";
+            const letters = ["A", "B", "C", "D"];
+
+            const detailedFeedback = QUIZ_QUESTIONS.map((q, idx) => {
+                const answer = userAnswers[idx];
+                if (!answer) return `Q${idx + 1} (${q.category}): Not answered`;
+                const selectedText = `${letters[answer.selected]}: ${q.options[answer.selected]}`;
+                const status = answer.correct ? "Correct" : "Incorrect";
+                return `Q${idx + 1} (${q.category}): ${status} — Selected "${selectedText}"`;
+            }).join(" | ");
+
+            const payload = {
+                quizType: "PM Onboarding Quiz",
+                name: userName,
+                email: userEmail,
+                score: finalPct,
+                correctCount: score,
+                totalQuestions: QUIZ_QUESTIONS.length,
+                resultStatus: resultStatus,
+                timeTaken: timeTakenString,
+                feedback: detailedFeedback
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify(payload)
+            })
+                .then(() => console.log("PM quiz result sent to Google Sheets."))
+                .catch(error => console.error("Error logging score:", error));
         }
 
         function sendResultEmail(finalPct) {
