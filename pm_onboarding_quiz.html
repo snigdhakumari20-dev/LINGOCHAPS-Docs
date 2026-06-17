@@ -425,6 +425,33 @@
             }
         }
 
+        .global-timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .global-timer.warning {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border-color: rgba(239, 68, 68, 0.2);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         footer.site-footer {
             padding: 2.5rem;
             text-align: center;
@@ -530,6 +557,10 @@
             <i class="fab fa-youtube"></i>
             <span>Lingo Chaps PM Portal</span>
         </a>
+        <div id="global-timer-container" class="global-timer" style="display: none;">
+            <i class="fas fa-clock"></i>
+            <span id="globalTimerDisplay">10:00</span>
+        </div>
         <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
     </header>
 
@@ -549,6 +580,7 @@
                 <h3><i class="fas fa-info-circle"></i> Assessment Guidelines</h3>
                 <ul>
                     <li><i class="fas fa-list-ol" style="color: var(--primary);"></i> <b>Questions:</b> 14 scenario-based questions covering CAT tools, client protocols, and PM workflows.</li>
+                    <li><i class="fas fa-clock" style="color: var(--primary);"></i> <b>Time limit:</b> You have <b>10 minutes</b> to complete the entire quiz.</li>
                     <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> <b>Passing Grade:</b> Score 80% or above to clear PM certification.</li>
                     <li><i class="fas fa-envelope" style="color: var(--primary);"></i> <b>Result Emailed:</b> A detailed score report will be sent to your email after completion.</li>
                     <li><i class="fas fa-database" style="color: var(--primary);"></i> <b>Result Logged:</b> Your score is automatically recorded in the manager database sheet.</li>
@@ -815,10 +847,17 @@
         // Google Sheets Web App URL — deploy google-sheets/pm-quiz-logger.gs on your PM-only sheet
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqKMT1ihStGUS_JrT4MCx0Z41G7tnZGdpsgCWfLHDul-Uwnd-K-r4s3btSwiuxx97Vsw/exec";
 
+        const STORAGE_KEY = "lc-pm-quiz-state";
+        const QUIZ_DURATION_SEC = 600;
+
         // STATE VARIABLES
         let userName = "";
         let userEmail = "";
         let quizStartTime = null;
+        let timerEndAt = null;
+        let globalTimerInterval = null;
+        let globalSecondsLeft = QUIZ_DURATION_SEC;
+        let resultsSubmitted = false;
         let userAnswers = [];
         let currentQuestionIndex = 0;
         let selectedOption = null;
@@ -857,7 +896,118 @@
             if (EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
                 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
             }
+            tryRestoreSession();
         });
+
+        function saveProgress(completed = false) {
+            if (!timerEndAt) return;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                userName,
+                userEmail,
+                quizStartTime,
+                timerEndAt,
+                currentQuestionIndex,
+                score,
+                userAnswers,
+                selectedOption,
+                answered,
+                quizActive: !completed,
+                completed
+            }));
+        }
+
+        function clearProgress() {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+
+        function tryRestoreSession() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+
+            let state;
+            try {
+                state = JSON.parse(raw);
+            } catch {
+                clearProgress();
+                return;
+            }
+
+            if (!state.quizActive || state.completed) return;
+
+            const remaining = Math.floor((state.timerEndAt - Date.now()) / 1000);
+            if (remaining <= 0) {
+                userName = state.userName || "";
+                userEmail = state.userEmail || "";
+                quizStartTime = state.quizStartTime || Date.now();
+                timerEndAt = state.timerEndAt;
+                currentQuestionIndex = state.currentQuestionIndex || 0;
+                score = state.score || 0;
+                userAnswers = state.userAnswers || [];
+                selectedOption = state.selectedOption;
+                answered = state.answered || false;
+                globalSecondsLeft = 0;
+                document.getElementById('welcome-screen').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                autoFinishQuiz();
+                return;
+            }
+
+            userName = state.userName;
+            userEmail = state.userEmail;
+            quizStartTime = state.quizStartTime;
+            timerEndAt = state.timerEndAt;
+            currentQuestionIndex = state.currentQuestionIndex;
+            score = state.score;
+            userAnswers = state.userAnswers || [];
+            selectedOption = state.selectedOption;
+            answered = state.answered || false;
+            globalSecondsLeft = remaining;
+
+            document.getElementById('userName').value = userName;
+            document.getElementById('userEmail').value = userEmail;
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('global-timer-container').style.display = 'flex';
+            questionScreen.style.display = "block";
+            resultScreen.style.display = "none";
+            startGlobalTimer();
+            loadQuestion();
+            restoreQuestionUI();
+        }
+
+        function startGlobalTimer() {
+            if (globalTimerInterval) clearInterval(globalTimerInterval);
+
+            const timerContainer = document.getElementById('global-timer-container');
+            const timerDisplay = document.getElementById('globalTimerDisplay');
+
+            function tick() {
+                globalSecondsLeft = Math.max(0, Math.floor((timerEndAt - Date.now()) / 1000));
+                const mins = Math.floor(globalSecondsLeft / 60);
+                const secs = globalSecondsLeft % 60;
+                timerDisplay.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+                if (globalSecondsLeft <= 60) {
+                    timerContainer.classList.add('warning');
+                } else {
+                    timerContainer.classList.remove('warning');
+                }
+
+                if (globalSecondsLeft <= 0) {
+                    clearInterval(globalTimerInterval);
+                    autoFinishQuiz();
+                }
+            }
+
+            tick();
+            globalTimerInterval = setInterval(tick, 1000);
+        }
+
+        function autoFinishQuiz() {
+            if (resultsSubmitted) return;
+            alert("Quiz time has expired! Your score will be submitted automatically.");
+            showResults();
+        }
 
         function startQuiz() {
             const nameInput = document.getElementById('userName').value.trim();
@@ -872,24 +1022,56 @@
                 return;
             }
 
+            clearProgress();
             userName = nameInput;
             userEmail = emailInput;
             quizStartTime = Date.now();
-            document.getElementById('welcome-screen').style.display = 'none';
-            document.getElementById('quiz-container').style.display = 'block';
-            initQuiz();
-        }
-
-        // INIT QUIZ
-        function initQuiz() {
+            timerEndAt = quizStartTime + QUIZ_DURATION_SEC * 1000;
             currentQuestionIndex = 0;
             score = 0;
+            userAnswers = [];
             answered = false;
             selectedOption = null;
-            userAnswers = [];
+            resultsSubmitted = false;
+
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('global-timer-container').style.display = 'flex';
             questionScreen.style.display = "block";
             resultScreen.style.display = "none";
+            startGlobalTimer();
+            saveProgress();
             loadQuestion();
+        }
+
+        function restoreQuestionUI() {
+            if (answered) {
+                const currentQuestion = QUIZ_QUESTIONS[currentQuestionIndex];
+                const isCorrect = selectedOption === currentQuestion.correctAnswer;
+                const items = optionsContainer.getElementsByClassName("option-item");
+                for (let i = 0; i < items.length; i++) {
+                    items[i].style.pointerEvents = 'none';
+                    if (i === currentQuestion.correctAnswer) {
+                        items[i].classList.add("correct");
+                    } else if (i === selectedOption && !isCorrect) {
+                        items[i].classList.add("wrong");
+                    }
+                }
+                feedbackBox.style.display = "block";
+                feedbackBox.className = "feedback-box " + (isCorrect ? "correct" : "wrong");
+                feedbackTitle.textContent = isCorrect ? "✓ Correct!" : "✗ Incorrect";
+                feedbackText.textContent = currentQuestion.explanation;
+                nextBtn.disabled = false;
+                nextBtn.innerHTML = (currentQuestionIndex === QUIZ_QUESTIONS.length - 1)
+                    ? 'Finish Quiz <i class="fas fa-flag-checkered"></i>'
+                    : 'Next Question <i class="fas fa-chevron-right"></i>';
+            } else if (selectedOption !== null) {
+                const opt = document.getElementById(`opt-${selectedOption}`);
+                if (opt) {
+                    opt.classList.add("selected");
+                    nextBtn.disabled = false;
+                }
+            }
         }
 
         // LOAD QUESTION
@@ -937,6 +1119,7 @@
                 items[i].classList.remove("selected");
             }
             document.getElementById(`opt-${idx}`).classList.add("selected");
+            saveProgress();
         }
 
         // SUBMIT OR NEXT
@@ -983,12 +1166,17 @@
             nextBtn.innerHTML = (currentQuestionIndex === QUIZ_QUESTIONS.length - 1)
                 ? 'Finish Quiz <i class="fas fa-flag-checkered"></i>' 
                 : 'Next Question <i class="fas fa-chevron-right"></i>';
+
+            saveProgress();
         }
 
         // NEXT QUESTION
         function nextQuestion() {
             currentQuestionIndex++;
+            answered = false;
+            selectedOption = null;
             if (currentQuestionIndex < QUIZ_QUESTIONS.length) {
+                saveProgress();
                 loadQuestion();
             } else {
                 showResults();
@@ -997,6 +1185,14 @@
 
         // SHOW RESULTS
         function showResults() {
+            if (resultsSubmitted) return;
+            resultsSubmitted = true;
+
+            if (globalTimerInterval) {
+                clearInterval(globalTimerInterval);
+            }
+            document.getElementById('global-timer-container').style.display = 'none';
+            clearProgress();
             progressBar.style.width = `100%`;
             questionScreen.style.display = "none";
             resultScreen.style.display = "block";
@@ -1022,16 +1218,20 @@
             sendLogData(finalPct);
         }
 
+        function getElapsedTimeString() {
+            const elapsedSec = QUIZ_DURATION_SEC - globalSecondsLeft;
+            const minsTaken = Math.floor(elapsedSec / 60);
+            const secsTaken = elapsedSec % 60;
+            return `${minsTaken}m ${secsTaken}s`;
+        }
+
         function sendLogData(finalPct) {
             if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === "YOUR_PM_QUIZ_SCRIPT_URL_HERE") {
                 console.warn("PM Google Sheets logging not configured.");
                 return;
             }
 
-            const elapsedMs = quizStartTime ? Date.now() - quizStartTime : 0;
-            const minsTaken = Math.floor(elapsedMs / 60000);
-            const secsTaken = Math.floor((elapsedMs % 60000) / 1000);
-            const timeTakenString = `${minsTaken}m ${secsTaken}s`;
+            const timeTakenString = getElapsedTimeString();
             const resultStatus = finalPct >= 80 ? "PASSED" : "FAILED";
             const letters = ["A", "B", "C", "D"];
 
@@ -1069,10 +1269,7 @@
                 return;
             }
 
-            const elapsedMs = quizStartTime ? Date.now() - quizStartTime : 0;
-            const minsTaken = Math.floor(elapsedMs / 60000);
-            const secsTaken = Math.floor((elapsedMs % 60000) / 1000);
-            const timeTakenStr = `${minsTaken}m ${secsTaken}s`;
+            const timeTakenStr = getElapsedTimeString();
             const resultStatus = finalPct >= 80 ? "PASSED ✅" : "FAILED ❌";
 
             const phaseBreakdown = QUIZ_QUESTIONS.map((q, idx) => {
@@ -1113,6 +1310,7 @@
         }
 
         function restartQuiz() {
+            clearProgress();
             location.reload();
         }
     </script>
