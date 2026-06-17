@@ -813,8 +813,8 @@
         const EMAILJS_SERVICE_ID  = "service_npbh4fn";
         const EMAILJS_TEMPLATE_ID = "template_idx5c9b";
 
-        // Google Sheets Web App URL — deploy google-sheets/assessment-logger.gs and paste URL here
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZaJs9gLLoV_eSC0L-uMG4YMNB82i1kC9rlxMwUsI8pK5kBfE2NxpNBIu7Pm5LV3RW/exec";
+        // Google Sheets Web App URL — deploy google-sheets/pm-quiz-logger.gs on your PM-only sheet
+        const GOOGLE_SCRIPT_URL = "YOUR_PM_QUIZ_SCRIPT_URL_HERE";
 
         // STATE VARIABLES
         let userName = "";
@@ -1024,8 +1024,8 @@
         }
 
         function sendLogData(finalPct) {
-            if (!GOOGLE_SCRIPT_URL) {
-                console.log("No Google Web App URL configured.");
+            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === "YOUR_PM_QUIZ_SCRIPT_URL_HERE") {
+                console.warn("PM Google Sheets logging not configured.");
                 return;
             }
 
@@ -1045,7 +1045,6 @@
             }).join(" | ");
 
             const payload = {
-                quizType: "PM Onboarding Quiz",
                 name: userName,
                 email: userEmail,
                 score: finalPct,
