@@ -265,14 +265,14 @@
         }
 
         .lead {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             line-height: 1.65;
             color: var(--text-dark);
             margin-bottom: 2rem;
         }
 
         .lead b {
-            color: var(--primary-light);
+            color: var(--primary);
         }
 
         /* Briefing Cards & Grids */
@@ -626,7 +626,7 @@
             <section id="overview">
                 <h1>Trim → Transcribe Workflow Guide</h1>
                 <p class="lead">
-                    This document details the standard operational procedures for preparing and converting multimedia assets for Lingo Chaps translation pipelines. Pre-trimming raw assets ensures fast uploads, lowers API transcription expenses, and keeps work targeted.
+                    Any source file (like MP4, MP3, AMR, or other video and audio formats) starts in the <b>Video Trimmer</b> desktop tool. Cut it down to only the parts you need before uploading it to the transcription tool. Smaller files upload faster, transcribe quicker, and are much easier to work with!
                 </p>
                 <div class="briefing-grid">
                     <div class="briefing-card">
@@ -642,7 +642,7 @@
             <section id="stage-01">
                 <h2>Stage 01: Video Trimmer (Local Preparation)</h2>
                 <p class="lead">
-                    Before uploading any raw media to our cloud pipelines, use the desktop <b>Video Trimmer</b> to extract only the target segments. Smaller files render faster and optimize our computational workloads.
+                    Start by trimming your video or audio file on your computer using the Video Trimmer tool.
                 </p>
 
                 <div class="steps">
@@ -651,7 +651,7 @@
                         <div class="step-badge">1</div>
                         <div class="step-content">
                             <h3>Open the source file</h3>
-                            <p>Launch the Video Trimmer. Click <b>Open Video</b> and select the source file from your local disk. Toggle the <b>Video / Audio only</b> switch at the top to configure the player according to your input type.</p>
+                            <p>Click the <b>Open Video</b> button and choose your file from your computer. We support both video and audio files. Toggle the <b>Video / Audio only</b> switch at the top to match your file type.</p>
                             <span class="hint brand"><i class="fas fa-info-circle"></i> Formats: MP4, MKV, MOV, MP3, M4A, AMR, WAV, etc.</span>
                         </div>
                     </div>
@@ -661,7 +661,7 @@
                         <div class="step-badge">2</div>
                         <div class="step-content">
                             <h3>Mark the range you need</h3>
-                            <p>Scrub the seek bar to locate your in and out timestamps. Click <b>Set Start</b> and <b>Set End</b> to select the bounds. When satisfied, click <b>Add to List</b> to append the selection to your export queue. You can add multiple segments from a single source file.</p>
+                            <p>Drag the slider to find where your clip starts and ends. Click <b>Set Start</b> and <b>Set End</b>. Then click <b>Add to List</b> to put it in the queue. You can repeat this to cut multiple clips from the same file.</p>
                         </div>
                     </div>
 
@@ -669,8 +669,8 @@
                     <div class="step-card">
                         <div class="step-badge">3</div>
                         <div class="step-content">
-                            <h3>Or auto-split instead of marking manually</h3>
-                            <p>For uniform clip splits, use the <b>Auto-split</b> module. Enter the desired division size in <b>Into ___ parts</b>, or define a specific duration inside <b>Every ___ h ___ m ___ s</b>, and hit <b>Generate</b> to populate your segment queue instantly.</p>
+                            <h3>Or use Auto-split instead</h3>
+                            <p>If you want to split the file into equal parts, use the <b>Auto-split</b> section. Type a number in <b>Into ___ parts</b> and click <b>Generate</b>. Or set a time length under <b>Every ___ h ___ m ___ s</b> and click <b>Generate</b>. This is the fastest way to break a long recording into smaller pieces.</p>
                             
                             <button class="panel-toggle"><i class="fas fa-chevron-right chev"></i> Practical Example: Equal Splits</button>
                             <div class="panel">
@@ -695,7 +695,7 @@
                         <div class="step-badge">4</div>
                         <div class="step-content">
                             <h3>Pick a save folder</h3>
-                            <p>Set your target destination directory by clicking <b>Choose...</b> beside the <b>Save folder</b> label. By default, exports are directed to a sub-folder named <code>trimmed video</code> inside your system's Downloads.</p>
+                            <p>Click <b>Choose...</b> next to <b>Save folder</b> to pick where you want to save the trimmed files. It defaults to a folder named <code>trimmed video</code> in your Downloads folder.</p>
                         </div>
                     </div>
 
@@ -704,8 +704,8 @@
                         <div class="step-badge">5</div>
                         <div class="step-content">
                             <h3>Convert to MP3 if you only need audio</h3>
-                            <p>If the transcription pipeline does not require video frames (OCR), check the <b>Convert to MP3</b> option. This strips visual streams and reduces file sizes to facilitate faster transfers.</p>
-                            <span class="hint good"><i class="fas fa-check-circle"></i> Recommended for call logs, voice notes, and AMR audio recordings</span>
+                            <p>Tick the <b>Convert to MP3</b> box before exporting if you don't need the video. This keeps the file size small for the next stage.</p>
+                            <span class="hint good"><i class="fas fa-check-circle"></i> Recommended for call recordings like AMR/MP3 files</span>
                         </div>
                     </div>
 
@@ -714,7 +714,7 @@
                         <div class="step-badge">6</div>
                         <div class="step-content">
                             <h3>Export</h3>
-                            <p>Confirm the contents of the segment queue and click <b>Trim All</b>. Once rendering finishes, click <b>Download</b> or <b>Open Folder</b> to collect the trimmed media files. These will serve as the inputs for Stage 02.</p>
+                            <p>Click <b>Trim All</b> to render all the clips in your list. Then click <b>Download</b> or <b>Open Folder</b> to get your finished files. These are the files you will upload in Stage 02.</p>
                         </div>
                     </div>
                 </div>
@@ -724,7 +724,7 @@
             <section id="stage-02">
                 <h2>Stage 02: Upload &amp; Transcribe</h2>
                 <p class="lead">
-                    With your trimmed files prepared locally, proceed to the <b>Lingochaps Transcription Portal</b>. Always ensure you are signed in with the correct credentials.
+                    Once your trimmed file is ready on your computer, open the <b>Lingochaps tool → Transcription</b> workspace. This is an internal tool, so always sign in with your official <b>@lingochaps</b> email.
                 </p>
 
                 <div class="steps">
@@ -733,7 +733,7 @@
                         <div class="step-badge">1</div>
                         <div class="step-content">
                             <h3>Sign in &amp; open New transcription</h3>
-                            <p>Access the portal using your official <b>@lingochaps</b> organizational email. Open the main navigation menu and click the <b>Transcription</b> module to load a new transcription job form.</p>
+                            <p>Log in with your official Lingochaps ID. Click the <b>Transcription</b> card on the left menu (it is the main active module) to open a new job.</p>
                         </div>
                     </div>
 
@@ -742,7 +742,7 @@
                         <div class="step-badge">2</div>
                         <div class="step-content">
                             <h3>Step 1 — upload the trimmed file</h3>
-                            <p>Drag your trimmed media file directly into the designated upload boundary, or click within the container to open the file selection explorer. Both raw video and audio formats exported from the trimmer are accepted.</p>
+                            <p>Click the upload box or drag your file in. The system accepts video (MP4, MKV, MOV...) and audio (MP3, M4A, WAV, AMR...) — use the exact files you exported from the trimmer.</p>
                         </div>
                     </div>
 
@@ -751,7 +751,7 @@
                         <div class="step-badge">3</div>
                         <div class="step-content">
                             <h3>Step 2 — set languages &amp; instructions</h3>
-                            <p>Keep the primary target language on <b>auto-detect</b> unless the dialect is known. If specifying manually, comma-separate language tokens. You may also add specialized terminology, spelling preferences, or formatting guides inside the <b>Custom instructions</b> box.</p>
+                            <p>Leave the <b>Languages</b> field on <code>auto-detect</code> unless you know the language being spoken (you can type hints separated by commas if you do). Add any notes for the AI model in <b>Custom instructions</b> (optional).</p>
                         </div>
                     </div>
 
@@ -760,7 +760,7 @@
                         <div class="step-badge">4</div>
                         <div class="step-content">
                             <h3>Choose what output you need</h3>
-                            <p>Select the pipeline mode appropriate for the project deliverables:</p>
+                            <p>Select the option that matches what your project needs:</p>
                             
                             <button class="panel-toggle"><i class="fas fa-chevron-right chev"></i> Pipeline Modes Explained</button>
                             <div class="panel">
@@ -786,7 +786,7 @@
                         <div class="step-badge">5</div>
                         <div class="step-content">
                             <h3>Step 3 — start transcription</h3>
-                            <p>Review your inputs and click <b>Start transcription</b>. The button will unlock once the media upload completes. If the trigger remains locked, verify the upload container status.</p>
+                            <p>Click <b>Start transcription</b>. This button only becomes active after you select a file. If you cannot click it, check Step 1 again.</p>
                         </div>
                     </div>
 
@@ -795,7 +795,7 @@
                         <div class="step-badge">6</div>
                         <div class="step-content">
                             <h3>Track progress in Recent jobs</h3>
-                            <p>Your job will appear at the top of the <b>Recent jobs</b> dashboard. Monitor status updates, percentages, and execution states from this panel.</p>
+                            <p>All uploaded jobs appear in the <b>Recent jobs</b> list below (newest first). You can see the status badge and progress percentage.</p>
                             
                             <button class="panel-toggle"><i class="fas fa-chevron-right chev"></i> Job Status Reference</button>
                             <div class="panel">
@@ -817,7 +817,7 @@
             <section id="stage-03">
                 <h2>Stage 03: Review &amp; Download Outputs</h2>
                 <p class="lead">
-                    Upon pipeline completion, verify transcription results and download the finalized reports directly from the job dashboard.
+                    Open your finished job to check the translated text or download the finalized Word report.
                 </p>
 
                 <div class="steps">
@@ -826,7 +826,7 @@
                         <div class="step-badge">1</div>
                         <div class="step-content">
                             <h3>Open the job details</h3>
-                            <p>Click on any job row displaying a <b>DONE</b> status. The page displays the processing timeline stages: <code>Queued → Transcribing → Extracting on-screen text → Generating report → Publishing outputs</code>.</p>
+                            <p>Click on a <b>DONE</b> row from your Recent jobs. The page shows the current progress: <code>Queued → Transcribing → Extracting on-screen text → Generating report → Publishing outputs</code>.</p>
                         </div>
                     </div>
 
@@ -835,7 +835,7 @@
                         <div class="step-badge">2</div>
                         <div class="step-content">
                             <h3>Download the Word report</h3>
-                            <p>Click the <b>Download Word report</b> action button. The system compiles the dialogue tables, translated text, OCR overlays, and video snapshots directly into a styled Word document (<code>.docx</code>) and initiates the file download.</p>
+                            <p>Once the job shows <b>COMPLETE / 100%</b>, click the <b>Download Word report</b> button. The report will save directly to your computer. It contains the dialogue table, translation columns, and notes (plus screenshots if you selected the 'Full' option).</p>
                         </div>
                     </div>
 
@@ -844,7 +844,7 @@
                         <div class="step-badge">3</div>
                         <div class="step-content">
                             <h3>Or read it on-screen, minute by minute</h3>
-                            <p>For quick checks, view the results inline using the minute-by-minute segment accordion. Expand or collapse blocks (e.g., <code>Minute 1</code>, <code>Minute 2</code>) to display the transcription blocks within those boundaries.</p>
+                            <p>You can read the transcription on the page using the minute-by-minute accordion. Click on any minute (like `Minute 1`, `Minute 2`) to expand the segments inside.</p>
                         </div>
                     </div>
 
@@ -853,7 +853,7 @@
                         <div class="step-badge">4</div>
                         <div class="step-content">
                             <h3>Read a segment</h3>
-                            <p>Each transcription segment displays structured columns: speaker ID, timestamp, original transcript text, and translation map. Proper names and specialized references contain informative descriptions underneath.</p>
+                            <p>Each segment shows the speaker, language, and timestamp. The transcription is on the left and the translation is on the right. Code-switched words are highlighted, and proper nouns have a short explanation footnote underneath.</p>
                             
                             <button class="panel-toggle"><i class="fas fa-chevron-right chev"></i> Sample Segment Layout</button>
                             <div class="panel">
