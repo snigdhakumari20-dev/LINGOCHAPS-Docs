@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trim → Transcribe Workflow | Lingo Chaps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --bg: #ffffff;
+            --sidebar-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --section-bg: #f8fafc;
+            --rule-bg: #fef2f2;
+            --rule-text: #991b1b;
+            --example-bg: #1e293b;
+            --violet-deep: #4b2fbf;
+            --violet-soft: #ece6fc;
+            --mint-soft: #e3f6ec;
+            --amber-soft: #fbf0dd;
+            --amber: #c98a1c;
+            --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        body.dark-mode {
+            --bg: #0f172a;
+            --text-dark: #f1f5f9;
+            --text-light: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --card-bg: #1e293b;
+            --sidebar-bg: #111827;
+            --section-bg: #1e293b;
+            --rule-bg: rgba(239, 68, 68, 0.1);
+            --rule-text: #fca5a5;
+            --secondary-bg: #1e293b;
+            --violet-deep: #a98bff;
+            --violet-soft: rgba(111, 76, 240, 0.15);
+            --mint-soft: rgba(31, 157, 110, 0.15);
+            --amber-soft: rgba(201, 138, 28, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg);
+            line-height: 1.6;
+            transition: 0.3s;
+        }
+
+        header {
+            height: 64px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 1000;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: 0.2s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .layout-container {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+
+        aside {
+            width: 300px;
+            border-right: 1px solid var(--border);
+            background: var(--sidebar-bg);
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 64px;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+        }
+
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+        }
+
+        .nav-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .nav-category-header:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .nav-category-header .toc-title {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-category-header i {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            transition: transform 0.3s;
+        }
+
+        .nav-category.collapsed .nav-list {
+            display: none;
+        }
+
+        .nav-category.collapsed .nav-category-header i {
+            transform: rotate(-90deg);
+        }
+
+        .nav-list {
+            list-style: none;
+            padding-left: 0.5rem;
+            margin-top: 5px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+            transition: 0.2s;
+            font-weight: 600;
+        }
+
+        .nav-item a:hover {
+            color: var(--primary);
+            background: rgba(79, 70, 229, 0.05);
+        }
+
+        .nav-item a.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        main {
+            flex: 1;
+            padding: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            color: var(--text-dark);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-dark);
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 1.35rem;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            line-height: 1.65;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+
+        .lead b {
+            color: var(--primary-light);
+        }
+
+        /* Briefing Cards & Grids */
+        .briefing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .briefing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+        }
+
+        .briefing-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Steps System */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.25rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            transition: 0.2s;
+        }
+
+        .step-card:hover {
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+
+        .step-badge {
+            background: var(--primary);
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 8px rgba(79, 70, 229, 0.2);
+        }
+
+        .step-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hint Badges */
+        .hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            background: var(--amber-soft);
+            color: var(--amber);
+            border-radius: 8px;
+            padding: 5px 10px;
+            margin-top: 8px;
+            align-self: flex-start;
+            font-weight: 600;
+        }
+
+        .hint.good {
+            background: var(--mint-soft);
+            color: var(--secondary);
+        }
+
+        .hint.brand {
+            background: var(--violet-soft);
+            color: var(--primary);
+        }
+
+        /* Action/Protocol Blocks */
+        .action-block {
+            padding: 1.25rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            background: var(--sidebar-bg);
+            color: var(--text-dark);
+        }
+
+        .action-block p:first-child {
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .action-primary {
+            background: rgba(79, 70, 229, 0.05);
+            border-color: var(--primary);
+        }
+
+        .action-success {
+            background: rgba(16, 185, 129, 0.05);
+            border-color: var(--secondary);
+        }
+
+        /* Collapsible Panels */
+        .panel-toggle {
+            margin-top: 12px;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            align-self: flex-start;
+            transition: 0.2s;
+        }
+
+        .panel-toggle:hover {
+            color: var(--primary-light);
+        }
+
+        .panel-toggle .chev {
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .panel-toggle.open .chev {
+            transform: rotate(90deg);
+        }
+
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+        }
+
+        .panel.open {
+            max-height: 800px;
+        }
+
+        .panel-inner {
+            margin-top: 10px;
+            background: var(--sidebar-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .panel-inner ul {
+            margin: 0;
+            padding-left: 18px;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+
+        .panel-inner li {
+            margin-bottom: 6px;
+        }
+
+        .panel-inner li:last-child {
+            margin-bottom: 0;
+        }
+
+        code {
+            background: var(--violet-soft);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        /* Interactive Checklist Section */
+        .checklist-card {
+            background: var(--example-bg);
+            color: #f1f5f9;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-top: 3rem;
+        }
+
+        .checklist-card h3 {
+            color: #ffffff;
+            margin-bottom: 6px;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checklist-card p.sub {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .check-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .check-row:first-of-type {
+            border-top: none;
+        }
+
+        .check-row input {
+            margin-top: 4px;
+            accent-color: var(--primary-light);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .check-row label {
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        .check-row label.done {
+            text-decoration: line-through;
+            color: #64748b;
+        }
+
+        .progress-track {
+            margin-top: 1.5rem;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary-light), #a98bff);
+            transition: width 0.3s ease;
+        }
+
+        .progress-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .layout-container {
+                flex-direction: column;
+            }
+
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 1.5rem;
+            }
+
+            main {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo">
+            <i class="fas fa-scissors"></i>
+            <span>Aura Workflow Guide</span>
+        </a>
+        <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <div class="layout-container">
+        <aside>
+            <div class="toc-title">Table of Contents</div>
+            <div class="nav-category">
+                <div class="nav-category-header">
+                    <span class="toc-title">Get Started</span>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#overview" class="active"><i class="fas fa-info-circle"></i> Overview</a></li>
+                </ul>
+            </div>
+            <div class="nav-category">
+                <div class="nav-category-header">
+                    <span class="toc-title">Workflow Stages</span>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#stage-01"><i class="fas fa-crop-alt"></i> Stage 01: Video Trimmer</a></li>
+                    <li class="nav-item"><a href="#stage-02"><i class="fas fa-cloud-upload-alt"></i> Stage 02: Transcribe</a></li>
+                    <li class="nav-item"><a href="#stage-03"><i class="fas fa-file-download"></i> Stage 03: Review Output</a></li>
+                </ul>
+            </div>
+            <div class="nav-category">
+                <div class="nav-category-header">
+                    <span class="toc-title">Verification</span>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#checklist-section"><i class="fas fa-tasks"></i> Run-through Checklist</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main>
+            <!-- OVERVIEW -->
+            <section id="overview">
+                <h1>Trim → Transcribe Workflow Guide</h1>
+                <p class="lead">
+                    This document details the standard operational procedures for preparing and converting multimedia assets for Lingo Chaps translation pipelines. Pre-trimming raw assets ensures fast uploads, lowers API transcription expenses, and keeps work targeted.
+                </p>
+                <div class="briefing-grid">
+                    <div class="briefing-card">
+                        <h3>Core Mechanics</h3>
+                        <p style="margin-top: 10px; margin-bottom: 0;">
+                            The process starts with local asset trimming via the <b>Video Trimmer</b> desktop utility, followed by automated ingestion and processing in the <b>Lingochaps Transcription Engine</b>, and finishes with quality checking generated dialogues and Word reports.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STAGE 01 -->
+            <section id="stage-01">
+                <h2>Stage 01: Video Trimmer (Local Preparation)</h2>
+                <p class="lead">
+                    Before uploading any raw media to our cloud pipelines, use the desktop <b>Video Trimmer</b> to extract only the target segments. Smaller files render faster and optimize our computational workloads.
+                </p>
+
+                <div class="steps">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-badge">1</div>
+                        <div class="step-content">
+                            <h3>Open the source file</h3>
+                            <p>Launch the Video Trimmer. Click <b>Open Video</b> and select the source file from your local disk. Toggle the <b>Video / Audio only</b> switch at the top to configure the player according to your input type.</p>
+                            <span class="hint brand"><i class="fas fa-info-circle"></i> Formats: MP4, MKV, MOV, MP3, M4A, AMR, WAV, etc.</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-badge">2</div>
+                        <div class="step-content">
+                            <h3>Mark the range you need</h3>
+                            <p>Scrub the seek bar to locate your in and out timestamps. Click <b>Set Start</b> and <b>Set End</b> to select the bounds. When satisfied, click <b>Add to List</b> to append the selection to your export queue. You can add multiple segments from a single source file.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-badge">3</div>
+                        <div class="step-content">
+                            <h3>Or auto-split instead of marking manually</h3>
+                            <p>For uniform clip splits, use the <b>Auto-split</b> module. Enter the desired division size in <b>Into ___ parts</b>, or define a specific duration inside <b>Every ___ h ___ m ___ s</b>, and hit <b>Generate</b> to populate your segment queue instantly.</p>
+                            
+                            <button class="panel-toggle"><i class="fas fa-chevron-right chev"></i> Practical Example: Equal Splits</button>
+                            <div class="panel">
+                                <div class="panel-inner">
+                                    <ul>
+                                        <li>Splitting a 30-minute file <b>Into 2 parts</b> yields:
+                                            <ul>
+                                                <li>Segment 1: <code>00:00:00 → 00:15:00</code> [queued]</li>
+                                                <li>Segment 2: <code>00:15:00 → 00:30:00</code> [queued]</li>
+                                            </ul>
+                                        </li>
+                                        <li>Exported files show a <code>[trimmed]</code> suffix upon write completion.</li>
+                                        <li>The status footer confirms <b>"All segments trimmed!"</b> when the process completes.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card">
+                        <div class="step-badge">4</div>
+                        <div class="step-content">
+                            <h3>Pick a save folder</h3>
+                            <p>Set your target destination directory by clicking <b>Choose...</b> beside the <b>Save folder</b> label. By default, exports are directed to a sub-folder named <code>trimmed video</code> inside your system's Downloads.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step-card">
+                        <div class="step-badge">5</div>
+                        <div class="step-content">
+                            <h3>Convert to MP3 if you only need audio</h3>
+                            <p>If the transcription pipeline does not require video frames (OCR), check the <b>Convert to MP3</b> option. This strips visual streams and reduces file sizes to facilitate faster transfers.</p>
+                            <span class="hint good"><i class="fas fa-check-circle"></i> Recommended for call logs, voice notes, and AMR audio recordings</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="step-card">
+                        <div class="step-badge">6</div>
+                        <div class="step-content">
+                            <h3>Export</h3>
+                            <p>Confirm the contents of the segment queue and click <b>Trim All</b>. Once rendering finishes, click <b>Download</b> or <b>Open Folder</b> to collect the trimmed media files. These will serve as the inputs for Stage 02.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STAGE 02 -->
+            <section id="stage-02">
+                <h2>Stage 02: Upload &amp; Transcribe</h2>
+                <p class="lead">
+                    With your trimmed files prepared locally, proceed to the <b>Lingochaps Transcription Portal</b>. Always ensure you are signed in with the correct credentials.
+                </p>
+
+                <div class="steps">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-badge">1</div>
+                        <div class="step-content">
+                            <h3>Sign in &amp; open New transcription</h3>
+                            <p>Access the portal using your official <b>@lingochaps</b> organizational email. Open the main navigation menu and click the <b>Transcription</b> module to load a new transcription job form.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-badge">2</div>
+                        <div class="step-content">
+                            <h3>Step 1 — upload the trimmed file</h3>
+                            <p>Drag your trimmed media file directly into the designated upload boundary, or click within the container to open the file selection explorer. Both raw video and audio formats exported from the trimmer are accepted.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-badge">3</div>
+                        <div class="step-content">
+                            <h3>Step 2 — set languages &amp; instructions</h3>
+                            <p>Keep the primary target language on <b>auto-detect</b> unless the dialect is known. If specifying manually, comma-separate language tokens. You may also add specialized terminology, spelling preferences, or formatting guides inside the <b>Custom instructions</b> box.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card">
+                        <div class="step-badge">4</div>
+                        <div class="step-content">
+                            <h3>Choose what output you need</h3>
+                            <p>Select the pipeline mode appropriate for the project deliverables:</p>
+                            
+                            <button class="panel-toggle"><i class="fas fa-chevron-right chev"></i> Pipeline Modes Explained</button>
+                            <div class="panel">
+                                <div class="panel-inner">
+                                    <ul>
+                                        <li><b>Full — transcription + on-screen text</b>: Extracts speech transcripts, translation maps, proper-noun notes, and any visible on-screen text using optical character recognition (OCR) accompanied by video snapshots.</li>
+                                        <li><b>Transcript only</b>: Performs speech recognition, transcription, and translation. Visual processing is omitted, ensuring faster queue processing.</li>
+                                        <li><b>On-screen text only</b>: Disables audio transcription entirely. Extracts text overlays and slides found within the video stream.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="action-block action-primary">
+                                <p><i class="fas fa-exclamation-triangle"></i> Fallback server-side trimming</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-light);">
+                                    You can check <b>Process only part of the video</b> to isolate bounds server-side. However, this should only be treated as a backup option; manual local trimming is the preferred procedure.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step-card">
+                        <div class="step-badge">5</div>
+                        <div class="step-content">
+                            <h3>Step 3 — start transcription</h3>
+                            <p>Review your inputs and click <b>Start transcription</b>. The button will unlock once the media upload completes. If the trigger remains locked, verify the upload container status.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="step-card">
+                        <div class="step-badge">6</div>
+                        <div class="step-content">
+                            <h3>Track progress in Recent jobs</h3>
+                            <p>Your job will appear at the top of the <b>Recent jobs</b> dashboard. Monitor status updates, percentages, and execution states from this panel.</p>
+                            
+                            <button class="panel-toggle"><i class="fas fa-chevron-right chev"></i> Job Status Reference</button>
+                            <div class="panel">
+                                <div class="panel-inner">
+                                    <ul>
+                                        <li><b>DONE / 100%</b>: Ingestion and post-processing completed. Ready for quality review.</li>
+                                        <li><b>ERROR</b>: The pipeline failed. Re-trim or re-encode your input file and upload again.</li>
+                                        <li><b>Refresh</b>: Click the refresh icon at the top right to poll the latest queue metrics.</li>
+                                        <li><b>Delete</b>: Click the trash bin icon to clear history logs. This action deletes all remote storage items permanently.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STAGE 03 -->
+            <section id="stage-03">
+                <h2>Stage 03: Review &amp; Download Outputs</h2>
+                <p class="lead">
+                    Upon pipeline completion, verify transcription results and download the finalized reports directly from the job dashboard.
+                </p>
+
+                <div class="steps">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-badge">1</div>
+                        <div class="step-content">
+                            <h3>Open the job details</h3>
+                            <p>Click on any job row displaying a <b>DONE</b> status. The page displays the processing timeline stages: <code>Queued → Transcribing → Extracting on-screen text → Generating report → Publishing outputs</code>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-badge">2</div>
+                        <div class="step-content">
+                            <h3>Download the Word report</h3>
+                            <p>Click the <b>Download Word report</b> action button. The system compiles the dialogue tables, translated text, OCR overlays, and video snapshots directly into a styled Word document (<code>.docx</code>) and initiates the file download.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-badge">3</div>
+                        <div class="step-content">
+                            <h3>Or read it on-screen, minute by minute</h3>
+                            <p>For quick checks, view the results inline using the minute-by-minute segment accordion. Expand or collapse blocks (e.g., <code>Minute 1</code>, <code>Minute 2</code>) to display the transcription blocks within those boundaries.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card">
+                        <div class="step-badge">4</div>
+                        <div class="step-content">
+                            <h3>Read a segment</h3>
+                            <p>Each transcription segment displays structured columns: speaker ID, timestamp, original transcript text, and translation map. Proper names and specialized references contain informative descriptions underneath.</p>
+                            
+                            <button class="panel-toggle"><i class="fas fa-chevron-right chev"></i> Sample Segment Layout</button>
+                            <div class="panel">
+                                <div class="panel-inner">
+                                    <ul>
+                                        <li><b>Format:</b> <code>Female Speaker 1 [Hindi] 00:07:09–00:07:15</code></li>
+                                        <li><b>Transcription (Left):</b> Multilingual or code-switched dialogues with color-coded token highlights.</li>
+                                        <li><b>Translation (Right):</b> Human-readable translated English context.</li>
+                                        <li><b>Explanatory note:</b> A footnote explanation for specialized terms or regional contexts (e.g., explaining who a named individual is in the conversation).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHECKLIST -->
+            <section id="checklist-section">
+                <div class="checklist-card">
+                    <h3><i class="fas fa-clipboard-check"></i> Run-through Checklist</h3>
+                    <p class="sub">Complete these tasks in order to execute the pipeline properly. Ticks persist locally in your browser.</p>
+                    <div id="checklist-rows"></div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-label" id="progress-label">0 of 8 done</div>
+                </div>
+            </section>
+
+            <footer>
+                <p>&copy; 2026 Lingo Chaps | Trim &amp; Transcribe Guide</p>
+                <p style="margin-top: 10px; font-size: 0.75rem; opacity: 0.6;">Internal Training Asset - Confidential</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // THEME TOGGLE
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+
+        // Check local storage for preference
+        if (localStorage.getItem('dark-mode') === 'true') {
+            document.body.classList.add('dark-mode');
+            themeIcon.className = 'fas fa-sun';
+        }
+
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('dark-mode', isDark);
+        });
+
+        // SCROLL SPY & SMOOTH SCROLL
+        const navLinks = document.querySelectorAll('.nav-item a');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(s => {
+                const sectionTop = s.offsetTop;
+                if (window.pageYOffset >= sectionTop - 150) {
+                    current = s.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(l => {
+                l.classList.remove('active');
+                if (l.getAttribute('href') === `#${current}`) {
+                    l.classList.add('active');
+                }
+            });
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // COLLAPSIBLE PANELS
+        document.querySelectorAll('.panel-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('open');
+                const panel = btn.nextElementSibling;
+                panel.classList.toggle('open');
+            });
+        });
+
+        // CHECKLIST STATE MANAGEMENT
+        const checklistItems = [
+            "Source file opened in trimmer",
+            "Range marked or auto-split generated",
+            "Save folder chosen",
+            "Trimmed / exported (MP3 toggle set if needed)",
+            "Signed in with @lingochaps ID",
+            "File uploaded, output type selected, transcription started",
+            "Job reached DONE / 100%",
+            "Word report downloaded"
+        ];
+
+        const rowsEl = document.getElementById('checklist-rows');
+        
+        // Load initial checklist state from localStorage
+        let checklistState = JSON.parse(localStorage.getItem('trim-transcribe-checklist')) || Array(checklistItems.length).fill(false);
+
+        checklistItems.forEach((text, i) => {
+            const row = document.createElement('div');
+            row.className = 'check-row';
+            row.innerHTML = `<input type="checkbox" id="chk${i}" ${checklistState[i] ? 'checked' : ''}><label for="chk${i}">${text}</label>`;
+            rowsEl.appendChild(row);
+        });
+
+        function updateProgress() {
+            const boxes = document.querySelectorAll('.check-row input');
+            let done = 0;
+            boxes.forEach((b, idx) => {
+                const lbl = b.nextElementSibling;
+                lbl.classList.toggle('done', b.checked);
+                checklistState[idx] = b.checked;
+                if (b.checked) done++;
+            });
+            
+            localStorage.setItem('trim-transcribe-checklist', JSON.stringify(checklistState));
+            document.getElementById('progress-fill').style.width = (done / boxes.length * 100) + '%';
+            document.getElementById('progress-label').textContent = `${done} of ${boxes.length} done`;
+        }
+
+        rowsEl.addEventListener('change', updateProgress);
+        updateProgress();
+    </script>
+</body>
+
+</html>

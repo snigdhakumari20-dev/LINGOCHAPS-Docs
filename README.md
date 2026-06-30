@@ -10,6 +10,7 @@ Welcome to the central repository for **Lingo Chaps** operational standards and 
 | :--- | :--- | :--- |
 | **YouTube Project Guide** | End-to-end execution manual for YouTube video projects. | [Live Link](https://conversify-india.github.io/LINGOCHAPS-Docs/youtube_project_guide.html) |
 | **Internal Onboarding** | Comprehensive training manual for new team members. | [Live Link](https://conversify-india.github.io/LINGOCHAPS-Docs/internal_onboarding.html) |
+| **Trim & Transcribe Guide** | Operational workflow for pre-trimming and transcription. | [Live Link](https://conversify-india.github.io/LINGOCHAPS-Docs/aura-workflow-manual.html) |
 
 ---
 
@@ -37,6 +38,7 @@ To view these interactive guides as live websites:
 3.  Once the site is live, you can navigate to the portals by using the following URLs:
     *   YouTube Project Guide: `https://conversify-india.github.io/LINGOCHAPS-Docs/youtube_project_guide.html`
     *   Internal Onboarding Portal: `https://conversify-india.github.io/LINGOCHAPS-Docs/internal_onboarding.html`
+    *   Trim & Transcribe Guide: `https://conversify-india.github.io/LINGOCHAPS-Docs/aura-workflow-manual.html`
 
 ---
 
